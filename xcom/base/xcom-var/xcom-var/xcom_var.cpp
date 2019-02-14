@@ -12,7 +12,94 @@ namespace xcom {
 #ifdef __cplusplus
     extern "C" {
 #endif
+        xcom_var::xcom_var_func::xcom_var_func()
+        {
+            func = nullptr;
+            funcpar = nullptr;
+        }
+        xcom_var::xcom_var_func::xcom_var_func(const xcom_var_func &vf)
+        {
+            func = vf.func;
+            funcpar = vf.funcpar;
+        }
+        xcom_var::xcom_var_func::xcom_var_func(xcom_var_func &&vf)
+        {
+            func = vf.func;
+            xcom_var_ptr vptr(new xcom_var(std::move(vf.funcpar)));
+            funcpar = vptr;
+            
+            vf.func = nullptr;
+            vf.funcpar = nullptr;
+        }
+        xcom_var::xcom_var_func::xcom_var_func(xcom_var_callback callback, const xcom_var &par)
+        {
+            func = callback;
+            xcom_var_ptr vptr(new xcom_var(par));
+            funcpar = vptr;
+        }
+        xcom_var::xcom_var_func::xcom_var_func(xcom_var_callback callback, xcom_var &&par)
+        {
+            func = callback;
+            funcpar = std::move(par);
+        }
+        xcom_var::xcom_var_func::~xcom_var_func()
+        {
+            func = nullptr;
+            funcpar.reset();
+            funcpar = nullptr;
+        }
         
+        xcom_var::xcom_var_func &xcom_var::xcom_var_func::operator =(const xcom_var_func &vf)
+        {
+            func = vf.func;
+            funcpar = vf.funcpar;
+            return *this;
+        }
+        xcom_var::xcom_var_func &xcom_var::xcom_var_func::operator =(xcom_var_func &&vf)
+        {
+            func = vf.func;
+            funcpar = std::move(vf.funcpar);
+            
+            vf.func = nullptr;
+            vf.funcpar = nullptr;
+            return *this;
+        }
+        
+        xcom_var::xcom_var_func::operator xcom_var() const
+        {
+            if (func) {
+               return func(funcpar);
+            }
+            return xcom_var();
+        }
+        const char *xcom_var::xcom_var_func::to_var_json() const
+        {
+            char buf[128];
+            sprintf(buf, "%p", func);
+            std::ostringstream ostr;
+            ostr << "{ \"func\" : ";
+            ostr << (func == nullptr ? "NULL" : buf);
+            ostr << ", \"param\" : \"";
+            ostr << (funcpar == nullptr ? "void" : funcpar->to_var_json());
+            ostr << "}";
+            std::string str = ostr.str();
+            return str.c_str();
+        }
+        
+        const char *xcom_var::xcom_var_func::to_json() const
+        {
+            char buf[128];
+            sprintf(buf, "%p", func);
+            std::ostringstream ostr;
+            ostr << "{ \"func\" : ";
+            ostr << (func == nullptr ? "NULL" : buf);
+            ostr << ", \"param\" : \"";
+            ostr << (funcpar == nullptr ? "void" : funcpar->to_json());
+            ostr << "}";
+            std::string str = ostr.str();
+            return str.c_str();
+        }
+        //==============================
         xcom_var::xcom_var_value::xcom_var_value()
         {
             memset(this, 0, sizeof(xcom_var_value));
@@ -76,6 +163,15 @@ namespace xcom {
                     }
                     break;
                 }
+                case xcom_vtype_func:
+                {
+                    if (this->obj.func_val != nullptr)
+                    {
+                        delete this->obj.func_val;
+                        this->obj.func_val = nullptr;
+                    }
+                    break;
+                }
                 case xcom_vtype_null:
                 case xcom_vtype_bool:
                 case xcom_vtype_int8:
@@ -90,7 +186,7 @@ namespace xcom {
                 case xcom_vtype_double:
                 case xcom_vtype_string:
                 case xcom_vtype_ref:
-                case xcom_vtype_func:
+               
                 default:
                     break;
             }
@@ -306,7 +402,7 @@ namespace xcom {
                     std::string str = ostr.str();
                     return str.c_str();
                     break;
-                }
+                };
                 case xcom_vtype_vptr:
                 {
                     if (this->obj.vptr_val)
@@ -314,7 +410,7 @@ namespace xcom {
                         std::string str = this->obj.vptr_val->to_var_json();
                         return str.c_str();
                     }
-                }
+                };
                 case xcom_vtype_ref: {
                     char buf[32];
                     sprintf(buf, "%p", this->obj.ref_val);
@@ -322,9 +418,14 @@ namespace xcom {
                     break;
                 };
                 case xcom_vtype_func: {
-                    char buf[32];
-                    sprintf(buf, "%p", this->obj.func_val);
-                    valstr = buf;
+                    if (this->obj.func_val)
+                    {
+                        std::string str = this->obj.func_val->to_var_json();
+                        return str.c_str();
+                    } else {
+                        valstr = "NULL";
+                    }
+                    
                     break;
                 };
             }
@@ -356,14 +457,25 @@ namespace xcom {
                     valstr = this->obj.buf_val->to_var_json();
                     std::string str = "{ \"" + typestr + "\" : " + valstr + " }"; return str.c_str();
                     break;
-                }
+                };
                 case xcom_vtype_ref: {
                     char buf[32];
                     sprintf(buf, "%p", this->obj.ref_val);
                     valstr = buf;
                     std::string str = "{ \"" + typestr + "\" : " + valstr + " }"; return str.c_str();
                     break;
-                }
+                };
+                case xcom_vtype_func: {
+                    if (this->obj.func_val)
+                    {
+                        std::string str = this->obj.func_val->to_json();
+                        return str.c_str();
+                    } else {
+                        valstr = "NULL";
+                    }
+                    
+                    break;
+                };
                 case xcom_vtype_array:
                 {
                     std::ostringstream ostr;
@@ -660,18 +772,10 @@ namespace xcom {
             init_vdict();
             xcom_var *ptr = new xcom_var(std::move(data));
             xcom_var_ptr var_ptr(ptr);
-            //            this->obj.dict_val->insert(std::make_pair(key, var_ptr));
             this->obj.dict_val->push_back(std::make_pair(key, var_ptr));
         }
 
         xcom_var_ptr xcom_var::get(const char *key) {
-            //            auto it = this->obj.dict_val->find(key);
-            //            if (it == this->obj.dict_val->end())
-            //            {
-            //                return nullptr;
-            //            }
-            //            return it->second;
-
             auto it = this->obj.dict_val->begin();
             while (it != this->obj.dict_val->end()) {
                 if (it->first == key) {
@@ -701,6 +805,12 @@ namespace xcom {
             {
                 return this->obj.dict_val->empty();
             }
+            else if (this->type == xcom_vtype_vptr) {
+                if (this->obj.vptr_val) {
+                    return this->obj.vptr_val->empty();
+                }
+                return false;
+            }
             else
             {
                 return true;
@@ -715,6 +825,12 @@ namespace xcom {
             else if (this->type == xcom_vtype_dict)
             {
                 return (uint32_t)this->obj.dict_val->size();
+            }
+            else if (this->type == xcom_vtype_vptr) {
+                if (this->obj.vptr_val) {
+                   return this->obj.vptr_val->size();
+                }
+                return 0;
             }
             else
             {

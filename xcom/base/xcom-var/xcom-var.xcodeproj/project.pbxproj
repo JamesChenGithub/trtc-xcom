@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		921B26BF221509A00024BE45 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B26BE221509A00024BE45 /* main.m */; };
+		921B26E4221517580024BE45 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 921B26DF2215171F0024BE45 /* main.cpp */; };
+		921B26E5221517580024BE45 /* xcom_var.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 921B26E02215171F0024BE45 /* xcom_var.cpp */; };
+		921B26E6221517580024BE45 /* xcom_var_type.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 921B26E22215171F0024BE45 /* xcom_var_type.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		921B26BB221509A00024BE45 /* var */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = var; sourceTree = BUILT_PRODUCTS_DIR; };
-		921B26BE221509A00024BE45 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		921B26BB221509A00024BE45 /* xcom-var */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "xcom-var"; sourceTree = BUILT_PRODUCTS_DIR; };
+		921B26DF2215171F0024BE45 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		921B26E02215171F0024BE45 /* xcom_var.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_var.cpp; sourceTree = "<group>"; };
+		921B26E12215171F0024BE45 /* xcom_var.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var.h; sourceTree = "<group>"; };
+		921B26E22215171F0024BE45 /* xcom_var_type.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_var_type.cpp; sourceTree = "<group>"; };
+		921B26E32215171F0024BE45 /* xcom_var_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var_type.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +47,7 @@
 		921B26B2221509A00024BE45 = {
 			isa = PBXGroup;
 			children = (
-				921B26BD221509A00024BE45 /* var */,
+				921B26DE2215171F0024BE45 /* xcom-var */,
 				921B26BC221509A00024BE45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,25 +55,29 @@
 		921B26BC221509A00024BE45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				921B26BB221509A00024BE45 /* var */,
+				921B26BB221509A00024BE45 /* xcom-var */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		921B26BD221509A00024BE45 /* var */ = {
+		921B26DE2215171F0024BE45 /* xcom-var */ = {
 			isa = PBXGroup;
 			children = (
-				921B26BE221509A00024BE45 /* main.m */,
+				921B26DF2215171F0024BE45 /* main.cpp */,
+				921B26E02215171F0024BE45 /* xcom_var.cpp */,
+				921B26E12215171F0024BE45 /* xcom_var.h */,
+				921B26E22215171F0024BE45 /* xcom_var_type.cpp */,
+				921B26E32215171F0024BE45 /* xcom_var_type.h */,
 			);
-			path = var;
+			path = "xcom-var";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		921B26BA221509A00024BE45 /* var */ = {
+		921B26BA221509A00024BE45 /* xcom-var */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 921B26C2221509A00024BE45 /* Build configuration list for PBXNativeTarget "var" */;
+			buildConfigurationList = 921B26C2221509A00024BE45 /* Build configuration list for PBXNativeTarget "xcom-var" */;
 			buildPhases = (
 				921B26B7221509A00024BE45 /* Sources */,
 				921B26B8221509A00024BE45 /* Frameworks */,
@@ -77,9 +87,9 @@
 			);
 			dependencies = (
 			);
-			name = var;
+			name = "xcom-var";
 			productName = var;
-			productReference = 921B26BB221509A00024BE45 /* var */;
+			productReference = 921B26BB221509A00024BE45 /* xcom-var */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +106,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 921B26B6221509A00024BE45 /* Build configuration list for PBXProject "var" */;
+			buildConfigurationList = 921B26B6221509A00024BE45 /* Build configuration list for PBXProject "xcom-var" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -108,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				921B26BA221509A00024BE45 /* var */,
+				921B26BA221509A00024BE45 /* xcom-var */,
 			);
 		};
 /* End PBXProject section */
@@ -118,7 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				921B26BF221509A00024BE45 /* main.m in Sources */,
+				921B26E6221517580024BE45 /* xcom_var_type.cpp in Sources */,
+				921B26E5221517580024BE45 /* xcom_var.cpp in Sources */,
+				921B26E4221517580024BE45 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +269,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		921B26B6221509A00024BE45 /* Build configuration list for PBXProject "var" */ = {
+		921B26B6221509A00024BE45 /* Build configuration list for PBXProject "xcom-var" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				921B26C0221509A00024BE45 /* Debug */,
@@ -266,7 +278,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		921B26C2221509A00024BE45 /* Build configuration list for PBXNativeTarget "var" */ = {
+		921B26C2221509A00024BE45 /* Build configuration list for PBXNativeTarget "xcom-var" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				921B26C3221509A00024BE45 /* Debug */,
