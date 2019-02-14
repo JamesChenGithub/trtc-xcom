@@ -181,6 +181,13 @@ namespace xcom {
                 return this->type != xcom_vtype_vptr  ?  false : this->obj.vptr_val == value;
             }
             
+            inline void reset_vptr()
+            {
+                if (this->type == xcom_vtype_vptr) {
+                    this->obj.vptr_val = nullptr;
+                }
+            }
+            
             // func
             
             inline xcom_var(xcom_var_func value):xcom_var() {

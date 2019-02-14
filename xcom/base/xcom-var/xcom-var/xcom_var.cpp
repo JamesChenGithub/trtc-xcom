@@ -36,6 +36,9 @@ namespace xcom {
                 {
                     if (this->obj.array_val != nullptr)
                     {
+                        for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
+                            it->second = nullptr;
+                        }
                         delete this->obj.array_val;
                         this->obj.array_val = nullptr;
                     }
@@ -46,6 +49,10 @@ namespace xcom {
                 {
                     if (this->obj.dict_val != nullptr)
                     {
+                        for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
+                            it->second = nullptr;
+                        }
+                        
                         delete this->obj.dict_val;
                         this->obj.dict_val = nullptr;
                     }

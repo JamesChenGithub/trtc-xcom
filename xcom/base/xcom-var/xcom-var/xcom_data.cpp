@@ -27,6 +27,9 @@ namespace xcom {
     {
         if (_core)
         {
+            if (_core->vptr_val() != nullptr) {
+                _core->reset_vptr();
+            }
             delete _core;
             _core = nullptr;
         }
