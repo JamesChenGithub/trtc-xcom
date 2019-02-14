@@ -14,74 +14,16 @@
 #include <sstream>
 
 #include "xcom_var_type.h"
+#include "xcom_var_value.h"
+#include "xcom_var_func.h"
 
 
 namespace xcom {
 #ifdef __cplusplus
     extern "C" {
 #endif
-        class xcom_var;
-        typedef std::shared_ptr<xcom_var> xcom_var_ptr;
-        typedef std::vector<std::pair<std::string, xcom_var_ptr>> xcom_var_dict;
-        typedef std::vector<xcom_var_ptr> xcom_var_array;
-        typedef xcom_var (*xcom_var_callback)(xcom_var);
-        
-        
-        
-        
         class xcom_var
         {
-        public:
-            
-            typedef struct xcom_var_func
-            {
-            public:
-                xcom_var_callback       func;
-                xcom_var_ptr            funcpar;
-                
-            public:
-                xcom_var_func();
-                xcom_var_func(const xcom_var_func &vf);
-                xcom_var_func(xcom_var_func &&vf);
-                xcom_var_func(xcom_var_callback callback, const xcom_var &par);
-                xcom_var_func(xcom_var_callback callback, xcom_var &&par);
-                ~xcom_var_func();
-                
-                xcom_var_func &operator =(const xcom_var_func &vf);
-                xcom_var_func &operator =(xcom_var_func &&vf);
-                operator xcom_var() const;
-                const char *to_var_json() const;
-                const char *to_json() const;
-            }xcom_var_func;
-            
-            typedef union xcom_var_value
-            {
-                bool            bool_val;
-                int8_t          int8_val;
-                uint8_t         uint8_val;
-                int16_t         int16_val;
-                uint16_t        uint16_val;
-                int32_t         int32_val;
-                uint32_t        uint32_val;
-                int64_t         int64_val;
-                uint64_t        uint64_val;
-                float           float_val;
-                double          double_val;
-                std::string     string_val;
-                void            *ref_val;
-                // 需要分配内存
-                xcom_var_buf    *buf_val;
-                xcom_var_dict   *dict_val;
-                xcom_var_array  *array_val;
-                xcom_var_func   *func_val;
-                xcom_var_ptr    vptr_val;
-            public:
-                xcom_var_value();
-                ~xcom_var_value();
-                
-            }xcom_var_value;
-            
-            
             
         public:
             xcom_var_value  obj;
@@ -161,10 +103,9 @@ namespace xcom {
 //
 //                        if (this->type == xcom_vtype_vptr)
 //                        {
-//                            xcom_var_ptr ptr = this->var_val();
-//                            printf("ptr = %p  %s\n", ptr.get(), ptr->to_var_json());
+//                            xcom_var_ptr ptr = this->vptr_val();
+//                            //printf("set ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
 //                            *ptr = value;
-//                            printf("ptr = %p  %s\n", ptr.get(), ptr->to_var_json());
 //                        }
 //                        else
 //                        {
@@ -246,9 +187,7 @@ namespace xcom {
                 this->type = xcom_vtype_func;
                 this->obj.func_val = new xcom_var_func(value);
             }
-//            inline operator xcom_var_func*() {
-//                return this->obj.func_val;
-//            }
+            
             inline xcom_var func_val() const {
                 if (this->type == xcom_vtype_func && this->obj.func_val) {
                     return this->obj.func_val;
@@ -256,7 +195,6 @@ namespace xcom {
                 return xcom_var();
             }
             inline xcom_var &operator = (xcom_var_func *value) {
-                
                 if (this->type == xcom_vtype_vptr)
                 {
                     xcom_var_ptr ptr = this->vptr_val();
@@ -270,15 +208,13 @@ namespace xcom {
                 }
                 return *this;
             }
-            
-            
-            
         public:
             /* array */
             xcom_var_ptr operator[](uint32_t index);
             
             /* 'index' based array methods */
-            void append(xcom_var data);
+            void append(const xcom_var &data);
+            void append(xcom_var &&data);
             bool erase(uint32_t index);
         private:
             
@@ -289,6 +225,7 @@ namespace xcom {
         public:
             /* dict */
             xcom_var_ptr operator[](const char *key);
+            
             bool contains(const char *key);
             
             bool erase(const char *key);

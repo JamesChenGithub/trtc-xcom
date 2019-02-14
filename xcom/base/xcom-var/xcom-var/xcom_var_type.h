@@ -1,5 +1,5 @@
 //
-//  xcom_var_type.hpp
+//  xcom_var_type.h
 //  xcom_var
 //
 //  Created by AlexiChen on 2019/2/14.
@@ -12,13 +12,12 @@
 
 
 #include <string>
-#include <unordered_map>
 #include <vector>
-#include <sstream>
 
-#ifdef __cplusplus
+
 namespace xcom
 {
+#ifdef __cplusplus
     extern "C" {
 #endif
         
@@ -68,7 +67,7 @@ namespace xcom
         
 #ifdef __cplusplus
     }
-}
 #endif
+}
 
-#endif /* var_type_hpp */
+#endif /* var_type_h */

@@ -18,7 +18,7 @@ namespace xcom {
         {
             switch(type)
             {
-                case xcom_vtype_null: return "null";
+                case xcom_vtype_null: return "NULL";
                 case xcom_vtype_bool: return "bool";
                 case xcom_vtype_int8: return "int8";
                 case xcom_vtype_uint8: return "uint8";
