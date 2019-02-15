@@ -31,10 +31,11 @@ namespace xcom {
                 case xcom_vtype_float: return "float";
                 case xcom_vtype_double: return "double";
                 case xcom_vtype_string: return "string";
-                case xcom_vtype_bytes: return "byte";
                 case xcom_vtype_ref:  return "ref";
+                case xcom_vtype_bytes: return "byte";
+                case xcom_vtype_map: return "map";
                 case xcom_vtype_array: return "array";
-                case xcom_vtype_dict: return "dic";
+                case xcom_vtype_dict: return "dict";
                 case xcom_vtype_func: return "func";
                 case xcom_vtype_vptr : return "vptr";
             }

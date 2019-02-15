@@ -36,8 +36,9 @@ namespace xcom {
             void            *ref_val;
             // 需要分配内存
             xcom_var_buf    *buf_val;
-            xcom_var_dict   *dict_val;
+            xcom_var_map    *map_val;
             xcom_var_array  *array_val;
+            xcom_var_dict   *dict_val;
             xcom_var_func   *func_val;
             xcom_var_ptr    vptr_val;
         public:

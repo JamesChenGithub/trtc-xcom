@@ -37,8 +37,9 @@ namespace xcom
             xcom_vtype_string    = 'c',      // string
             xcom_vtype_ref       = '&',      // outside ptr ref: manage by outside
             xcom_vtype_bytes     = 'm',      // buffer
+            xcom_vtype_map       = '(',      // map : insert / search by  tree
             xcom_vtype_array     = '[',      // array
-            xcom_vtype_dict      = '{',      // dictionary
+            xcom_vtype_dict      = '{',      // dictionary sorted by insert index
             xcom_vtype_func      = 'F',      // var_callback : var (*var_callback)(const var &);
             xcom_vtype_vptr      = 'v',      // used by xcom_vtype_array/xcom_vtype_dict
         } xcom_var_type;

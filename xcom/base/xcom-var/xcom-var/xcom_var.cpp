@@ -58,6 +58,20 @@ namespace xcom {
                     }
                     break;
                 }
+                case xcom_vtype_map:
+                {
+                    if (this->obj.map_val != nullptr)
+                    {
+                        for (auto it = this->obj.map_val->begin(); it != this->obj.map_val->end(); it++) {
+                            it->second = nullptr;
+                        }
+                        
+                        delete this->obj.map_val;
+                        this->obj.map_val = nullptr;
+                    }
+                    break;
+                }
+                
                 case xcom_vtype_bytes:
                 {
                     if (this->obj.buf_val != nullptr)
@@ -141,6 +155,21 @@ namespace xcom {
                     }
                     break;
                 }
+                case xcom_vtype_map:
+                {
+                    if (var.obj.map_val)
+                    {
+                        this->obj.map_val = new xcom_var_map;
+                        auto it = var.obj.map_val->begin();
+                        while (it != var.obj.map_val->end()) {
+                            
+                            xcom_var_ptr sec(new xcom_var(*(it->second)));
+                            this->obj.map_val->insert(std::make_pair(it->first, sec));
+                            it++;
+                        }
+                    }
+                    break;
+                }
                     
                 case xcom_vtype_bytes:
                 {
@@ -207,6 +236,15 @@ namespace xcom {
                     {
                         this->obj.dict_val = var.obj.dict_val;
                         var.obj.dict_val = nullptr;
+                    }
+                    break;
+                }
+                case xcom_vtype_map:
+                {
+                    if (var.obj.map_val)
+                    {
+                        this->obj.map_val = var.obj.map_val;
+                        var.obj.map_val = nullptr;
                     }
                     break;
                 }
@@ -298,7 +336,8 @@ namespace xcom {
                     restr = ostr.str();
                     break;
                 };
-                case xcom_vtype_dict: {
+                case xcom_vtype_dict:
+                {
                     std::ostringstream ostr;
                     ostr << "{";
                     auto it = this->obj.dict_val->begin();
@@ -316,6 +355,26 @@ namespace xcom {
                     restr = ostr.str();
                     break;
                 };
+                case xcom_vtype_map:
+                {
+                    std::ostringstream ostr;
+                    ostr << "{";
+                    auto it = this->obj.map_val->begin();
+                    auto end = this->obj.map_val->end();
+                    while(it != end){
+                        std::string json = it->second->to_var_json();
+                        ostr << "\""<<it->first << "\":" << json;
+                        it++;
+                        if (it != end)
+                        {
+                            ostr << ",";
+                        }
+                    }
+                    ostr << "}";
+                    restr = ostr.str();
+                    break;
+                };
+    
                 case xcom_vtype_vptr:
                 {
                     if (this->obj.vptr_val)
@@ -419,7 +478,7 @@ namespace xcom {
                     while(it != end) {
                         xcom_var_ptr ptr = it->second;
                         std::string json = "";
-                        if (ptr->type == xcom_vtype_dict || ptr->type == xcom_vtype_array)
+                        if (ptr->type == xcom_vtype_dict || ptr->type == xcom_vtype_map || ptr->type == xcom_vtype_array)
                         {
                             json = it->second->to_json();
                             ostr << "\"" << it->first << "\":" << json ;
@@ -431,6 +490,36 @@ namespace xcom {
                         }
 
 
+                        it++;
+                        if (it != end)
+                        {
+                            ostr << ",";
+                        }
+                    }
+                    ostr << "}";
+                    restr = ostr.str();
+                    break;
+                }
+                case xcom_vtype_map: {
+                    std::ostringstream ostr;
+                    ostr << "{";
+                    auto it = this->obj.map_val->begin();
+                    auto end = this->obj.map_val->end();
+                    while(it != end) {
+                        xcom_var_ptr ptr = it->second;
+                        std::string json = "";
+                        if (ptr->type == xcom_vtype_dict || ptr->type == xcom_vtype_map || ptr->type == xcom_vtype_array)
+                        {
+                            json = it->second->to_json();
+                            ostr << "\"" << it->first << "\":" << json ;
+                        }
+                        else
+                        {
+                            json = it->second->to_json(it->first.c_str());
+                            ostr << json;
+                        }
+                        
+                        
                         it++;
                         if (it != end)
                         {
@@ -642,44 +731,105 @@ namespace xcom {
         }
         //=====================
         /* dict */
+        
+        void xcom_var::insert(const char *key, const xcom_var &value, bool is_dic_insert)
+        {
+            if (!key || !*key)
+                return;
+            
+            if (this->type == xcom_vtype_dict) {
+                *(*this)[key] = value;
+            } else {
+                init_vmap();
+                this->put(key, value);
+            }
+            
+        }
         xcom_var_ptr xcom_var::operator[](const char *key) {
             if (!key || !*key)
                 return nullptr;
-
-            if (this->type != xcom_vtype_dict)
-                init_vdict();
-
-            if (!this->contains(key))
-            {
-                this->put(key);
-            }
             
-            xcom_var_ptr ptr = get(key);
-            printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
-            return ptr;
+            if (this->type == xcom_vtype_dict) {
+                if (!this->contains(key))
+                {
+                    this->put(key);
+                }
+                
+                xcom_var_ptr ptr = get(key);
+                printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+                return ptr;
+            }
+            else if (this->type == xcom_vtype_map)
+            {
+                if (this->contains(key))
+                {
+                    xcom_var_ptr ptr = get(key);
+                    return ptr;
+                }
+                return nullptr;
+            }
+            else
+            {
+                if (this->type != xcom_vtype_dict) {
+                    init_vdict();
+                }
+                if (!this->contains(key))
+                {
+                    this->put(key);
+                }
+                
+                xcom_var_ptr ptr = get(key);
+                printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+                return ptr;
+            }
         }
         
         bool xcom_var::contains(const char *key)
         {
-            if (this->type != xcom_vtype_dict)
-                return false;
-
-            for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
-                if (it->first == key ) {
-                    return true;
+            if (this->type == xcom_vtype_dict)
+            {
+                if (this->obj.dict_val) {
+                    for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
+                        if (it->first == key ) {
+                            return true;
+                        }
+                    }
+                }
+                
+            }
+            else if (this->type == xcom_vtype_map)
+            {
+                if (this->obj.map_val) {
+                    auto it = this->obj.map_val->find(key);
+                    if (it != this->obj.map_val->end()) {
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
         bool xcom_var::erase(const char *key) {
-            if (this->type != xcom_vtype_dict)
-                return false;
-
-            for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
-                if (it->first == key ) {
-                    this->obj.dict_val->erase(it);
-                    return true;
+            if (this->type == xcom_vtype_dict)
+            {
+                if(this->obj.dict_val) {
+                    for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
+                        if (it->first == key ) {
+                            this->obj.dict_val->erase(it);
+                            return true;
+                        }
+                    }
+                }
+            }
+            else if (this->type == xcom_vtype_map) {
+                if(this->obj.map_val) {
+                    auto it = this->obj.map_val->find(key);
+                    if (it != this->obj.map_val->end())
+                    {
+                        it->second.reset();
+                        this->obj.map_val->erase(it);
+                        return true;
+                    }
                 }
             }
             return false;
@@ -694,6 +844,16 @@ namespace xcom {
                 this->obj.dict_val = new xcom_var_dict;
             }
         }
+        
+        void xcom_var::init_vmap()
+        {
+            if (this->type != xcom_vtype_map)
+            {
+                this->reset();
+                this->type = xcom_vtype_map;
+                this->obj.map_val = new xcom_var_map;
+            }
+        }
 
         /* 'key-value' dictionary methods */
         void xcom_var::put(const char *key) {
@@ -702,15 +862,32 @@ namespace xcom {
             printf("crate ptr : %p\n", cpy.get());
             this->obj.dict_val->push_back(std::make_pair(key, cpy));
         }
+        
+        void xcom_var::put(const char *key, const xcom_var &value)
+        {
+            xcom_var_ptr cpy(new xcom_var(value));
+            printf("crate ptr : %p\n", cpy.get());
+            this->obj.dict_val->push_back(std::make_pair(key, cpy));
+        }
 
         xcom_var_ptr xcom_var::get(const char *key) {
-            auto it = this->obj.dict_val->begin();
-            while (it != this->obj.dict_val->end()) {
-                if (it->first == key) {
+            if (this->type == xcom_vtype_dict) {
+                auto it = this->obj.dict_val->begin();
+                while (it != this->obj.dict_val->end()) {
+                    if (it->first == key) {
+                        return it->second;
+                    }
+                    it++;
+                }
+            }
+            else if (this->type == xcom_vtype_map) {
+                auto it = this->obj.map_val->find(key);
+                if (it != this->obj.map_val->end())
+                {
                     return it->second;
                 }
-                it++;
             }
+            
             return nullptr;
         }
         //=====================

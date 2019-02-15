@@ -10,6 +10,8 @@
 #define xcom_var_def_h
 
 #include <string>
+#include <map>
+#include <vector>
 
 namespace xcom {
 #ifdef __cplusplus
@@ -17,8 +19,9 @@ namespace xcom {
 #endif
         class xcom_var;
         typedef std::shared_ptr<xcom_var> xcom_var_ptr;
-        typedef std::vector<std::pair<std::string, xcom_var_ptr>> xcom_var_dict;
+        typedef std::map<std::string, xcom_var_ptr> xcom_var_map;
         typedef std::vector<xcom_var_ptr> xcom_var_array;
+        typedef std::vector<std::pair<std::string, xcom_var_ptr>> xcom_var_dict;
         typedef xcom_var (*xcom_var_callback)(xcom_var &);
         
 //#define printf //printf

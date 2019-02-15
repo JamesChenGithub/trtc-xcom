@@ -231,6 +231,10 @@ namespace xcom {
             
             void init_varray();
         public:
+            // map
+            // 必须先插入后，才可以再用[key]方式取值
+            // 当前若为dic时，是否（is_dic_insert）继续插入
+            void insert(const char *key, const xcom_var &value, bool is_dic_insert = false);
             /* dict */
             xcom_var_ptr operator[](const char *key);
             
@@ -239,9 +243,14 @@ namespace xcom {
             bool erase(const char *key);
         private:
             void init_vdict();
+            void init_vmap();
             
             /* 'key-value' dictionary methods */
+            // for dict
             void put(const char *key);
+            
+            // for map
+            void put(const char *key, const xcom_var &value);
             
             xcom_var_ptr get(const char *key);
             
