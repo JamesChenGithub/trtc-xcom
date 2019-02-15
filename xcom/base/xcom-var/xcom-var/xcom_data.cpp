@@ -8,6 +8,7 @@
 
 #include "xcom_data.h"
 #include "xcom_var.h"
+#include "xcom_var_func.h"
 namespace xcom {
     
     static int datacount = 0;
@@ -49,20 +50,26 @@ namespace xcom {
             xcom_var var = *data._core;
             _core = new xcom_var(std::move(var));
             isowed = true;
-//            data._core = nullptr;
         }
     }
     
     xcom_data::xcom_data(xcom_var *var, bool isvp):xcom_data()
     {
         if (var != nullptr) {
-//            xcom_var_ptr ptr(var);
-//            _core = new xcom_var(ptr);
             _core = var;
             isowed = false;
             printf("var = %p,  _core = %p , vp = %p ,  %s  \n", var,  _core, _core->vptr_val().get() ,_core->to_json());
         }
     }
+    
+    xcom_data::xcom_data(const xcom_var &var, bool isPrivateTag):xcom_data()
+    {
+        if (var.is_valid()) {
+            _core = new xcom_var(std::move(var));
+            isowed = true;
+        }
+    }
+    
     
     xcom_data::xcom_data(const xcom_data &data):xcom_data()
     {
@@ -103,7 +110,6 @@ namespace xcom {
     {
         if (data._core && _core) {
             *_core = std::move(*data._core);
-//            data._core = nullptr;
         } else {
             this->reset(std::move(data));
         }
@@ -171,6 +177,14 @@ namespace xcom {
     xcom_data::operator const char *() const
     {
         return _core ? _core->string_val().c_str() : nullptr;
+    }
+    xcom_data::operator xcom_var()
+    {
+        if (_core == nullptr){
+            _core = new xcom_var;
+            isowed = true;
+        }
+        return *_core;
     }
     const char * xcom_data::string_val() const
     {
@@ -262,6 +276,49 @@ namespace xcom {
             isowed = true;
         }
         return _core->set_buffer(buf, len);
+    }
+    
+    void xcom_data::set_callback(const xcom_data_callback funcAddr, xcom_data &data)
+    {
+        if (funcAddr == nullptr)
+        {
+            return;
+        }
+        
+//        if (_core)  {
+//            if (data._core) {
+//                
+//                xcom::xcom_var_func func((xcom::xcom_var_func)funcAddr, data);
+//                *_core = func;
+//            }
+//            else {
+//                xcom::xcom_var_func func((xcom::xcom_var_func)funcAddr);
+//                *_core = func;
+//            }
+//        }
+//        else {
+//            
+//            if (data._core) {
+//                xcom::xcom_var_func func((xcom::xcom_var_func)funcAddr, data);
+//                _core = new xcom_var(func);
+//            }
+//            else {
+//                xcom::xcom_var_func func((xcom::xcom_var_func)funcAddr);
+//                _core = new xcom_var(func);
+//            }
+//            
+//            isowed = true;
+//        }
+    }
+    
+    xcom_data xcom_data::callback()
+    {
+        if (_core) {
+            xcom_var ret = _core->func_val();
+            return xcom_data(std::move(ret), true);
+        }
+        
+        return xcom_data(0);
     }
     
     xcom_data xcom_data::operator[](int32_t index)

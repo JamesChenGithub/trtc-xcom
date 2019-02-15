@@ -28,13 +28,18 @@ namespace xcom {
         vf.func = nullptr;
         vf.funcpar = nullptr;
     }
-    xcom_var_func::xcom_var_func(xcom_var_callback callback, const xcom_var &par)
+    xcom_var_func::xcom_var_func(const xcom_var_callback callback)
+    {
+        func = callback;
+        funcpar = nullptr;
+    }
+    xcom_var_func::xcom_var_func(const xcom_var_callback callback, const xcom_var &par)
     {
         func = callback;
         xcom_var_ptr vptr(new xcom_var(par));
         funcpar = vptr;
     }
-    xcom_var_func::xcom_var_func(xcom_var_callback callback, xcom_var &&par)
+    xcom_var_func::xcom_var_func(const xcom_var_callback callback, xcom_var &&par)
     {
         func = callback;
         funcpar = std::move(par);
@@ -64,8 +69,11 @@ namespace xcom {
     
     xcom_var_func::operator xcom_var() const
     {
-        if (func) {
-            return func(funcpar);
+        if (funcpar != nullptr) {
+            xcom_var voidvar;
+            return func(voidvar);
+        }else {
+            return func(*funcpar);
         }
         return xcom_var();
     }

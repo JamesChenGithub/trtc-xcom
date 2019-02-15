@@ -19,7 +19,7 @@ namespace xcom {
         typedef std::shared_ptr<xcom_var> xcom_var_ptr;
         typedef std::vector<std::pair<std::string, xcom_var_ptr>> xcom_var_dict;
         typedef std::vector<xcom_var_ptr> xcom_var_array;
-        typedef xcom_var (*xcom_var_callback)(xcom_var);
+        typedef xcom_var (*xcom_var_callback)(xcom_var &);
         
 //#define printf //printf
 #ifdef __cplusplus

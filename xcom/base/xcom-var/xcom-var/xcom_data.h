@@ -15,6 +15,9 @@
 namespace xcom {
     
     class xcom_var;
+    class xcom_data;
+    typedef xcom_data (*xcom_data_callback)(xcom_data &);
+    
     class xcom_data
     {
     public:
@@ -75,29 +78,8 @@ namespace xcom {
         
     public:
         // func
-        
-        
-//        inline xcom_data func_val() const {
-//            if (this->type == xcom_vtype_func && this->obj.func_val) {
-//                return this->obj.func_val;
-//            }
-//            return xcom_var();
-//        }
-//        inline xcom_data &operator = (xcom_var_func *value) {
-//            if (this->type == xcom_vtype_vptr)
-//            {
-//                xcom_var_ptr ptr = this->vptr_val();
-//                *ptr = value;
-//            }
-//            else
-//            {
-//                this->reset();
-//                this->type = xcom_vtype_func;
-//                this->obj.func_val = value;
-//            }
-//            return *this;
-//        }
-        
+        void set_callback(const xcom_data_callback funcAddr, xcom_data &data);
+        xcom_data callback();
     public:
         // tool
         const char *to_var_json() const;
@@ -114,14 +96,22 @@ namespace xcom {
     private:
         xcom_var *_core = nullptr;
         bool isowed = true;
-        xcom_data(xcom_var *var, bool isvp);
+    private:
+        xcom_data(xcom_var *var, bool isPrivateTag);
+        xcom_data(const xcom_var &var, bool isPrivateTag);
+    private:
         
+    private:
+        operator xcom_var();
         // 重置
         void reset();
         // 复制
         void reset(const xcom_data &var);
         // move
         void reset(xcom_data &&var);
+        
+    
+        
     };
     
 }

@@ -6,8 +6,8 @@
 //  Copyright © 2019年 AlexiChen. All rights reserved.
 //
 
-#ifndef var_hpp
-#define var_hpp
+#ifndef xcom_var_h
+#define xcom_var_h
 
 #include <string>
 #include <vector>
@@ -201,7 +201,8 @@ namespace xcom {
                 }
                 return xcom_var();
             }
-            inline xcom_var &operator = (xcom_var_func *value) {
+            
+            xcom_var &operator = (const xcom_var_func &value) {
                 if (this->type == xcom_vtype_vptr)
                 {
                     xcom_var_ptr ptr = this->vptr_val();
@@ -211,7 +212,7 @@ namespace xcom {
                 {
                     this->reset();
                     this->type = xcom_vtype_func;
-                    this->obj.func_val = value;
+                    this->obj.func_val = new xcom_var_func(value);
                 }
                 return *this;
             }
@@ -253,6 +254,7 @@ namespace xcom {
             inline bool is_number() const { return this->type <= xcom_vtype_string; }
             inline bool is_array() const { return this->type == xcom_vtype_array; }
             inline bool is_dict() const { return this->type == xcom_vtype_dict;}
+            inline bool is_valid() const { return this->type != xcom_vtype_null;}
             
             // just array or dict vaild, return empty;
             // other return false
@@ -271,4 +273,4 @@ namespace xcom {
 
 
 
-#endif /* var_hpp */
+#endif /* xcom_var_h */

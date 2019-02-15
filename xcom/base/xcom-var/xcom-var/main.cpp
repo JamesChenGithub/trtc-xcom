@@ -6,10 +6,11 @@
 //  Copyright © 2019年 AlexiChen. All rights reserved.
 //
 
-#include "xcom_var_type.h"
-#include "xcom_var.h"
+//#include "xcom_var_type.h"
+//#include "xcom_var.h"
 #include "xcom_data.h"
 #include <iostream>
+#include <functional>
 
 using namespace xcom;
 int main(int argc, const char * argv[]) {
@@ -331,89 +332,106 @@ int main(int argc, const char * argv[]) {
     //
     //    }
     
-    {
-        xcom_data var;
-        var["enable"] = true;
-        std::string str = var.to_var_json();
-        var["age"] = 100;
-        std::cout << "var :" <<  str << std::endl;
-        str = var.to_json();
-        std::cout << "var :" <<  str << std::endl;
-        
-        xcom_data content;
-        {
-            content["age"]=18;
-            content["size"]=28;
-            content["house"]=38;
-            content["house"]=48;
-            
-            std::cout << "content : " << content.to_json() << std::endl;
-        }
-        
-        var["content"] = content;
-        var["content2"] = content;
-        var["content3"] = content;
-        
-        std::cout << "var :" << var.to_var_json() << std::endl;
-        std::cout << "var :" << var.to_json() << std::endl;
-        
-    }
-    
-    {
-        xcom_data var;
-        
-        xcom_data content;
-        {
-            content["sage"]=18;
-            content["age"]=18;
-        }
-        
-        var.append(content);
-        std::cout << "var :" << var.to_var_json() << std::endl << std::endl;
-        std::cout << "var :" << var.to_json() << std::endl << std::endl;
-        
-        
-        content["sage"]=28;
-        content["age"]=28;
-        var.append(content);
-        
-        content["sage"]=38;
-        content["age"]=38;
-        var.append(content);
-        
-        content["sage"]=48;
-        content["age"]=48;
-        var.append(content);
-        
-        
-        std::cout << "var :" << var.to_var_json() << std::endl << std::endl;
-        std::cout << "var :" << var.to_json() << std::endl << std::endl;
-        
-    }
-    
+//    {
+//        xcom_data var;
+//        var["enable"] = true;
+//        std::string str = var.to_var_json();
+//        var["age"] = 100;
+//        std::cout << "var :" <<  str << std::endl;
+//        str = var.to_json();
+//        std::cout << "var :" <<  str << std::endl;
+//
+//        xcom_data content;
+//        {
+//            content["age"]=18;
+//            content["size"]=28;
+//            content["house"]=38;
+//            content["house"]=48;
+//
+//            std::cout << "content : " << content.to_json() << std::endl;
+//        }
+//
+//        var["content"] = content;
+//        var["content2"] = content;
+//        var["content3"] = content;
+//
+//        std::cout << "var :" << var.to_var_json() << std::endl;
+//        std::cout << "var :" << var.to_json() << std::endl;
+//
+//    }
+//
+//    {
+//        xcom_data var;
+//
+//        xcom_data content;
+//        {
+//            content["sage"]=18;
+//            content["age"]=18;
+//        }
+//
+//        var.append(content);
+//        std::cout << "var :" << var.to_var_json() << std::endl << std::endl;
+//        std::cout << "var :" << var.to_json() << std::endl << std::endl;
+//
+//
+//        content["sage"]=28;
+//        content["age"]=28;
+//        var.append(content);
+//
+//        content["sage"]=38;
+//        content["age"]=38;
+//        var.append(content);
+//
+//        content["sage"]=48;
+//        content["age"]=48;
+//        var.append(content);
+//
+//
+//        std::cout << "var :" << var.to_var_json() << std::endl << std::endl;
+//        std::cout << "var :" << var.to_json() << std::endl << std::endl;
+//
+//    }
+//
     {
         xcom_data stuArray1;
         xcom_data stuArray;
         xcom_data stuDic;
-        
+
         for (int i = 0; i < 50; i++) {
-            std::string stuname = "std_" + std::to_string(i);;
+            std::string stuname = "std_" + std::to_string(i);
             xcom_data stu;
             for (int j = 0; j < 5; j++){
-                std::string item = "item_"+ std::to_string(j);
+                std::string item = "科目"+ std::to_string(j+1);
                 stu[item.c_str()] =  5*i + j;
             }
             stuArray1[i] = stu;
             stuArray.append(stu);
             stuDic[stuname.c_str()] = stu;
         }
-        
+
         std::cout << "stuArray1 :============" << std::endl << stuArray1.to_json() << std::endl;
-        
+
         std::cout << "stuArray :============" << std::endl << stuArray.to_json() << std::endl;
-        
+
         std::cout << "stuDic :============" << std::endl << stuDic.to_json() << std::endl;
+
+    }
+    
+    {
+        xcom_data par;
+        par["age"] = 10;
+        par["score"] = 100;
+        auto call = [](xcom_data &apr)->xcom_data {
+            apr["age"] = 100;
+            apr["score"] = 100;
+            return apr;
+        };
+        call(par);
+        std::cout << "par :============" << par.to_json() << std::endl;
         
+        xcom_data act;
+        act.set_callback(call, par);
+
     }
     
     return 0;

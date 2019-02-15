@@ -1,5 +1,5 @@
 //
-//  xcom_var_value.hpp
+//  xcom_var_value.h
 //  xcom-var
 //
 //  Created by AlexiChen on 2019/2/14.

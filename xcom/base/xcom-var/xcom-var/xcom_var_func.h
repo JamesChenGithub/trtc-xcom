@@ -1,5 +1,5 @@
 //
-//  xcom_var_func.hpp
+//  xcom_var_func.h
 //  xcom-var
 //
 //  Created by AlexiChen on 2019/2/14.
@@ -18,15 +18,16 @@ namespace xcom
         typedef struct xcom_var_func
         {
         public:
-            xcom_var_callback       func;
+            xcom_var_callback func;
             xcom_var_ptr            funcpar;
             
         public:
             xcom_var_func();
             xcom_var_func(const xcom_var_func &vf);
             xcom_var_func(xcom_var_func &&vf);
-            xcom_var_func(xcom_var_callback callback, const xcom_var &par);
-            xcom_var_func(xcom_var_callback callback, xcom_var &&par);
+            xcom_var_func(const xcom_var_callback callback);
+            xcom_var_func(const xcom_var_callback callback, const xcom_var &par);
+            xcom_var_func(const xcom_var_callback callback, xcom_var &&par);
             ~xcom_var_func();
             
             xcom_var_func &operator =(const xcom_var_func &vf);
