@@ -73,6 +73,11 @@ namespace xcom {
         }
     }
     
+//    xcom_data::xcom_data(const xcom_var_func &func):xcom_data() {
+//        _core = new xcom_var(func);
+//        isowed = true;
+//    }
+    
     xcom_data::xcom_data(xcom_data &&data):xcom_data()
     {
         if (data._core)

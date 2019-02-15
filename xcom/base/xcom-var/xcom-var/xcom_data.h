@@ -74,6 +74,31 @@ namespace xcom {
         void set_buf(const void *buf, uint32_t len);
         
     public:
+        // func
+        
+        
+//        inline xcom_data func_val() const {
+//            if (this->type == xcom_vtype_func && this->obj.func_val) {
+//                return this->obj.func_val;
+//            }
+//            return xcom_var();
+//        }
+//        inline xcom_data &operator = (xcom_var_func *value) {
+//            if (this->type == xcom_vtype_vptr)
+//            {
+//                xcom_var_ptr ptr = this->vptr_val();
+//                *ptr = value;
+//            }
+//            else
+//            {
+//                this->reset();
+//                this->type = xcom_vtype_func;
+//                this->obj.func_val = value;
+//            }
+//            return *this;
+//        }
+        
+    public:
         // tool
         const char *to_var_json() const;
         const char *to_json() const ;

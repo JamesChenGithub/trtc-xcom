@@ -36,8 +36,8 @@ namespace xcom {
                 {
                     if (this->obj.array_val != nullptr)
                     {
-                        for (auto it = this->obj.dict_val->begin(); it != this->obj.dict_val->end(); it++) {
-                            it->second = nullptr;
+                        for (int i = 0; i < this->obj.array_val->size(); i++) {
+                            (*this->obj.array_val)[i] = nullptr;
                         }
                         delete this->obj.array_val;
                         this->obj.array_val = nullptr;
@@ -574,9 +574,8 @@ namespace xcom {
             init_varray();
             if (this->type == xcom_vtype_array)
             {
-                xcom_var *ptr = new xcom_var(data);
-                xcom_var_ptr var_ptr(ptr);
-                this->obj.array_val->emplace_back(ptr);
+                xcom_var_ptr var_ptr = std::make_shared<xcom_var>(new xcom_var(data));
+                this->obj.array_val->emplace_back(std::move(var_ptr));
             }
         }
         
@@ -588,9 +587,8 @@ namespace xcom {
             init_varray();
             if (this->type == xcom_vtype_array)
             {
-                xcom_var *ptr = new xcom_var(std::move(data));
-                xcom_var_ptr var_ptr(ptr);
-                this->obj.array_val->emplace_back(ptr);
+                xcom_var_ptr var_ptr = std::make_shared<xcom_var>(new xcom_var(std::move(data)));
+                this->obj.array_val->emplace_back(std::move(var_ptr));
             }
         }
 

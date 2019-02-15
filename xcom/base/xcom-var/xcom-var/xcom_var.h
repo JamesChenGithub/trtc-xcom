@@ -72,7 +72,7 @@ namespace xcom {
             const char *to_json(const char *key) const;
         public:
             // basic types
-            #define XCOM_VAR_FUNC(T, VT, VAL) \
+            #define XCOM_VAR_FUNCTION(T, VT, VAL) \
             inline xcom_var(T value):xcom_var() { this->type = xcom_vtype_##VT;  this->obj.VT##_val = value; } \
             inline operator T() {return this->obj.VT##_val; } \
             inline T VT##_val() const {return this->obj.VT##_val; } \
@@ -121,18 +121,18 @@ namespace xcom {
 //                    }
             
             
-            XCOM_VAR_FUNC(bool, bool, false)
-            XCOM_VAR_FUNC(int8_t, int8, 0)
-            XCOM_VAR_FUNC(uint8_t, uint8, 0)
-            XCOM_VAR_FUNC(int16_t, int16, 0)
-            XCOM_VAR_FUNC(uint16_t, uint16, 0)
-            XCOM_VAR_FUNC(int32_t, int32, 0)
-            XCOM_VAR_FUNC(uint32_t, uint32, 0)
-            XCOM_VAR_FUNC(int64_t, int64, 0)
-            XCOM_VAR_FUNC(uint64_t, uint64, 0)
-            XCOM_VAR_FUNC(float, float, 0.0)
-            XCOM_VAR_FUNC(double, double, 0.0)
-            XCOM_VAR_FUNC(void *, ref, NULL)
+            XCOM_VAR_FUNCTION(bool, bool, false)
+            XCOM_VAR_FUNCTION(int8_t, int8, 0)
+            XCOM_VAR_FUNCTION(uint8_t, uint8, 0)
+            XCOM_VAR_FUNCTION(int16_t, int16, 0)
+            XCOM_VAR_FUNCTION(uint16_t, uint16, 0)
+            XCOM_VAR_FUNCTION(int32_t, int32, 0)
+            XCOM_VAR_FUNCTION(uint32_t, uint32, 0)
+            XCOM_VAR_FUNCTION(int64_t, int64, 0)
+            XCOM_VAR_FUNCTION(uint64_t, uint64, 0)
+            XCOM_VAR_FUNCTION(float, float, 0.0)
+            XCOM_VAR_FUNCTION(double, double, 0.0)
+            XCOM_VAR_FUNCTION(void *, ref, NULL)
             
             
             
@@ -190,7 +190,7 @@ namespace xcom {
             
             // func
             
-            inline xcom_var(xcom_var_func value):xcom_var() {
+            inline xcom_var(const xcom_var_func &value):xcom_var() {
                 this->type = xcom_vtype_func;
                 this->obj.func_val = new xcom_var_func(value);
             }

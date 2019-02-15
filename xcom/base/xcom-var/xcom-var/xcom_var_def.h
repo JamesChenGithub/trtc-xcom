@@ -21,7 +21,7 @@ namespace xcom {
         typedef std::vector<xcom_var_ptr> xcom_var_array;
         typedef xcom_var (*xcom_var_callback)(xcom_var);
         
-#define printf //printf
+//#define printf //printf
 #ifdef __cplusplus
     }
 #endif
