@@ -737,7 +737,7 @@ namespace xcom {
             if (!key || !*key)
                 return;
             
-            if (this->type == xcom_vtype_dict) {
+            if (this->type == xcom_vtype_dict && is_dic_insert) {
                 *(*this)[key] = value;
             } else {
                 init_vmap();

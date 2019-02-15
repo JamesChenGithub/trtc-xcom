@@ -62,6 +62,8 @@ namespace xcom {
         bool operator == (const char* data) const;
         
     public:
+        // map
+        void insert(const char *key, const xcom_data &xvalue, bool is_dic_insert = false);
         // dict delc
         xcom_data operator[](const char *key);
         bool contains(const char *key);

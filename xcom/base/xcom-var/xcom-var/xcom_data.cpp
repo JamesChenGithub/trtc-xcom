@@ -236,7 +236,25 @@ namespace xcom {
         return _core ? _core->size() : 0;
     }
     
-    
+    void xcom_data::insert(const char *key, const xcom_data &xvalue, bool is_dic_insert)
+    {
+        if (!key || !*key)
+            return;
+        
+        if (xvalue._core == nullptr) {
+            return;
+        } else {
+            
+            if (xvalue._core->is_valid()) {
+                if (_core == nullptr) {
+                    _core = new xcom_var();
+                    isowed = true;
+                }
+                
+                _core->insert(key, *(xvalue._core), is_dic_insert);
+            }
+        }
+    }
     xcom_data xcom_data::operator[](const char *key)
     {
         if (!key || !*key)
