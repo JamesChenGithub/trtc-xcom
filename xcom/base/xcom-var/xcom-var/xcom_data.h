@@ -88,6 +88,7 @@ namespace xcom {
         
     private:
         xcom_var *_core = nullptr;
+        bool isowed = true;
         xcom_data(xcom_var *var, bool isvp);
         
         // 重置

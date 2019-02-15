@@ -25,11 +25,8 @@ namespace xcom {
     // 重置
     void xcom_data::reset()
     {
-        if (_core)
+        if (_core && isowed)
         {
-            if (_core->vptr_val() != nullptr) {
-                _core->reset_vptr();
-            }
             delete _core;
             _core = nullptr;
         }
@@ -38,7 +35,10 @@ namespace xcom {
     void xcom_data::reset(const xcom_data &data)
     {
         reset();
-        _core = new xcom_var(*data._core);
+        if (data._core) {
+            _core = new xcom_var(*data._core);
+            isowed = true;
+        }
     }
     // move
     void xcom_data::reset(xcom_data &&data)
@@ -48,6 +48,7 @@ namespace xcom {
         {
             xcom_var var = *data._core;
             _core = new xcom_var(std::move(var));
+            isowed = true;
             data._core = nullptr;
         }
     }
@@ -55,8 +56,10 @@ namespace xcom {
     xcom_data::xcom_data(xcom_var *var, bool isvp):xcom_data()
     {
         if (var != nullptr) {
-            xcom_var_ptr ptr(var);
-            _core = new xcom_var(ptr);
+//            xcom_var_ptr ptr(var);
+//            _core = new xcom_var(ptr);
+            _core = var;
+            isowed = false;
             printf("var = %p,  _core = %p , vp = %p ,  %s  \n", var,  _core, _core->vptr_val().get() ,_core->to_json());
         }
     }
@@ -66,6 +69,7 @@ namespace xcom {
         if (data._core)
         {
             _core = new xcom_var(*data._core);
+            isowed = true;
         }
     }
     
@@ -81,23 +85,34 @@ namespace xcom {
    
     xcom_data& xcom_data::operator = (const xcom_data &data)
     {
-        this->reset(data);
+        if (data._core && _core) {
+            *_core = *data._core;
+        } else {
+            this->reset(data);
+        }
+        
         return *this;
         
     }
     xcom_data& xcom_data::operator = (xcom_data &&data)
     {
-        this->reset(std::move(data));
+        if (data._core && _core) {
+            *_core = std::move(*data._core);
+            data._core = nullptr;
+        } else {
+            this->reset(std::move(data));
+        }
+        
         return *this;
     }
     
 #define XCOM_DATA_IMPL(T, VT, VAL) \
-    xcom_data::xcom_data(T value):xcom_data() { _core = new xcom_var(value); } \
+    xcom_data::xcom_data(T value):xcom_data() { _core = new xcom_var(value); isowed = true;} \
     xcom_data::operator T() const {return _core ? _core->obj.VT##_val : VAL; } \
     T xcom_data::VT##_val() const {return _core ? _core->obj.VT##_val : VAL; } \
     xcom_data& xcom_data::operator = (T value) { \
-        if (_core)  *_core = value;\
-        else  _core = new xcom_var(value);\
+        if (_core)  {*_core = value;}\
+        else  {_core = new xcom_var(value); isowed = true;}\
         return *this;\
     }\
     bool xcom_data::operator == (const T value) const { return _core && _core->type != xcom_vtype_##VT  ? _core->obj.VT##_val == value : false ;}
@@ -105,6 +120,7 @@ namespace xcom {
 
 //    xcom_data::xcom_data(bool value):_core(nullptr), isowed(true) {
 //        _core = new xcom_var(value);
+//        isowed = true;
 //    }
 //    xcom_data::operator bool() const{
 //        return _core ? _core->obj.bool_val : false;
@@ -121,6 +137,7 @@ namespace xcom {
 //        else
 //        {
 //            _core = new xcom_var(value);
+//            isowed = true;
 //        }
 //        return *this;
 //    }
@@ -144,6 +161,7 @@ namespace xcom {
     
     xcom_data::xcom_data(const char *value):xcom_data() {
         _core = new xcom_var(value);
+        isowed = true;
     }
     xcom_data::operator const char *() const
     {
@@ -160,6 +178,7 @@ namespace xcom {
         }
         else {
             _core = new xcom_var(value);
+            isowed = true;
         }
         return *this;
     }
@@ -206,9 +225,10 @@ namespace xcom {
         
         if (_core == nullptr) {
             _core = new xcom_var();
+            isowed = true;
         }
         xcom_var_ptr ptr = (*_core)[key];
-        //printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+        printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
         return xcom_data(ptr.get(), false);
     }
     bool xcom_data::contains(const char *key)
@@ -234,6 +254,7 @@ namespace xcom {
         if (_core == nullptr)
         {
             _core = new xcom_var();
+            isowed = true;
         }
         return _core->set_buffer(buf, len);
     }
@@ -243,6 +264,7 @@ namespace xcom {
         if (_core == nullptr)
         {
             _core = new xcom_var();
+            isowed = true;
         }
         xcom_var_ptr ptr = (*_core)[index];
         return xcom_data(ptr.get(), false);
@@ -256,6 +278,7 @@ namespace xcom {
         if (_core == nullptr)
         {
             _core = new xcom_var();
+            isowed = true;
         }
         return _core->append(*data._core);
     }
@@ -265,6 +288,7 @@ namespace xcom {
         if (_core == nullptr)
         {
             _core = new xcom_var();
+            isowed = true;
         }
         return _core->erase(index);
     }

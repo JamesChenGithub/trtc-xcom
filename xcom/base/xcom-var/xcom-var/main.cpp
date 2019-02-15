@@ -13,134 +13,134 @@
 
 using namespace xcom;
 int main(int argc, const char * argv[]) {
-//    {
-//        std::cout << "基础参数测试" << std::endl;
-//        // 基本参数验证
-//        xcom_var var;
-//        var = true;
-//
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (uint8_t)8;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (int8_t)-8;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (uint16_t)16;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (int16_t)-16;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (uint32_t)32;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (int32_t)-32;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (uint64_t)64;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (int64_t)-64;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (float)-64.12121;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (double)-64.212121212121121;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = "ab";
-//        std::cout << var.to_json() << std::endl;
-//
-//        std::string str = "str";
-//        var = str;
-//        std::cout << var.to_json() << std::endl;
-//
-//        var = (void *)nullptr;
-//        std::cout << var.to_json() << std::endl;
-//    }
-//
-//    {
-//        std::cout << "operator = 测试" << std::endl;
-//        xcom_var xv;
-//
-//        xcom_var var;
-//        var = true;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (uint8_t)8;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (int8_t)-8;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (uint16_t)16;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (int16_t)-16;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (uint32_t)32;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (int32_t)-32;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (uint64_t)64;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (int64_t)-64;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (float)-64.12121;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (double)-64.212121212121121;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = "ab";
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        std::string str = "str";
-//        var = str;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//
-//        var = (void *)nullptr;
-//        xv = var;
-//        std::cout << xv.to_json() << std::endl;
-//    }
-//
-//    {
-//        std::cout << "operator = 测试" << std::endl;
-//        xcom_var_ptr vptr(new xcom_var(10));
-//        std::cout << vptr->to_json() << std::endl;
-//
-//        xcom_var var;
-//        var = true;
-//        var = vptr;
-//        std::cout << var.to_json() << std::endl;
-//        std::cout << vptr->to_json() << std::endl;
-//
-//        *vptr = "heheh";
-//        std::cout << var.to_json() << std::endl;
-//        std::cout << vptr->to_json() << std::endl;
-//    }
-
+    //    {
+    //        std::cout << "基础参数测试" << std::endl;
+    //        // 基本参数验证
+    //        xcom_var var;
+    //        var = true;
+    //
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (uint8_t)8;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (int8_t)-8;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (uint16_t)16;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (int16_t)-16;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (uint32_t)32;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (int32_t)-32;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (uint64_t)64;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (int64_t)-64;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (float)-64.12121;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (double)-64.212121212121121;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = "ab";
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        std::string str = "str";
+    //        var = str;
+    //        std::cout << var.to_json() << std::endl;
+    //
+    //        var = (void *)nullptr;
+    //        std::cout << var.to_json() << std::endl;
+    //    }
+    //
+    //    {
+    //        std::cout << "operator = 测试" << std::endl;
+    //        xcom_var xv;
+    //
+    //        xcom_var var;
+    //        var = true;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (uint8_t)8;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (int8_t)-8;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (uint16_t)16;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (int16_t)-16;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (uint32_t)32;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (int32_t)-32;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (uint64_t)64;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (int64_t)-64;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (float)-64.12121;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (double)-64.212121212121121;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = "ab";
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        std::string str = "str";
+    //        var = str;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //
+    //        var = (void *)nullptr;
+    //        xv = var;
+    //        std::cout << xv.to_json() << std::endl;
+    //    }
+    //
+    //    {
+    //        std::cout << "operator = 测试" << std::endl;
+    //        xcom_var_ptr vptr(new xcom_var(10));
+    //        std::cout << vptr->to_json() << std::endl;
+    //
+    //        xcom_var var;
+    //        var = true;
+    //        var = vptr;
+    //        std::cout << var.to_json() << std::endl;
+    //        std::cout << vptr->to_json() << std::endl;
+    //
+    //        *vptr = "heheh";
+    //        std::cout << var.to_json() << std::endl;
+    //        std::cout << vptr->to_json() << std::endl;
+    //    }
+    
     {
         xcom_data var;
 //        var["enable"] = true;
@@ -148,25 +148,82 @@ int main(int argc, const char * argv[]) {
         xcom_data content;
         {
             content["sage"]=18;
-            std::cout << "content :" << content.to_json() << std::endl;
+            //            std::cout << "content :" << content.to_json() << std::endl;
             content["age"]=28;
         }
-        std::cout << "content :" << content.to_var_json() << std::endl;
-        std::cout << "content :" << content.to_json() << std::endl;
-
+        //        std::cout << "content :" << content.to_var_json() << std::endl;
+        //        std::cout << "content :" << content.to_json() << std::endl;
+        
         var["content"] = content;
-//        var["content2"] = content;
-//        var["content3"] = content;
-//
-//        content.erase("sage");
-//        var["haha"] = content;
-
-        std::cout << "var :" << var.to_var_json() << std::endl;
         std::cout << "var :" << var.to_json() << std::endl;
-
+        content["age"]=100;
+        var["content2"] = content;
+        std::cout << "var :" << var.to_json() << std::endl;
+         content["sage"]=100;
+        var["content3"] = content;
+        std::cout << "var :" << var.to_json() << std::endl;
+        content.erase("sage");
+        var["haha"] = content;
+        std::cout << "var :" << var.to_json() << std::endl;
+        
+        
+        std::cout << "var :" << var.to_json() << std::endl;
+        
     }
-
-//
+    
+    {
+        xcom_data var;
+        
+        {
+            xcom_data content;
+            content["sage"]=18;
+            
+            content["age"]=28;
+             var["content"] = std::move(content);
+            std::cout << "var :" << var.to_json() << std::endl;
+        }
+        
+        {
+            xcom_data content;
+            content["sage2"]=128;
+            
+            content["age3"]=238;
+            var["content2"] = std::move(content);
+            std::cout << "var :" << var.to_json() << std::endl;
+        }
+        
+        {
+            xcom_data content;
+            content["sage2"]=11128;
+            
+            content["age3"]=22238;
+            var["content3"] = std::move(content);
+            std::cout << "var :" << var.to_json() << std::endl;
+        }
+        std::cout << "var :" << var.to_json() << std::endl;
+        
+    }
+    
+    {
+        xcom_data var;
+        
+        void *i100 = malloc(100);
+        memset(i100, 0, 100);
+        var.set_buf(i100, 100);
+        memset(i100, 2, 100);
+        free(i100);
+        std::cout << "var :" << var.to_json() << std::endl;
+        
+    }
+    
+    {
+        xcom_data var;
+        
+        
+        
+    }
+    
+    //
     return 0;
     
     

@@ -70,15 +70,7 @@ namespace xcom {
                 case xcom_vtype_vptr:
                 {
                     xcom_var_ptr ptr = this->obj.vptr_val;
-                    int count = ptr.use_count();
-                    if (count == 1) {
-                        ptr->reset();
-                    }
-                    else{
-                        this->obj.vptr_val = nullptr;
-                        int count = ptr.use_count();
-                    }
-                    
+                    this->obj.vptr_val = nullptr;
                     break;
                 }
                 case xcom_vtype_func:
@@ -126,7 +118,8 @@ namespace xcom {
                         this->obj.array_val = new xcom_var_array;
                         auto it = var.obj.array_val->begin();
                         while (it != var.obj.array_val->end()) {
-                            this->obj.array_val->emplace_back(*it);
+                            xcom_var_ptr cpy = std::make_shared<xcom_var>(new xcom_var(*it));
+                            this->obj.array_val->emplace_back(cpy);
                             it++;
                         }
                     }
@@ -140,7 +133,9 @@ namespace xcom {
                         this->obj.dict_val = new xcom_var_dict;
                         auto it = var.obj.dict_val->begin();
                         while (it != var.obj.dict_val->end()) {
-                            this->obj.dict_val->push_back(std::make_pair(it->first, it->second));
+                            
+                            xcom_var_ptr sec = std::make_shared<xcom_var>(new xcom_var(*(it->second)));
+                            this->obj.dict_val->push_back(std::make_pair(it->first, sec));
                             it++;
                         }
                     }
@@ -331,7 +326,7 @@ namespace xcom {
                     break;
                 };
                 case xcom_vtype_ref: {
-                    char buf[32];
+                    char buf[64];
                     sprintf(buf, "%p", this->obj.ref_val);
                     valstr = buf;
                     break;
@@ -493,7 +488,7 @@ namespace xcom {
                     break;
                 }
                 case xcom_vtype_ref: {
-                    char buf[32];
+                    char buf[64];
                     sprintf(buf, "%p", this->obj.ref_val);
                     valstr = buf;
                     std::string str = "\"" + typestr + "\":" + valstr; return str.c_str();
@@ -650,7 +645,7 @@ namespace xcom {
             }
             
             xcom_var_ptr ptr = get(key);
-            //printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+            printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
             return ptr;
         }
         

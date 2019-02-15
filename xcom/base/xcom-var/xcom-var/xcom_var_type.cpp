@@ -56,7 +56,7 @@ namespace xcom {
                 void *abuf = malloc(len);
                 if (abuf)
                 {
-                    memcpy(this->buf, buf, len);
+                    memcpy(abuf, buf, len);
                     this->buf = abuf;
                     this->len = len;
                 }
