@@ -558,11 +558,24 @@ namespace xcom {
         }
         //=====================
         /* array */
-        xcom_var_ptr xcom_var::operator[](uint32_t index) {
-            if (this->type != xcom_vtype_array)
+        xcom_var_ptr xcom_var::operator[](int32_t index) {
+            if (index < 0)
                 return nullptr;
-
-            return at(index);
+            
+            init_varray();
+            if (index >=0 && index < this->obj.array_val->size()) {
+                return at(index);
+            }
+            if (index == this->obj.array_val->size())
+            {
+                xcom_var_ptr var_ptr(new xcom_var(0));
+                this->obj.array_val->emplace_back(std::move(var_ptr));
+                return at(index);
+            }
+            else {
+                printf("Error Index: %d for Array[%d, %d]\n", index, 0, this->obj.array_val->size());
+                return nullptr;
+            }
         }
 
         /* 'index' based array methods */
@@ -593,7 +606,7 @@ namespace xcom {
         }
 
 
-        bool xcom_var::erase(uint32_t index)
+        bool xcom_var::erase(int32_t index)
         {
             if (this->type == xcom_vtype_array)
             {
@@ -685,7 +698,7 @@ namespace xcom {
         /* 'key-value' dictionary methods */
         void xcom_var::put(const char *key) {
             
-            xcom_var_ptr cpy(new xcom_var(false));
+            xcom_var_ptr cpy(new xcom_var(0));
             printf("crate ptr : %p\n", cpy.get());
             this->obj.dict_val->push_back(std::make_pair(key, cpy));
         }

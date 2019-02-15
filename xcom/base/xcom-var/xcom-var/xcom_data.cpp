@@ -264,7 +264,7 @@ namespace xcom {
         return _core->set_buffer(buf, len);
     }
     
-    xcom_data xcom_data::operator[](uint32_t index)
+    xcom_data xcom_data::operator[](int32_t index)
     {
         if (_core == nullptr)
         {
@@ -288,7 +288,7 @@ namespace xcom {
         return _core->append(*data._core);
     }
     
-    bool xcom_data::erase(uint32_t index)
+    bool xcom_data::erase(int32_t index)
     {
         if (_core == nullptr)
         {

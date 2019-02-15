@@ -217,12 +217,12 @@ namespace xcom {
             }
         public:
             /* array */
-            xcom_var_ptr operator[](uint32_t index);
+            xcom_var_ptr operator[](int32_t index);
             
             /* 'index' based array methods */
             void append(const xcom_var &data);
             void append(xcom_var &&data);
-            bool erase(uint32_t index);
+            bool erase(int32_t index);
         private:
             
             /* 'index' based array methods */
