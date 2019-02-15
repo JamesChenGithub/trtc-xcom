@@ -240,7 +240,7 @@ namespace xcom {
             void init_vdict();
             
             /* 'key-value' dictionary methods */
-            void put(const char *key, xcom_var &&data);
+            void put(const char *key);
             
             xcom_var_ptr get(const char *key);
             

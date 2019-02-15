@@ -49,7 +49,7 @@ namespace xcom {
             xcom_var var = *data._core;
             _core = new xcom_var(std::move(var));
             isowed = true;
-            data._core = nullptr;
+//            data._core = nullptr;
         }
     }
     
@@ -84,7 +84,7 @@ namespace xcom {
         {
             xcom_var var = *data._core;
             _core = new xcom_var(std::move(var));
-            data._core = nullptr;
+//            data._core = nullptr;
         }
     }
    
@@ -103,7 +103,7 @@ namespace xcom {
     {
         if (data._core && _core) {
             *_core = std::move(*data._core);
-            data._core = nullptr;
+//            data._core = nullptr;
         } else {
             this->reset(std::move(data));
         }

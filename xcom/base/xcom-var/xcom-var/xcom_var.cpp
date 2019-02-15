@@ -118,7 +118,7 @@ namespace xcom {
                         this->obj.array_val = new xcom_var_array;
                         auto it = var.obj.array_val->begin();
                         while (it != var.obj.array_val->end()) {
-                            xcom_var_ptr cpy = std::make_shared<xcom_var>(new xcom_var(*it));
+                            xcom_var_ptr cpy(new xcom_var(*it));
                             this->obj.array_val->emplace_back(cpy);
                             it++;
                         }
@@ -134,7 +134,7 @@ namespace xcom {
                         auto it = var.obj.dict_val->begin();
                         while (it != var.obj.dict_val->end()) {
                             
-                            xcom_var_ptr sec = std::make_shared<xcom_var>(new xcom_var(*(it->second)));
+                            xcom_var_ptr sec(new xcom_var(*(it->second)));
                             this->obj.dict_val->push_back(std::make_pair(it->first, sec));
                             it++;
                         }
@@ -453,7 +453,7 @@ namespace xcom {
                     break;
                 }
                 default:
-                    return "";
+                    return " ";
 
             }
             return restr.c_str();
@@ -462,7 +462,7 @@ namespace xcom {
         const char *xcom_var::to_json(const char *key) const
         {
             if (key == nullptr) {
-                return "";
+                return " ";
             }
 
             std::string typestr = std::string(key);
@@ -495,10 +495,10 @@ namespace xcom {
                     break;
                 }
                 default:
-                    return "";
+                    return " ";
 
             }
-            return "";
+            return " ";
         }
 
         //=====================
@@ -574,7 +574,7 @@ namespace xcom {
             init_varray();
             if (this->type == xcom_vtype_array)
             {
-                xcom_var_ptr var_ptr = std::make_shared<xcom_var>(new xcom_var(data));
+                xcom_var_ptr var_ptr(new xcom_var(data));
                 this->obj.array_val->emplace_back(std::move(var_ptr));
             }
         }
@@ -587,7 +587,7 @@ namespace xcom {
             init_varray();
             if (this->type == xcom_vtype_array)
             {
-                xcom_var_ptr var_ptr = std::make_shared<xcom_var>(new xcom_var(std::move(data)));
+                xcom_var_ptr var_ptr(new xcom_var(std::move(data)));
                 this->obj.array_val->emplace_back(std::move(var_ptr));
             }
         }
@@ -638,8 +638,7 @@ namespace xcom {
 
             if (!this->contains(key))
             {
-                xcom_var&& var = xcom_var(false);
-                this->put(key, std::move(var));
+                this->put(key);
             }
             
             xcom_var_ptr ptr = get(key);
@@ -684,11 +683,11 @@ namespace xcom {
         }
 
         /* 'key-value' dictionary methods */
-        void xcom_var::put(const char *key,  xcom_var&& data) {
-            xcom_var *ptr = new xcom_var(std::move(data));
-            xcom_var_ptr var_ptr(ptr);
-            printf("crate ptr : %p\n", var_ptr.get());
-            this->obj.dict_val->push_back(std::make_pair(key, var_ptr));
+        void xcom_var::put(const char *key) {
+            
+            xcom_var_ptr cpy(new xcom_var(false));
+            printf("crate ptr : %p\n", cpy.get());
+            this->obj.dict_val->push_back(std::make_pair(key, cpy));
         }
 
         xcom_var_ptr xcom_var::get(const char *key) {

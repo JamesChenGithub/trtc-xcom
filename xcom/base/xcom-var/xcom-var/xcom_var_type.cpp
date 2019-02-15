@@ -38,7 +38,7 @@ namespace xcom {
                 case xcom_vtype_func: return "func";
                 case xcom_vtype_vptr : return "vptr";
             }
-            return "";
+            return " ";
         }
         
         

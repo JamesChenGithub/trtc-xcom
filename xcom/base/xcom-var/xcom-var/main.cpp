@@ -142,20 +142,23 @@ int main(int argc, const char * argv[]) {
     //            std::cout << vptr->to_json() << std::endl;
     //        }
     
-    {
-        xcom_data var;
-        var["enable"] = true;
-        var["age"] = 18;
-        xcom_data content;
-        {
-            content["sage"]=18;
-            //            std::cout << "content :" << content.to_json() << std::endl;
-            content["age"]=28;
-        }
-        std::cout << "content :" << content.to_var_json() << std::endl;
-        std::cout << "content :" << content.to_json() << std::endl;
-        
-        var["content"] = content;
+//    {
+//        xcom_data var;
+//        var["enable"] = true;
+//        var["age"] = 18;
+//        xcom_data content;
+//        {
+//            content["sage"]=18;
+//            //            std::cout << "content :" << content.to_json() << std::endl;
+//            content["age"]=28;
+//        }
+//        std::cout << "content :" << content.to_var_json() << std::endl;
+//        std::cout << "content :" << content.to_json() << std::endl;
+//
+//        std::cout << "xcom_var" << std::endl;
+//        {
+//            var["content"] = content;
+//        }
 //        std::cout << "var :" << var.to_json() << std::endl;
 //        content["age"]=100;
 //        var["content2"] = content;
@@ -166,44 +169,48 @@ int main(int argc, const char * argv[]) {
 //        content.erase("sage");
 //        var["haha"] = content;
 //        std::cout << "var :" << var.to_json() << std::endl;
-        
-        
-        std::cout << "var :" << var.to_json() << std::endl;
-        
-    }
-    //
-    //    {
-    //        xcom_data var;
-    //
-    //        {
-    //            xcom_data content;
-    //            content["sage"]=18;
-    //
-    //            content["age"]=28;
-    //             var["content"] = std::move(content);
-    //            std::cout << "var :" << var.to_json() << std::endl;
-    //        }
-    //
-    //        {
-    //            xcom_data content;
-    //            content["sage2"]=128;
-    //
-    //            content["age3"]=238;
-    //            var["content2"] = std::move(content);
-    //            std::cout << "var :" << var.to_json() << std::endl;
-    //        }
-    //
-    //        {
-    //            xcom_data content;
-    //            content["sage2"]=11128;
-    //
-    //            content["age3"]=22238;
-    //            var["content3"] = std::move(content);
-    //            std::cout << "var :" << var.to_json() << std::endl;
-    //        }
-    //        std::cout << "var :" << var.to_json() << std::endl;
-    //
-    //    }
+//
+//
+//        std::cout << "var :" << var.to_json() << std::endl;
+//
+//    }
+    
+        {
+            xcom_data var;
+            
+            {
+                xcom_data content;
+                {
+                content["sage"]=18;
+                }
+
+//                content["age"]=28;
+                {
+                var["content"] = std::move(content);
+                }
+//                std::cout << "var :" << var.to_json() << std::endl;
+            }
+    
+//            {
+//                xcom_data content;
+//                content["sage2"]=128;
+//
+//                content["age3"]=238;
+//                var["content2"] = std::move(content);
+//                std::cout << "var :" << var.to_json() << std::endl;
+//            }
+//
+//            {
+//                xcom_data content;
+//                content["sage2"]=11128;
+//
+//                content["age3"]=22238;
+//                var["content3"] = std::move(content);
+//                std::cout << "var :" << var.to_json() << std::endl;
+//            }
+            std::cout << "var :" << var.to_json() << std::endl;
+    
+        }
     
     //    {
     //        xcom_data var;
