@@ -18,11 +18,13 @@ namespace xcom {
     extern "C" {
 #endif
         class xcom_var;
+        class xcom_data;
         typedef std::shared_ptr<xcom_var> xcom_var_ptr;
         typedef std::map<std::string, xcom_var_ptr> xcom_var_map;
         typedef std::vector<xcom_var_ptr> xcom_var_array;
         typedef std::vector<std::pair<std::string, xcom_var_ptr>> xcom_var_dict;
-        typedef xcom_var (*xcom_var_callback)(xcom_var &);
+        typedef xcom_data (*xcom_callback)(xcom_data &);
+        
         
 //#define printf //printf
 #ifdef __cplusplus

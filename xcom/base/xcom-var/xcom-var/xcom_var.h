@@ -15,7 +15,7 @@
 
 #include "xcom_var_type.h"
 #include "xcom_var_value.h"
-#include "xcom_var_func.h"
+#include "xcom_data_func.h"
 
 
 namespace xcom {
@@ -132,7 +132,38 @@ namespace xcom {
             XCOM_VAR_FUNCTION(uint64_t, uint64, 0)
             XCOM_VAR_FUNCTION(float, float, 0.0)
             XCOM_VAR_FUNCTION(double, double, 0.0)
-            XCOM_VAR_FUNCTION(void *, ref, NULL)
+//            XCOM_VAR_FUNCTION(void *, ref, NULL)
+            
+            inline xcom_var(void * value):xcom_var() {
+                this->type = xcom_vtype_ref;
+                this->obj.ref_val = value;
+            }
+            inline operator void *() {
+                return this->obj.ref_val;
+            }
+            inline bool ref_val() const {
+                return this->obj.ref_val;
+            }
+            inline xcom_var &operator = (void * value) {
+                
+                if (this->type == xcom_vtype_vptr)
+                {
+                    xcom_var_ptr ptr = this->vptr_val();
+                    //printf("set ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+                    *ptr = value;
+                }
+                else
+                {
+                    this->reset();
+                    this->type = xcom_vtype_ref;
+                    this->obj.ref_val = value;
+                }
+                return *this;
+            }
+            
+            inline bool operator == (const void *value) const {
+                return this->type != xcom_vtype_ref  ?  false : this->obj.ref_val == value;
+            }
             
             
             
@@ -190,19 +221,23 @@ namespace xcom {
             
             // func
             
-            inline xcom_var(const xcom_var_func &value):xcom_var() {
+            inline xcom_var(const xcom_data_func &value):xcom_var() {
                 this->type = xcom_vtype_func;
-                this->obj.func_val = new xcom_var_func(value);
+                this->obj.func_val = new xcom_data_func(value);
+            }
+            inline xcom_var(xcom_data_func &&value):xcom_var() {
+                this->type = xcom_vtype_func;
+                this->obj.func_val = new xcom_data_func(std::move(value));
             }
             
-            inline xcom_var func_val() const {
+            inline xcom_data_func *func_val() const {
                 if (this->type == xcom_vtype_func && this->obj.func_val) {
                     return this->obj.func_val;
                 }
-                return xcom_var();
+                return nullptr;
             }
             
-            xcom_var &operator = (const xcom_var_func &value) {
+            xcom_var &operator = (const xcom_data_func &value) {
                 if (this->type == xcom_vtype_vptr)
                 {
                     xcom_var_ptr ptr = this->vptr_val();
@@ -212,7 +247,21 @@ namespace xcom {
                 {
                     this->reset();
                     this->type = xcom_vtype_func;
-                    this->obj.func_val = new xcom_var_func(value);
+                    this->obj.func_val = new xcom_data_func(value);
+                }
+                return *this;
+            }
+            xcom_var &operator = (xcom_data_func &&value) {
+                if (this->type == xcom_vtype_vptr)
+                {
+                    xcom_var_ptr ptr = this->vptr_val();
+                    *ptr = std::move(value);
+                }
+                else
+                {
+                    this->reset();
+                    this->type = xcom_vtype_func;
+                    this->obj.func_val = new xcom_data_func(std::move(value));
                 }
                 return *this;
             }

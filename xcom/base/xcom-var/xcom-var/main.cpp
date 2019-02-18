@@ -392,46 +392,46 @@ int main(int argc, const char * argv[]) {
 //
 //    }
 //
-    {
-        xcom_data stuArray1;
-        xcom_data stuArray;
-        xcom_data stuDic;
-
-        for (int i = 0; i < 50; i++) {
-            std::string stuname = "std_" + std::to_string(i);
-            xcom_data stu;
-            for (int j = 0; j < 5; j++){
-                std::string item = "科目"+ std::to_string(j+1);
-                stu[item.c_str()] =  5*i + j;
-            }
-            stuArray1[i] = stu;
-            stuArray.append(stu);
-            stuDic[stuname.c_str()] = stu;
-        }
-
-        std::cout << "stuArray1 :============" << std::endl << stuArray1.to_json() << std::endl;
-
-        std::cout << "stuArray :============" << std::endl << stuArray.to_json() << std::endl;
-
-        std::cout << "stuDic :============" << std::endl << stuDic.to_json() << std::endl;
-
-    }
+//    {
+//        xcom_data stuArray1;
+//        xcom_data stuArray;
+//        xcom_data stuDic;
+//
+//        for (int i = 0; i < 50; i++) {
+//            std::string stuname = "std_" + std::to_string(i);
+//            xcom_data stu;
+//            for (int j = 0; j < 5; j++){
+//                std::string item = "科目"+ std::to_string(j+1);
+//                stu[item.c_str()] =  5*i + j;
+//            }
+//            stuArray1[i] = stu;
+//            stuArray.append(stu);
+//            stuDic[stuname.c_str()] = stu;
+//        }
+//
+//        std::cout << "stuArray1 :============" << std::endl << stuArray1.to_json() << std::endl;
+//
+//        std::cout << "stuArray :============" << std::endl << stuArray.to_json() << std::endl;
+//
+//        std::cout << "stuDic :============" << std::endl << stuDic.to_json() << std::endl;
+//
+//    }
     
     {
-        xcom_data par;
-        par["age"] = 10;
-        par["score"] = 100;
-        auto call = [](xcom_data &apr)->xcom_data {
-            apr["age"] = 100;
-            apr["score"] = 100;
-            return apr;
-        };
-        call(par);
-        std::cout << "par :============" << par.to_json() << std::endl;
-        
-        xcom_data act;
-        act.set_callback(call, par);
-
+        {
+            xcom_data par;
+            par["score"] = 100;
+            auto call = [](xcom_data &apr)->xcom_data {
+                apr["score"] = "max";
+                apr["age"] = 100;
+                std::cout << "par :============" << apr.to_json() << std::endl;
+                return apr;
+            };
+            
+            xcom_data act;
+            act.set_callback(call, std::move(par));
+            act.callback();
+        }
     }
     
     return 0;

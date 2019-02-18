@@ -13,7 +13,7 @@
 #include <vector>
 #include "xcom_var_def.h"
 #include "xcom_var_type.h"
-#include "xcom_var_func.h"
+#include "xcom_data_func.h"
 
 namespace xcom {
 #ifdef __cplusplus
@@ -39,7 +39,7 @@ namespace xcom {
             xcom_var_map    *map_val;
             xcom_var_array  *array_val;
             xcom_var_dict   *dict_val;
-            xcom_var_func   *func_val;
+            xcom_data_func  *func_val;
             xcom_var_ptr    vptr_val;
         public:
             xcom_var_value();

@@ -16,11 +16,13 @@ namespace xcom {
         static int varcout = 0;
         xcom_var::~xcom_var()
         {
-            
+            if (this->type == xcom_vtype_func) {
+                int i = 0;
+            }
             printf("xcom_var [%d] dealloc : %p \n", --varcout, this);
             reset();
         }
-        #define kDefault_Xcom_Var_Value = {.int32_val{0}}
+#define kDefault_Xcom_Var_Value = {.int32_val{0}}
         xcom_var::xcom_var()
         {
             printf("xcom_var [%d]  malloc : %p\n", ++varcout, this);
@@ -71,7 +73,7 @@ namespace xcom {
                     }
                     break;
                 }
-                
+                    
                 case xcom_vtype_bytes:
                 {
                     if (this->obj.buf_val != nullptr)
@@ -83,7 +85,6 @@ namespace xcom {
                 }
                 case xcom_vtype_vptr:
                 {
-                    xcom_var_ptr ptr = this->obj.vptr_val;
                     this->obj.vptr_val = nullptr;
                     break;
                 }
@@ -110,7 +111,7 @@ namespace xcom {
                 case xcom_vtype_double:
                 case xcom_vtype_string:
                 case xcom_vtype_ref:
-               
+                    
                 default:
                     break;
             }
@@ -118,7 +119,7 @@ namespace xcom {
             this->type = xcom_vtype_null;
             
         }
-    
+        
         void xcom_var::reset(const xcom_var &var)
         {
             this->reset();
@@ -187,6 +188,15 @@ namespace xcom {
                     }
                     break;
                 }
+                case xcom_vtype_func: {
+                    if (this->obj.func_val != nullptr)
+                    {
+                        delete this->obj.func_val;
+                        this->obj.func_val = nullptr;
+                    }
+                    this->obj.func_val = var.obj.func_val;
+                    break;
+                }
                     
                 case xcom_vtype_null:  break;
                 case xcom_vtype_bool: { this->obj.bool_val = var.obj.bool_val; break; }
@@ -202,7 +212,7 @@ namespace xcom {
                 case xcom_vtype_double: { this->obj.double_val = var.obj.double_val; break; }
                 case xcom_vtype_string: { this->obj.string_val = var.obj.string_val; break; }
                 case xcom_vtype_ref: { this->obj.ref_val = var.obj.ref_val; break; }
-                case xcom_vtype_func: { this->obj.func_val = var.obj.func_val; break; }
+                    
                     
                 default:
                 {
@@ -265,6 +275,15 @@ namespace xcom {
                     }
                     break;
                 }
+                case xcom_vtype_func: {
+                    if (this->obj.func_val != nullptr)
+                    {
+                        delete this->obj.func_val;
+                        this->obj.func_val = nullptr;
+                    }
+                    this->obj.func_val = std::move(var.obj.func_val);
+                    var.obj.func_val = nullptr;
+                    break; }
                     
                 case xcom_vtype_null:  break;
                 case xcom_vtype_bool: { this->obj.bool_val = var.obj.bool_val; break; }
@@ -280,7 +299,7 @@ namespace xcom {
                 case xcom_vtype_double: { this->obj.double_val = var.obj.double_val; break; }
                 case xcom_vtype_string: { this->obj.string_val = var.obj.string_val; var.obj.string_val = ""; break; }
                 case xcom_vtype_ref: { this->obj.ref_val = var.obj.ref_val; var.obj.ref_val = nullptr; break; }
-                case xcom_vtype_func: { this->obj.func_val = var.obj.func_val; var.obj.func_val = nullptr; break; }
+                    
                     
                 default:
                 {
@@ -290,8 +309,8 @@ namespace xcom {
             
             var.reset();
         }
-
-
+        
+        
         //================
         const char *xcom_var::to_var_json() const
         {
@@ -374,7 +393,7 @@ namespace xcom {
                     restr = ostr.str();
                     break;
                 };
-    
+                    
                 case xcom_vtype_vptr:
                 {
                     if (this->obj.vptr_val)
@@ -401,14 +420,14 @@ namespace xcom {
                     break;
                 };
             }
-
+            
             if (restr.length() > 0) {
                 return restr.c_str();
             }
             std::string str = "{\"" + typestr + "\":" + valstr + "}";
             return str.c_str();
         }
-
+        
         const char *xcom_var::to_json() const
         {
             std::string restr = "";
@@ -488,8 +507,8 @@ namespace xcom {
                             json = it->second->to_json(it->first.c_str());
                             ostr << json;
                         }
-
-
+                        
+                        
                         it++;
                         if (it != end)
                         {
@@ -536,24 +555,24 @@ namespace xcom {
                     {
                         valstr = this->obj.vptr_val->to_json();
                     } else {
-                       valstr = "NULL";
+                        valstr = "NULL";
                     }
                     restr = "{\"" + typestr + "\":" + valstr + "}";
                     break;
                 }
                 default:
                     return " ";
-
+                    
             }
             return restr.c_str();
         }
-
+        
         const char *xcom_var::to_json(const char *key) const
         {
             if (key == nullptr) {
                 return " ";
             }
-
+            
             std::string typestr = std::string(key);
             std::string valstr = "" ;
             switch(this->type)
@@ -585,11 +604,11 @@ namespace xcom {
                 }
                 default:
                     return " ";
-
+                    
             }
             return " ";
         }
-
+        
         //=====================
         //string
         // string
@@ -601,21 +620,21 @@ namespace xcom {
             this->type = xcom_vtype_string;
             this->obj.string_val = cstr ? cstr : "";
         }
-
+        
         xcom_var::operator const char *() const {
             return this->type == xcom_vtype_string ? this->obj.string_val.c_str() : "";
         }
         xcom_var::operator std::string () const {
             return this->type == xcom_vtype_string ? this->obj.string_val.c_str() : std::string("");
         }
-
+        
         const char *xcom_var::cstr_val() const  {
             return this->type == xcom_vtype_string ? this->obj.string_val.c_str() : "";
         }
         std::string xcom_var::string_val() const {
             return this->type == xcom_vtype_string ? this->obj.string_val : std::string("");
         }
-
+        
         xcom_var & xcom_var::operator= (const char *cstr) {
             if (this->type == xcom_vtype_vptr) {
                 xcom_var_ptr ptr = this->vptr_val();
@@ -638,7 +657,7 @@ namespace xcom {
             }
             return *this;
         }
-
+        
         bool xcom_var::operator == (const char *cstr) const {
             return this->type != xcom_vtype_string || cstr == nullptr ?  false : this->obj.string_val == std::string(cstr);
         }
@@ -662,17 +681,17 @@ namespace xcom {
                 return at(index);
             }
             else {
-                printf("Error Index: %d for Array[%d, %d]\n", index, 0, this->obj.array_val->size());
+                printf("Error Index: %d for Array[%d, %d]\n", index, 0, (int)(this->obj.array_val->size()));
                 return nullptr;
             }
         }
-
+        
         /* 'index' based array methods */
         void xcom_var::append(const xcom_var &data)
         {
             if (data.type == xcom_vtype_null)
                 return;
-
+            
             init_varray();
             if (this->type == xcom_vtype_array)
             {
@@ -693,8 +712,8 @@ namespace xcom {
                 this->obj.array_val->emplace_back(std::move(var_ptr));
             }
         }
-
-
+        
+        
         bool xcom_var::erase(int32_t index)
         {
             if (this->type == xcom_vtype_array)
@@ -707,19 +726,19 @@ namespace xcom {
             }
             return false;
         }
-
-
+        
+        
         /* 'index' based array methods */
         xcom_var_ptr xcom_var::at(uint32_t index) {
-
+            
             if(index >=0 && index < this->obj.array_val->size())
             {
                 return (*this->obj.array_val)[index];
             }
-
+            
             return nullptr;
         }
-
+        
         void xcom_var::init_varray()
         {
             if (this->type != xcom_vtype_array)
@@ -808,7 +827,7 @@ namespace xcom {
             }
             return false;
         }
-
+        
         bool xcom_var::erase(const char *key) {
             if (this->type == xcom_vtype_dict)
             {
@@ -834,7 +853,7 @@ namespace xcom {
             }
             return false;
         }
-
+        
         void xcom_var::init_vdict()
         {
             if (this->type != xcom_vtype_dict)
@@ -854,7 +873,7 @@ namespace xcom {
                 this->obj.map_val = new xcom_var_map;
             }
         }
-
+        
         /* 'key-value' dictionary methods */
         void xcom_var::put(const char *key) {
             
@@ -869,7 +888,7 @@ namespace xcom {
             printf("crate ptr : %p\n", cpy.get());
             this->obj.dict_val->push_back(std::make_pair(key, cpy));
         }
-
+        
         xcom_var_ptr xcom_var::get(const char *key) {
             if (this->type == xcom_vtype_dict) {
                 auto it = this->obj.dict_val->begin();
@@ -933,7 +952,7 @@ namespace xcom {
             }
             else if (this->type == xcom_vtype_vptr) {
                 if (this->obj.vptr_val) {
-                   return this->obj.vptr_val->size();
+                    return this->obj.vptr_val->size();
                 }
                 return 0;
             }

@@ -81,6 +81,7 @@ namespace xcom {
     public:
         // func
         void set_callback(const xcom_data_callback funcAddr, xcom_data &data);
+        void set_callback(const xcom_data_callback funcAddr, xcom_data &&data);
         xcom_data callback();
     public:
         // tool
