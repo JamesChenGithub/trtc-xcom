@@ -554,10 +554,12 @@ namespace xcom {
                     if (this->obj.vptr_val.get())
                     {
                         valstr = this->obj.vptr_val->to_json();
+                        restr = valstr;
                     } else {
                         valstr = "NULL";
+                        restr = "{\"" + typestr + "\":" + valstr + "}";
                     }
-                    restr = "{\"" + typestr + "\":" + valstr + "}";
+                    
                     break;
                 }
                 default:
@@ -885,8 +887,8 @@ namespace xcom {
         void xcom_var::put(const char *key, const xcom_var &value)
         {
             xcom_var_ptr cpy(new xcom_var(value));
-            printf("crate ptr : %p\n", cpy.get());
-            this->obj.dict_val->push_back(std::make_pair(key, cpy));
+            printf("crate ptr : %p  , %s\n", cpy.get(), cpy->to_var_json());
+            this->obj.map_val->insert(std::make_pair(key, cpy));
         }
         
         xcom_var_ptr xcom_var::get(const char *key) {

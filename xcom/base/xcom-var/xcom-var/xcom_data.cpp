@@ -265,7 +265,9 @@ namespace xcom {
             isowed = true;
         }
         xcom_var_ptr ptr = (*_core)[key];
-        printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+        if (ptr) {
+            printf("get ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+        }
         return xcom_data(ptr.get(), false);
     }
     bool xcom_data::contains(const char *key)

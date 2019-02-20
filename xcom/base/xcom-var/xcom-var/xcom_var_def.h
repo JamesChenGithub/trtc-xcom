@@ -26,7 +26,7 @@ namespace xcom {
         typedef xcom_data (*xcom_callback)(xcom_data &);
         
         
-//#define printf //printf
+#define printf //printf
 #ifdef __cplusplus
     }
 #endif

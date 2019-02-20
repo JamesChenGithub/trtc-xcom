@@ -36,6 +36,7 @@ namespace xcom
             xcom_vtype_double    = 'D',      // double
             xcom_vtype_string    = 'c',      // string
             xcom_vtype_ref       = '&',      // outside ptr ref: manage by outside
+            
             xcom_vtype_bytes     = 'm',      // buffer
             xcom_vtype_map       = '(',      // map : insert / search by  tree
             xcom_vtype_array     = '[',      // array
