@@ -1130,7 +1130,7 @@ namespace xcom {
             std::string astr = a.to_var_json();
             std::string bstr = b.to_var_json();
             std::string funcname = __FUNCTION__;
-            std::string error =  " logic error :"  + funcname + "(" + astr + "," + bstr + ")";
+            std::string error =  " logic error :"  + funcname + "(" + astr + "," + bstr + ") has float or double";
             throw std::logic_error(error);
         }
         
@@ -1206,6 +1206,13 @@ namespace xcom {
                 throw std::logic_error(error);
                 break;
         }
+    }
+    
+    
+    std::ostream & operator <<(std::ostream &os, const xcom_var &a )
+    {
+        os<< a.to_json();
+        return os;
     }
     
 #ifdef __cplusplus
