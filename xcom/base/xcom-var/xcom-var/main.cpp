@@ -470,6 +470,8 @@ int main(int argc, const char * argv[]) {
                 a = 1;
                 b = "124";
                 std::cout <<  "a + b" << a + b;
+                std::cout <<  "-a + b" << -a;
+                std::cout <<  "-b" << -b;
             }
             
             {

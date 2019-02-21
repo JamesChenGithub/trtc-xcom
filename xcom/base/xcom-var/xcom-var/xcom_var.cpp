@@ -1202,7 +1202,7 @@ namespace xcom {
             default:
                 std::string str = this->to_var_json();
                 std::string funcname = __FUNCTION__;
-                std::string error =  " logic error :"  + funcname + "(" + str + ")";
+                std::string error =  " logic error :"  + funcname + "(" + str + ") just for number";
                 throw std::logic_error(error);
                 break;
         }
