@@ -457,7 +457,7 @@ int main(int argc, const char * argv[]) {
 //        std::cout << "contact : " << contacts.to_json() << std::endl;
 //
 //    }
-    
+    {
     float x = 0.3;
     x++;
     
@@ -468,9 +468,36 @@ int main(int argc, const char * argv[]) {
     const char *a = "";
     const char *p = nullptr;
     std::string ast = std::string(a);
-    std::string pst = std::string(p);
+    //std::string pst = std::string(p);
     std::string s = std::to_string(i);
     short i2 = i + i + j;
+    }
+//    {
+//        float a = 3.5;
+//        float b = 1.2;
+//        int m = 1;
+//        a%b;
+//        a%m;
+//
+//
+//    }
+//
+//    {
+//        double a = 3.5;
+//        double b = 1.2;
+//        int m = 1;
+//        a%b;
+//        a%m;
+//
+//
+//    }
     
+    {
+        int b = 10;
+        bool a = true;
+        bool c = false;
+       int a1= b%a;
+        int a2= b%c;
+    }
     return 0;
 }

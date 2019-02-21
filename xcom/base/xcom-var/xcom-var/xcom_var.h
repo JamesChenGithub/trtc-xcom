@@ -311,32 +311,32 @@ namespace xcom {
 
             
         public:
-            inline bool is_number() const { return this->type <= xcom_vtype_string; }
+            inline bool is_number() const { return this->type < xcom_vtype_string; }
+            inline bool is_string() const { return this->type == xcom_vtype_string; }
             inline bool is_array() const { return this->type == xcom_vtype_array; }
             inline bool is_dict() const { return this->type == xcom_vtype_dict;}
             inline bool is_valid() const { return this->type != xcom_vtype_null;}
+            bool is_zero() const;
             
             // just array or dict vaild, return empty;
             // other return false
-            bool empty();
+            bool empty() const;
             
             // just array or dict vaild, return size;
             // other return 1
             uint32_t size();
             
         private:
-            
-            
-            
+        
         public:
             
             // 友元重载 ： 双目算术运算符    + (加)，-(减)，*(乘)，/(除)，% (取模)
             // 只针对数据类型, 非数据类型返回 xcom_var() 
-            friend xcom_var operator+(const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator-(const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator*(const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator/(const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator%(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator+(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator-(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator*(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator/(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator%(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
             
             // 关系运算符   != (不等于)，< (小于)，> (大于>，<=(小于等于)，>=(大于等于)
             bool operator !=(const xcom_var& d);
@@ -350,8 +350,8 @@ namespace xcom {
             friend xcom_var operator&&(const xcom_var& a, const xcom_var& b);
             friend xcom_var operator!(const xcom_var& a);
             //  单目运算符    + (正)，-(负)
-            bool operator +();
-            bool operator -();
+            xcom_var operator +() const throw(std::logic_error);
+            xcom_var operator -() const throw(std::logic_error);
             // 自增自减运算符    ++(自增)，--(自减)
             xcom_var& operator++ ()     // prefix ++
             {
