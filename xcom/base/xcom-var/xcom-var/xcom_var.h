@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <iostream>
 
 #include "xcom_var_type.h"
 #include "xcom_var_value.h"
@@ -20,7 +21,7 @@
 
 namespace xcom {
 #ifdef __cplusplus
-    extern "C" {
+//    extern "C" {
 #endif
         class xcom_var
         {
@@ -67,6 +68,7 @@ namespace xcom {
         public:
             const char *to_var_json() const;
             const char *to_json() const;
+            const char *to_string() const;
             
         private:
             const char *to_json(const char *key) const;
@@ -132,38 +134,38 @@ namespace xcom {
             XCOM_VAR_FUNCTION(uint64_t, uint64, 0)
             XCOM_VAR_FUNCTION(float, float, 0.0)
             XCOM_VAR_FUNCTION(double, double, 0.0)
-//            XCOM_VAR_FUNCTION(void *, ref, NULL)
+            XCOM_VAR_FUNCTION(void *, ref, NULL)
             
-            inline xcom_var(void * value):xcom_var() {
-                this->type = xcom_vtype_ref;
-                this->obj.ref_val = value;
-            }
-            inline operator void *() {
-                return this->obj.ref_val;
-            }
-            inline bool ref_val() const {
-                return this->obj.ref_val;
-            }
-            inline xcom_var &operator = (void * value) {
-                
-                if (this->type == xcom_vtype_vptr)
-                {
-                    xcom_var_ptr ptr = this->vptr_val();
-                    //printf("set ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
-                    *ptr = value;
-                }
-                else
-                {
-                    this->reset();
-                    this->type = xcom_vtype_ref;
-                    this->obj.ref_val = value;
-                }
-                return *this;
-            }
-            
-            inline bool operator == (const void *value) const {
-                return this->type != xcom_vtype_ref  ?  false : this->obj.ref_val == value;
-            }
+//            inline xcom_var(void * value):xcom_var() {
+//                this->type = xcom_vtype_ref;
+//                this->obj.ref_val = value;
+//            }
+//            inline operator void *() {
+//                return this->obj.ref_val;
+//            }
+//            inline bool ref_val() const {
+//                return this->obj.ref_val;
+//            }
+//            inline xcom_var &operator = (void * value) {
+//                
+//                if (this->type == xcom_vtype_vptr)
+//                {
+//                    xcom_var_ptr ptr = this->vptr_val();
+//                    //printf("set ptr : %p : %s\n", ptr.get(), ptr->to_var_json());
+//                    *ptr = value;
+//                }
+//                else
+//                {
+//                    this->reset();
+//                    this->type = xcom_vtype_ref;
+//                    this->obj.ref_val = value;
+//                }
+//                return *this;
+//            }
+//            
+//            inline bool operator == (const void *value) const {
+//                return this->type != xcom_vtype_ref  ?  false : this->obj.ref_val == value;
+//            }
             
             
             
@@ -321,12 +323,93 @@ namespace xcom {
             // just array or dict vaild, return size;
             // other return 1
             uint32_t size();
+            
+        private:
+            
+            
+            
+        public:
+            
+            // 友元重载 ： 双目算术运算符    + (加)，-(减)，*(乘)，/(除)，% (取模)
+            // 只针对数据类型, 非数据类型返回 xcom_var() 
+            friend xcom_var operator+(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator-(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator*(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator/(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator%(const xcom_var& a, const xcom_var& b);
+            
+            // 关系运算符   != (不等于)，< (小于)，> (大于>，<=(小于等于)，>=(大于等于)
+            bool operator !=(const xcom_var& d);
+            bool operator <(const xcom_var& d);
+            bool operator >(const xcom_var& d);
+            bool operator <=(const xcom_var& d);
+            bool operator >=(const xcom_var& d);
+            
+            // 逻辑运算符    ||(逻辑或)，&&(逻辑与)，!(逻辑非)
+            friend xcom_var operator||(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator&&(const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator!(const xcom_var& a);
+            //  单目运算符    + (正)，-(负)
+            bool operator +();
+            bool operator -();
+            // 自增自减运算符    ++(自增)，--(自减)
+            xcom_var& operator++ ()     // prefix ++
+            {
+                // Do work on this.   (increment your object here)
+                return *this;
+            }
+            
+            // You want to make the ++ operator work like the standard operators
+            // The simple way to do this is to implement postfix in terms of prefix.
+            //
+            xcom_var  operator++ (int)  // postfix ++
+            {
+                xcom_var result(*this);   // make a copy for result
+                ++(*this);              // Now use the prefix version to do the work
+                return result;          // return the copy (the old) value.
+            }
+            
+            xcom_var& operator-- ()     // prefix ++
+            {
+                // Do work on this.   (increment your object here)
+                return *this;
+            }
+            
+            // You want to make the ++ operator work like the standard operators
+            // The simple way to do this is to implement postfix in terms of prefix.
+            //
+            xcom_var  operator-- (int)  // postfix ++
+            {
+                xcom_var result(*this);   // make a copy for result
+                ++(*this);              // Now use the prefix version to do the work
+                return result;          // return the copy (the old) value.
+            }
+            
+            // 位运算符:只对整型    | (按位或)，& (按位与)，~(按位取反)，^(按位异或),，<< (左移)，>>(右移)
+            friend bool operator | (const xcom_var& a, const xcom_var& b);
+            friend bool operator & (const xcom_var& a, const xcom_var& b);
+            friend bool operator ^ (const xcom_var& a, const xcom_var& b);
+            friend xcom_var operator ~ (const xcom_var& a);
+            friend xcom_var operator << (const xcom_var& a, int i);
+            friend std::ostream & operator <<(std::ostream &os, const xcom_var &a );
+            friend xcom_var operator >> (const xcom_var& a, int i);
+            // 赋值运算符 +=, -=, *=, /= , % = , &=, |=, ^=, <<=, >>=
+            xcom_var& operator +=(const xcom_var& a);
+            xcom_var& operator -=(const xcom_var& a);
+            xcom_var& operator *=(const xcom_var& a);
+            xcom_var& operator /=(const xcom_var& a);
+            xcom_var& operator %=(const xcom_var& a);
+            xcom_var& operator &=(const xcom_var& a);
+            xcom_var& operator |=(const xcom_var& a);
+            xcom_var& operator ^=(const xcom_var& a);
+            xcom_var& operator <<=(int i);
+            xcom_var& operator >>=(int i);
         };
         
 #ifdef __cplusplus
-    }
-}
+//    }
 #endif
+}
 
 
 

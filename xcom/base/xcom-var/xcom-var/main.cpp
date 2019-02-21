@@ -461,5 +461,16 @@ int main(int argc, const char * argv[]) {
     float x = 0.3;
     x++;
     
+    bool i = true;
+    bool j = false;
+    std::string str = "";
+    std::string asst = std::string(str);
+    const char *a = "";
+    const char *p = nullptr;
+    std::string ast = std::string(a);
+    std::string pst = std::string(p);
+    std::string s = std::to_string(i);
+    short i2 = i + i + j;
+    
     return 0;
 }

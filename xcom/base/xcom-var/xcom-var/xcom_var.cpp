@@ -10,15 +10,12 @@
 #include <iostream>
 namespace xcom {
 #ifdef __cplusplus
-    extern "C" {
+//    extern "C" {
 #endif
         //==============================
         static int varcout = 0;
         xcom_var::~xcom_var()
         {
-            if (this->type == xcom_vtype_func) {
-                int i = 0;
-            }
             printf("xcom_var [%d] dealloc : %p \n", --varcout, this);
             reset();
         }
@@ -568,6 +565,29 @@ namespace xcom {
             }
             return restr.c_str();
         }
+    
+        const char *xcom_var::to_string() const
+        {
+            std::string res = "";
+            switch(this->type)
+            {
+                case xcom_vtype_bool: res = std::to_string(this->bool_val());break;
+                case xcom_vtype_int8: res = std::to_string(this->int8_val());break;
+                case xcom_vtype_uint8: res = std::to_string(this->uint8_val());break;
+                case xcom_vtype_int16: res = std::to_string(this->int16_val());break;
+                case xcom_vtype_uint16: res = std::to_string(this->uint16_val());break;
+                case xcom_vtype_int32: res = std::to_string(this->int32_val());break;
+                case xcom_vtype_uint32: res = std::to_string(this->uint32_val());break;
+                case xcom_vtype_int64: res = std::to_string(this->int64_val());break;
+                case xcom_vtype_uint64: res = std::to_string(this->uint64_val());break;
+                case xcom_vtype_float: res = std::to_string(this->float_val());break;
+                case xcom_vtype_double: res = std::to_string(this->double_val());break;
+                case xcom_vtype_string: res = this->string_val();break;
+                default:
+                    break;
+            }
+            return res.c_str();
+        }
         
         const char *xcom_var::to_json(const char *key) const
         {
@@ -963,8 +983,29 @@ namespace xcom {
                 return 1;
             }
         }
+        
+        
+        // 操作符重载
+        
+
+        xcom_var operator+(const xcom_var& a, const xcom_var& b)
+        {
+            if (a.type == xcom_vtype_null) return xcom_var(b);
+            if (b.type == xcom_vtype_null) return xcom_var(a);
+            
+            if (a.type < xcom_vtype_string && b.type < xcom_vtype_string) {
+                // 直接相加
+            }
+            else {
+                // string 相加
+            }
+                
+
+            return a;
+            
+        }
 #ifdef __cplusplus
-    }
+//    }
 #endif
 }
 

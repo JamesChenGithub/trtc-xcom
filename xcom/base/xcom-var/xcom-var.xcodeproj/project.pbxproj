@@ -13,6 +13,7 @@
 		921B26E922154BA60024BE45 /* xcom_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 921B26E722154BA60024BE45 /* xcom_data.cpp */; };
 		921B26EC22154C840024BE45 /* xcom_data_func.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 921B26EA22154C840024BE45 /* xcom_data_func.cpp */; };
 		921B26EF22154CC60024BE45 /* xcom_var_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 921B26ED22154CC60024BE45 /* xcom_var_value.cpp */; };
+		92AA5BB0221D28C2009FFE33 /* xcom_var_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92AA5BAE221D28C2009FFE33 /* xcom_var_util.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		921B26ED22154CC60024BE45 /* xcom_var_value.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_var_value.cpp; sourceTree = "<group>"; };
 		921B26EE22154CC60024BE45 /* xcom_var_value.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var_value.h; sourceTree = "<group>"; };
 		921B26F022154DF40024BE45 /* xcom_var_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var_def.h; sourceTree = "<group>"; };
+		92AA5BAE221D28C2009FFE33 /* xcom_var_util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_var_util.cpp; sourceTree = "<group>"; };
+		92AA5BAF221D28C2009FFE33 /* xcom_var_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var_util.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				921B26ED22154CC60024BE45 /* xcom_var_value.cpp */,
 				921B26EE22154CC60024BE45 /* xcom_var_value.h */,
 				921B26F022154DF40024BE45 /* xcom_var_def.h */,
+				92AA5BAE221D28C2009FFE33 /* xcom_var_util.cpp */,
+				92AA5BAF221D28C2009FFE33 /* xcom_var_util.h */,
 			);
 			path = "xcom-var";
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 			files = (
 				921B26E6221517580024BE45 /* xcom_var_type.cpp in Sources */,
 				921B26E5221517580024BE45 /* xcom_var.cpp in Sources */,
+				92AA5BB0221D28C2009FFE33 /* xcom_var_util.cpp in Sources */,
 				921B26EF22154CC60024BE45 /* xcom_var_value.cpp in Sources */,
 				921B26E922154BA60024BE45 /* xcom_data.cpp in Sources */,
 				921B26EC22154C840024BE45 /* xcom_data_func.cpp in Sources */,
