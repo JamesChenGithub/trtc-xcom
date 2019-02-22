@@ -417,22 +417,22 @@ break;\
     
     
     //比较操作
-#define xcom_compare_opera(a, b, func) \
+#define xcom_compare_opera(a, b, func)\
 do{\
 switch (a.type) {\
 case xcom_vtype_bool:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.bool_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.bool_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.bool_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.bool_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.bool_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.bool_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.bool_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.bool_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.bool_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.bool_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.bool_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.bool_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.bool_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.bool_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.bool_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.bool_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.bool_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.bool_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.bool_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.bool_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.bool_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.bool_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -440,17 +440,17 @@ break;\
 }\
 case xcom_vtype_int8:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.int8_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.int8_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.int8_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.int8_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.int8_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.int8_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.int8_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.int8_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.int8_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.int8_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.int8_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.int8_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.int8_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.int8_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.int8_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.int8_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.int8_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.int8_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.int8_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.int8_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.int8_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.int8_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -458,17 +458,17 @@ break;\
 }\
 case xcom_vtype_uint8:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.uint8_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.uint8_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.uint8_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.uint8_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.uint8_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.uint8_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.uint8_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.uint8_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.uint8_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.uint8_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.uint8_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.uint8_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.uint8_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.uint8_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.uint8_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.uint8_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.uint8_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.uint8_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.uint8_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.uint8_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.uint8_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.uint8_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -476,17 +476,17 @@ break;\
 }\
 case xcom_vtype_int16:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.int16_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.int16_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.int16_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.int16_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.int16_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.int16_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.int16_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.int16_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.int16_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.int16_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.int16_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.int16_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.int16_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.int16_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.int16_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.int16_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.int16_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.int16_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.int16_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.int16_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.int16_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.int16_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -494,17 +494,17 @@ break;\
 }\
 case xcom_vtype_uint16:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.uint16_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.uint16_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.uint16_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.uint16_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.uint16_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.uint16_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.uint16_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.uint16_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.uint16_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.uint16_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.uint16_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.uint16_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.uint16_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.uint16_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.uint16_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.uint16_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.uint16_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.uint16_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.uint16_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.uint16_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.uint16_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.uint16_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -512,17 +512,17 @@ break;\
 }\
 case xcom_vtype_int32:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.int32_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.int32_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.int32_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.int32_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.int32_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.int32_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.int32_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.int32_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.int32_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.int32_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.int32_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.int32_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.int32_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.int32_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.int32_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.int32_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.int32_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.int32_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.int32_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.int32_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.int32_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.int32_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -530,17 +530,17 @@ break;\
 }\
 case xcom_vtype_uint32:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.uint32_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.uint32_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.uint32_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.uint32_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.uint32_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.uint32_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.uint32_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.uint32_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.uint32_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.uint32_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.uint32_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.uint32_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.uint32_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.uint32_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.uint32_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.uint32_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.uint32_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.uint32_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.uint32_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.uint32_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.uint32_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.uint32_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -548,17 +548,17 @@ break;\
 }\
 case xcom_vtype_int64:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.int64_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.int64_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.int64_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.int64_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.int64_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.int64_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.int64_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.int64_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.int64_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.int64_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.int64_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.int64_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.int64_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.int64_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.int64_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.int64_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.int64_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.int64_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.int64_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.int64_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.int64_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.int64_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -566,17 +566,17 @@ break;\
 }\
 case xcom_vtype_uint64:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.uint64_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.uint64_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.uint64_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.uint64_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.uint64_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.uint64_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.uint64_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.uint64_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.uint64_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.uint64_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.uint64_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.uint64_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.uint64_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.uint64_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.uint64_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.uint64_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.uint64_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.uint64_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.uint64_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.uint64_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.uint64_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.uint64_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -584,17 +584,17 @@ break;\
 }\
 case xcom_vtype_float:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.float_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.float_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.float_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.float_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.float_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.float_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.float_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.float_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.float_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.float_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.float_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.float_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.float_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.float_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.float_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.float_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.float_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.float_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.float_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.float_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.float_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.float_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -602,17 +602,17 @@ break;\
 }\
 case xcom_vtype_double:\
 switch (b.type) { \
-case xcom_vtype_bool:  return   func(a.double_val(), b.bool_val())); \
-case xcom_vtype_int8:  return   func(a.double_val(), b.int8_val())); \
-case xcom_vtype_uint8: return   func(a.double_val(), b.uint8_val())); \
-case xcom_vtype_int16: return   func(a.double_val(), b.int16_val())); \
-case xcom_vtype_uint16:return   func(a.double_val(), b.uint16_val())); \
-case xcom_vtype_int32: return   func(a.double_val(), b.int32_val())); \
-case xcom_vtype_uint32:return   func(a.double_val(), b.uint32_val())); \
-case xcom_vtype_int64: return   func(a.double_val(), b.int64_val())); \
-case xcom_vtype_uint64:return   func(a.double_val(), b.uint64_val())); \
-case xcom_vtype_float: return   func(a.double_val(), b.float_val())); \
-case xcom_vtype_double:return   func(a.double_val(), b.double_val())); \
+case xcom_vtype_bool:  return   func(a.double_val(), b.bool_val()); \
+case xcom_vtype_int8:  return   func(a.double_val(), b.int8_val()); \
+case xcom_vtype_uint8: return   func(a.double_val(), b.uint8_val()); \
+case xcom_vtype_int16: return   func(a.double_val(), b.int16_val()); \
+case xcom_vtype_uint16:return   func(a.double_val(), b.uint16_val()); \
+case xcom_vtype_int32: return   func(a.double_val(), b.int32_val()); \
+case xcom_vtype_uint32:return   func(a.double_val(), b.uint32_val()); \
+case xcom_vtype_int64: return   func(a.double_val(), b.int64_val()); \
+case xcom_vtype_uint64:return   func(a.double_val(), b.uint64_val()); \
+case xcom_vtype_float: return   func(a.double_val(), b.float_val()); \
+case xcom_vtype_double:return   func(a.double_val(), b.double_val()); \
 case xcom_vtype_string:return   false; \
 break;\
 default:\
@@ -631,7 +631,7 @@ case xcom_vtype_int64: return   false; \
 case xcom_vtype_uint64:return   false; \
 case xcom_vtype_float: return   false; \
 case xcom_vtype_double:return  false; \
-case xcom_vtype_string:return   func(a.string_val(), b.string_val())); \
+case xcom_vtype_string:return   func(a.string_val(), b.string_val()); \
 break;\
 default:\
 break;\
@@ -641,9 +641,26 @@ default:\
 break;\
 }\
 return false;\
-}while(0);\
-return false\
+}while(0)
     
-}
+    
+    
+    //比较操作
+#define xcom_compare(a, b, func)\
+do {\
+    if (a.type > xcom_vtype_string || b.type > xcom_vtype_string) {\
+        std::string astr = a.to_var_json();\
+        std::string bstr = b.to_var_json();\
+        std::string funcname = __FUNCTION__;\
+        std::string error =  " logic error :"  + funcname + "(" + astr + "," + bstr + ") can't compare";\
+        throw std::logic_error(error);\
+    }\
+    if (a.type == xcom_vtype_null) {return false;}\
+    if (b.type == xcom_vtype_null) {return false;}\
+    if (a.type <= xcom_vtype_string && b.type <= xcom_vtype_string) {\
+        xcom_compare_opera(a, b, func);\
+    }\
+    return false;\
+}while(0)
 
 #endif /* xcom_var_util_h */

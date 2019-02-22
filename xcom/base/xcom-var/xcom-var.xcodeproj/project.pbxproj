@@ -44,6 +44,7 @@
 		921B26F022154DF40024BE45 /* xcom_var_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var_def.h; sourceTree = "<group>"; };
 		92AA5BAE221D28C2009FFE33 /* xcom_var_util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_var_util.cpp; sourceTree = "<group>"; };
 		92AA5BAF221D28C2009FFE33 /* xcom_var_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_var_util.h; sourceTree = "<group>"; };
+		92AFEDD722200017007F349D /* test.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = test.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 				921B26F022154DF40024BE45 /* xcom_var_def.h */,
 				92AA5BAE221D28C2009FFE33 /* xcom_var_util.cpp */,
 				92AA5BAF221D28C2009FFE33 /* xcom_var_util.h */,
+				92AFEDD722200017007F349D /* test.strings */,
 			);
 			path = "xcom-var";
 			sourceTree = "<group>";
