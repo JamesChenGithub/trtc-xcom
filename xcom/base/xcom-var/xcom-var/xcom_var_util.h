@@ -72,6 +72,23 @@ namespace xcom {
         return a != b;
     }
     
+    template<class T, class U>
+    inline bool xcom_logic_and(T a, U b)
+    {
+        return a && b;
+    }
+    template<class T, class U>
+    inline bool xcom_logic_or(T a, U b)
+    {
+        return a || b;
+    }
+    
+    template<class T>
+    inline bool xcom_logic_not(T a)
+    {
+        return !a;
+    }
+    
 
     //数值型 + - * /
 #define xcom_num_base_opera(a, b, func) \
@@ -662,5 +679,7 @@ do {\
     }\
     return false;\
 }while(0)
+    
+}
 
 #endif /* xcom_var_util_h */

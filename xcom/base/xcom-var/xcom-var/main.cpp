@@ -457,6 +457,23 @@ int main(int argc, const char * argv[]) {
     //        std::cout << "contact : " << contacts.to_json() << std::endl;
     //
     //    }
+    
+//    {
+//        float a = 100.0;
+//        double b = 0.0;
+//        
+//        bool a1 = a || b;
+//        bool a2 = a && b;
+//        bool a12 = !a;
+//        bool a3 = !b;
+//        
+////        std::string c= "q234123";
+////        bool a4 = a || c;
+////        bool a5 = a && c;
+////        bool a6 = !c;
+//        
+//        
+//    }
     {
         try {
             {
@@ -514,5 +531,7 @@ int main(int argc, const char * argv[]) {
         }
         
     }
+    
+    
     return 0;
 }

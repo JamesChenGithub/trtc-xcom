@@ -1162,27 +1162,46 @@ namespace xcom {
     bool operator !=(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
     {
         xcom_compare(a, b, xcom_not_equalto);
+        // 实际不可达
+        return false;
     }
     bool operator ==(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
     {
         xcom_compare(a, b, xcom_equalto);
+        // 实际不可达
+        return false;
     }
     bool operator < (const xcom_var& a, const xcom_var& b) throw(std::logic_error)
     {
         xcom_compare(a, b, xcom_less_than);
+        // 实际不可达
+        return false;
     }
      bool operator > (const xcom_var& a, const xcom_var& b) throw(std::logic_error)
     {
         xcom_compare(a, b, xcom_greater_than);
+        // 实际不可达
+        return false;
     }
      bool operator <=(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
     {
         xcom_compare(a, b, xcom_less_than_equalto);
+        // 实际不可达
+        return false;
     }
     bool operator >=(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
     {
         xcom_compare(a, b, xcom_greater_than_equalto);
+        // 实际不可达
+        return false;
     }
+    
+//    friend xcom_var operator||(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
+//    {
+//        
+//    }
+//    friend xcom_var operator&&(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+//    friend xcom_var operator!(const xcom_var& a) throw(std::logic_error);
     
     xcom_var xcom_var::operator +() const throw(std::logic_error)
     {

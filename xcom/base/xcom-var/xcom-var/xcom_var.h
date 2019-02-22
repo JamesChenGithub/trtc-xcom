@@ -347,9 +347,9 @@ namespace xcom {
             friend bool operator >=(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
             
             // 逻辑运算符    ||(逻辑或)，&&(逻辑与)，!(逻辑非)
-            friend xcom_var operator||(const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator&&(const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator!(const xcom_var& a);
+            friend xcom_var operator||(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator&&(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator!(const xcom_var& a) throw(std::logic_error);
             //  单目运算符    + (正)，-(负)
             xcom_var operator +() const throw(std::logic_error);
             xcom_var operator -() const throw(std::logic_error);
