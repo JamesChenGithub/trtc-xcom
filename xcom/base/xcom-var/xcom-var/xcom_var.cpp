@@ -1159,6 +1159,33 @@ namespace xcom {
         return a;
     }
     
+    bool operator !=(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
+    {
+        if (a.type > xcom_vtype_string || b.type > xcom_vtype_string)
+        {
+            std::string astr = a.to_var_json();
+            std::string bstr = b.to_var_json();
+            std::string funcname = __FUNCTION__;
+            std::string error =  " logic error :"  + funcname + "(" + astr + "," + bstr + ") can't compare";
+            throw std::logic_error(error);
+        }
+        
+        if (a.type == xcom_vtype_null) {return false;}
+        if (b.type == xcom_vtype_null) {return false;}
+        
+        if (a.type <= xcom_vtype_string && b.type <= xcom_vtype_string) {
+            //return xcom_compare_opera(a, b, xcom_not_equalto);
+            return false;
+        }
+        
+        return false;
+    }
+//    friend bool operator ==(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+//    friend bool operator < (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+//    friend bool operator > (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+//    friend bool operator <=(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+//    friend bool operator >=(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+    
     xcom_var xcom_var::operator +() const throw(std::logic_error)
     {
         switch (this->type) {

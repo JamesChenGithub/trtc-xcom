@@ -339,11 +339,12 @@ namespace xcom {
             friend xcom_var operator%(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
             
             // 关系运算符   != (不等于)，< (小于)，> (大于>，<=(小于等于)，>=(大于等于)
-            bool operator !=(const xcom_var& d);
-            bool operator <(const xcom_var& d);
-            bool operator >(const xcom_var& d);
-            bool operator <=(const xcom_var& d);
-            bool operator >=(const xcom_var& d);
+            friend bool operator !=(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend bool operator ==(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend bool operator < (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend bool operator > (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend bool operator <=(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend bool operator >=(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
             
             // 逻辑运算符    ||(逻辑或)，&&(逻辑与)，!(逻辑非)
             friend xcom_var operator||(const xcom_var& a, const xcom_var& b);
