@@ -1196,12 +1196,61 @@ namespace xcom {
         return false;
     }
     
-//    friend xcom_var operator||(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
-//    {
-//        
-//    }
-//    friend xcom_var operator&&(const xcom_var& a, const xcom_var& b) throw(std::logic_error);
-//    friend xcom_var operator!(const xcom_var& a) throw(std::logic_error);
+    xcom_var operator||(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
+    {
+        if (a.type >= xcom_vtype_string || b.type >= xcom_vtype_string || a.type == xcom_vtype_null || b.type == xcom_vtype_null)
+        {
+            std::string astr = a.to_var_json();
+            std::string bstr = b.to_var_json();
+            std::string funcname = __FUNCTION__;
+            std::string error =  " logic error :"  + funcname + "(" + astr + "," + bstr + ")";
+            throw std::logic_error(error);
+        }
+        else {
+            xcom_logic_opera(a, b, xcom_logic_or);
+        }
+        // 实际不可达
+        return xcom_var(false);
+    }
+    xcom_var operator&&(const xcom_var& a, const xcom_var& b) throw(std::logic_error)
+    {
+        if (a.type >= xcom_vtype_string || b.type >= xcom_vtype_string || a.type == xcom_vtype_null || b.type == xcom_vtype_null)
+        {
+            std::string astr = a.to_var_json();
+            std::string bstr = b.to_var_json();
+            std::string funcname = __FUNCTION__;
+            std::string error =  " logic error :"  + funcname + "(" + astr + "," + bstr + ")";
+            throw std::logic_error(error);
+        }
+        else {
+            xcom_logic_opera(a, b, xcom_logic_and);
+        }
+        // 实际不可达
+        return xcom_var(false);
+    }
+    xcom_var operator!(const xcom_var& a) throw(std::logic_error)
+    {
+        switch (a.type) {
+            case xcom_vtype_bool:  return xcom_var(!a.bool_val());
+            case xcom_vtype_int8:  return xcom_var(!a.int8_val());
+            case xcom_vtype_uint8: return xcom_var(!a.uint8_val());
+            case xcom_vtype_int16: return xcom_var(!a.int16_val());
+            case xcom_vtype_uint16:return xcom_var(!a.uint16_val());
+            case xcom_vtype_int32: return xcom_var(!a.int32_val());
+            case xcom_vtype_uint32:return xcom_var(!a.uint32_val());
+            case xcom_vtype_int64: return xcom_var(!a.int64_val());
+            case xcom_vtype_uint64:return xcom_var(!a.uint64_val());
+            case xcom_vtype_float: return xcom_var(!a.float_val());
+            case xcom_vtype_double:return xcom_var(!a.double_val());
+            break;
+            default:
+            std::string str = a.to_var_json();
+            std::string funcname = __FUNCTION__;
+            std::string error =  " logic error :"  + funcname + "(" + str + ")";
+            throw std::logic_error(error);
+            break;
+        }
+    }
     
     xcom_var xcom_var::operator +() const throw(std::logic_error)
     {
