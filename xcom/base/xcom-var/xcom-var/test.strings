@@ -1,142 +1,90 @@
-#define xcom_binary_opera(a, b, func) \
-do{\
-switch (a.type) {\
-case xcom_vtype_bool:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.bool_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.bool_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.bool_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.bool_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.bool_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.bool_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.bool_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.bool_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.bool_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_int8:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.int8_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.int8_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.int8_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.int8_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.int8_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.int8_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.int8_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.int8_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.int8_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_uint8:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.uint8_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.uint8_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.uint8_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.uint8_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.uint8_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.uint8_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.uint8_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.uint8_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.uint8_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_int16:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.int16_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.int16_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.int16_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.int16_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.int16_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.int16_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.int16_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.int16_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.int16_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_uint16:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.uint16_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.uint16_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.uint16_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.uint16_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.uint16_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.uint16_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.uint16_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.uint16_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.uint16_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_int32:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.int32_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.int32_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.int32_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.int32_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.int32_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.int32_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.int32_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.int32_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.int32_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_uint32:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.uint32_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.uint32_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.uint32_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.uint32_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.uint32_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.uint32_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.uint32_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.uint32_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.uint32_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_int64:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.int64_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.int64_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.int64_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.int64_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.int64_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.int64_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.int64_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.int64_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.int64_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-case xcom_vtype_uint64:\
-switch (b.type) { \
-case xcom_vtype_bool:  return xcom_var(func(a.uint64_val(), b.bool_val())); \
-case xcom_vtype_int8:  return xcom_var(func(a.uint64_val(), b.int8_val())); \
-case xcom_vtype_uint8: return xcom_var(func(a.uint64_val(), b.uint8_val())); \
-case xcom_vtype_int16: return xcom_var(func(a.uint64_val(), b.int16_val())); \
-case xcom_vtype_uint16:return xcom_var(func(a.uint64_val(), b.uint16_val())); \
-case xcom_vtype_int32: return xcom_var(func(a.uint64_val(), b.int32_val())); \
-case xcom_vtype_uint32:return xcom_var(func(a.uint64_val(), b.uint32_val())); \
-case xcom_vtype_int64: return xcom_var(func(a.uint64_val(), b.int64_val())); \
-case xcom_vtype_uint64:return xcom_var(func(a.uint64_val(), b.uint64_val())); \
-break;\
-default:\
-break;\
-}\
-default:\
-break;\
-}\
-}while(0)
+// 友元重载 ： 双目算术运算符    + (加)，-(减)，*(乘)，/(除)，% (取模)
+// 只针对数据类型, 非数据类型返回 xcom_data()
+friend xcom_data operator+(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator-(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator*(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator/(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator%(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+
+// 关系运算符   != (不等于)，< (小于)，> (大于>，<=(小于等于)，>=(大于等于)
+friend bool operator !=(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend bool operator ==(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend bool operator < (const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend bool operator > (const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend bool operator <=(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend bool operator >=(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+
+// 逻辑运算符    ||(逻辑或)，&&(逻辑与)，!(逻辑非)
+friend xcom_data operator||(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator&&(const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator!(const xcom_data& a) throw(std::logic_error);
+//  单目运算符    + (正)，-(负)
+xcom_data operator +() const throw(std::logic_error);
+xcom_data operator -() const throw(std::logic_error);
+// 自增自减运算符    ++(自增)，--(自减)
+xcom_data& operator++ () throw(std::logic_error);     // prefix ++
+xcom_data  operator++ (int) throw(std::logic_error);// postfix ++
+
+xcom_data& operator-- () throw(std::logic_error);     // prefix --
+xcom_data  operator-- (int) throw(std::logic_error);  // postfix --
+
+
+// 位运算符:只对整型    | (按位或)，& (按位与)，~(按位取反)，^(按位异或),，<< (左移)，>>(右移)
+friend xcom_data operator | (const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator & (const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator ^ (const xcom_data& a, const xcom_data& b) throw(std::logic_error);
+friend xcom_data operator ~ (const xcom_data& a) throw(std::logic_error);
+friend xcom_data operator << (const xcom_data& a, int i) throw(std::logic_error);
+friend std::ostream & operator <<(std::ostream &os, const xcom_data &a );
+friend xcom_data operator >> (const xcom_data& a, int i) throw(std::logic_error);
+// 赋值运算符 +=, -=, *=, /= , % = , &=, |=, ^=, <<=, >>=
+inline xcom_data& operator +=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this + a;
+    return *this;
+}
+inline xcom_data& operator -=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this - a;
+    return *this;
+}
+inline xcom_data& operator *=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this * a;
+    return *this;
+}
+inline xcom_data& operator /=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this / a;
+    return *this;
+}
+inline xcom_data& operator %=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this % a;
+    return *this;
+}
+inline xcom_data& operator &=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this & a;
+    return *this;
+}
+inline xcom_data& operator |=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this | a;
+    return *this;
+}
+inline xcom_data& operator ^=(const xcom_data& a) throw(std::logic_error)
+{
+    *this = *this ^ a;
+    return *this;
+}
+inline xcom_data& operator <<=(int i) throw(std::logic_error)
+{
+    *this = *this << i;
+    return *this;
+}
+inline xcom_data& operator >>=(int i) throw(std::logic_error)
+{
+    *this = *this >> i;
+    return *this;
+}

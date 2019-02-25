@@ -474,84 +474,337 @@ int main(int argc, const char * argv[]) {
 //        
 //        
 //    }
-    {
-        try {
-            {
-                bool a = true;
-                int ia = 1212121;
-                auto nfaa = ~a;
-                auto ab = a|ia;
-            
-                float fa = 1.099090;
-                fa++;
-                
-//                auto nfa = ~fa;
-//                auto af = ab|fa;
-                
-                
-                int aa = 0x7FFFFFFF;
-                aa++;
-                
-                uint8_t ua = 0xFF;
-                ua++;
-                
-                getchar();
-            }
-            {
-                xcom_var a = 1 + 1.5;
-                xcom_var b = 1 + 2;
-                xcom_var c = a + b;
-                std::cout << "a : " << a.to_json() << std::endl;
-                std::cout << "b : " << b.to_json() << std::endl;
-                std::cout << "c : " << c.to_json() << std::endl;
-                
-                a = 1;
-                b = "124";
-                std::cout <<  "a + b" << a + b;
-                std::cout <<  "-a + b" << -a;
-                std::cout <<  "-b" << -b;
-            }
-            
-            {
-                xcom_var a = 1 + 1.5;
-                xcom_var b = 1 + 2;
-                xcom_var c = a - b;
-                std::cout << "a : " << a.to_json() << std::endl;
-                std::cout << "b : " << b.to_json() << std::endl;
-                std::cout << "c : " << c.to_json() << std::endl;
-            }
-            
-            {
-                xcom_var a = 1 + 1.5;
-                xcom_var b = 1 + 2;
-                xcom_var c = a * b;
-                std::cout << "a : " << a.to_json() << std::endl;
-                std::cout << "b : " << b.to_json() << std::endl;
-                std::cout << "c : " << c.to_json() << std::endl;
-            }
-            
-            {
-                xcom_var a = 1 + 1.5;
-                xcom_var b = 1 + 2;
-                xcom_var c = a / b;
-                std::cout << "a : " << a.to_json() << std::endl;
-                std::cout << "b : " << b.to_json() << std::endl;
-                std::cout << "c : " << c.to_json() << std::endl;
-            }
-            
-            {
-                xcom_var a = 1 + 1.5;
-                xcom_var b = 1 + 2;
-                xcom_var c = a % b;
-                std::cout << "a : " << a.to_json() << std::endl;
-                std::cout << "b : " << b.to_json() << std::endl;
-                std::cout << "c : " << c.to_json() << std::endl;
-            }
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
+//    {
+//        try {
+//            {
+//                bool a = true;
+//                int ia = 1212121;
+//                auto nfaa = ~a;
+//                auto ab = a|ia;
+//
+//                float fa = 1.099090;
+//                fa++;
+//
+////                auto nfa = ~fa;
+////                auto af = ab|fa;
+//
+//
+//                int aa = 0x7FFFFFFF;
+//                aa++;
+//
+//                uint8_t ua = 0xFF;
+//                ua++;
+//
+//                getchar();
+//            }
+//            {
+//                xcom_var a = 1 + 1.5;
+//                xcom_var b = 1 + 2;
+//                xcom_var c = a + b;
+//                std::cout << "a : " << a.to_json() << std::endl;
+//                std::cout << "b : " << b.to_json() << std::endl;
+//                std::cout << "c : " << c.to_json() << std::endl;
+//
+//                a = 1;
+//                b = "124";
+//                std::cout <<  "a + b" << a + b;
+//                std::cout <<  "-a + b" << -a;
+//                std::cout <<  "-b" << -b;
+//            }
+//
+//            {
+//                xcom_var a = 1 + 1.5;
+//                xcom_var b = 1 + 2;
+//                xcom_var c = a - b;
+//                std::cout << "a : " << a.to_json() << std::endl;
+//                std::cout << "b : " << b.to_json() << std::endl;
+//                std::cout << "c : " << c.to_json() << std::endl;
+//            }
+//
+//            {
+//                xcom_var a = 1 + 1.5;
+//                xcom_var b = 1 + 2;
+//                xcom_var c = a * b;
+//                std::cout << "a : " << a.to_json() << std::endl;
+//                std::cout << "b : " << b.to_json() << std::endl;
+//                std::cout << "c : " << c.to_json() << std::endl;
+//            }
+//
+//            {
+//                xcom_var a = 1 + 1.5;
+//                xcom_var b = 1 + 2;
+//                xcom_var c = a / b;
+//                std::cout << "a : " << a.to_json() << std::endl;
+//                std::cout << "b : " << b.to_json() << std::endl;
+//                std::cout << "c : " << c.to_json() << std::endl;
+//            }
+//
+//            {
+//                xcom_var a = 1 + 1.5;
+//                xcom_var b = 1 + 2;
+//                xcom_var c = a % b;
+//                std::cout << "a : " << a.to_json() << std::endl;
+//                std::cout << "b : " << b.to_json() << std::endl;
+//                std::cout << "c : " << c.to_json() << std::endl;
+//            }
+//        } catch (std::logic_error e) {
+//            std::cout << e.what() << std::endl;
+//        }
         
-    }
+//    }
+    
+    
+            try {
+                
+                {
+                    xcom_data a = 3.5;
+                    xcom_data b = 2;
+                    xcom_data c = a % b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                    
+                    a = 1;
+                    b = "124";
+                    std::cout << a + b << std::endl;
+                    std::cout << -a + b<< std::endl;;
+                    
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a + b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+    
+                    a = 1;
+                    b = "124";
+                    std::cout << a + b << std::endl;
+                    std::cout << -a + b<< std::endl;;
+                    
+                }
+    
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a - b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+    
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a * b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+    
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a / b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+    
+                {
+                    xcom_data a = 1 + 100;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a % b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a < b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a > b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a == b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a != b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a <= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a >= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a & b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a | b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a ^ b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = ~b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = ~a;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a << b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    xcom_data c = a >> b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    std::cout << "c : " << c << std::endl;
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a += b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a -= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a *= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a /= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a %= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a &= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a |= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+                
+                {
+                    xcom_data a = 1 + 1.5;
+                    xcom_data b = 1 + 2;
+                    a ^= b;
+                    std::cout << "a : " << a << std::endl;
+                    std::cout << "b : " << b << std::endl;
+                    
+                }
+            } catch (std::logic_error e) {
+                std::cout << e.what() << std::endl;
+            }
+
     
     
     return 0;
