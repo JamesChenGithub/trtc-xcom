@@ -12,6 +12,8 @@
 #include "xcom_var.h"
 
 namespace xcom {
+    
+    // + - * / %
     template<class T, class U>
     inline auto xcom_add(T a, U b)->decltype(a+b)
     {
@@ -36,6 +38,7 @@ namespace xcom {
         return a/b;
     }
     
+    // < <= > >= !=
     template<class T, class U>
     inline bool xcom_less_than(T a, U b)
     {
@@ -72,6 +75,7 @@ namespace xcom {
         return a != b;
     }
     
+    // && || !
     template<class T, class U>
     inline bool xcom_logic_and(T a, U b)
     {
@@ -87,6 +91,32 @@ namespace xcom {
     inline bool xcom_logic_not(T a)
     {
         return !a;
+    }
+    
+    // & | ~ ^
+    
+    template<class T, class U>
+    inline auto xcom_binary_and(T a, U b)
+    {
+        return a & b;
+    }
+    
+    template<class T, class U>
+    inline auto xcom_binary_or(T a, U b)
+    {
+        return a | b;
+    }
+    
+    template<class T, class U>
+    inline auto xcom_binary_xor(T a, U b)
+    {
+        return a ^ b;
+    }
+    
+    template<class T>
+    inline auto xcom_binary_not(T a)
+    {
+        return ~a;
     }
     
 
@@ -878,27 +908,150 @@ break;\
 }\
 }while(0)
     
-    
-//    switch (a.type) {
-//        case xcom_vtype_bool:  return xcom_var(!a.bool_val());
-//        case xcom_vtype_int8:  return xcom_var(!a.int8_val());
-//        case xcom_vtype_uint8: return xcom_var(!a.uint8_val());
-//        case xcom_vtype_int16: return xcom_var(!a.int16_val());
-//        case xcom_vtype_uint16:return xcom_var(!a.uint16_val());
-//        case xcom_vtype_int32: return xcom_var(!a.int32_val());
-//        case xcom_vtype_uint32:return xcom_var(!a.uint32_val());
-//        case xcom_vtype_int64: return xcom_var(!a.int64_val());
-//        case xcom_vtype_uint64:return xcom_var(!a.uint64_val());
-//        case xcom_vtype_float: return xcom_var(!a.float_val());
-//        case xcom_vtype_double:return xcom_var(!a.double_val());
-//        break;
-//        default:
-//        std::string str = a.to_var_json();
-//        std::string funcname = __FUNCTION__;
-//        std::string error =  " logic error :"  + funcname + "(" + str + ")";
-//        throw std::logic_error(error);
-//        break;
-//    }
+    // binary 操作
+#define xcom_binary_opera(a, b, func) \
+do{\
+switch (a.type) {\
+case xcom_vtype_bool:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.bool_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.bool_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.bool_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.bool_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.bool_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.bool_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.bool_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.bool_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.bool_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_int8:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.int8_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.int8_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.int8_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.int8_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.int8_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.int8_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.int8_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.int8_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.int8_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_uint8:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.uint8_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.uint8_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.uint8_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.uint8_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.uint8_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.uint8_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.uint8_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.uint8_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.uint8_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_int16:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.int16_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.int16_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.int16_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.int16_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.int16_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.int16_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.int16_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.int16_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.int16_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_uint16:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.uint16_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.uint16_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.uint16_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.uint16_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.uint16_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.uint16_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.uint16_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.uint16_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.uint16_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_int32:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.int32_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.int32_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.int32_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.int32_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.int32_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.int32_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.int32_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.int32_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.int32_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_uint32:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.uint32_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.uint32_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.uint32_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.uint32_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.uint32_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.uint32_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.uint32_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.uint32_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.uint32_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_int64:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.int64_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.int64_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.int64_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.int64_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.int64_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.int64_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.int64_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.int64_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.int64_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+case xcom_vtype_uint64:\
+switch (b.type) { \
+case xcom_vtype_bool:  return xcom_var(func(a.uint64_val(), b.bool_val())); \
+case xcom_vtype_int8:  return xcom_var(func(a.uint64_val(), b.int8_val())); \
+case xcom_vtype_uint8: return xcom_var(func(a.uint64_val(), b.uint8_val())); \
+case xcom_vtype_int16: return xcom_var(func(a.uint64_val(), b.int16_val())); \
+case xcom_vtype_uint16:return xcom_var(func(a.uint64_val(), b.uint16_val())); \
+case xcom_vtype_int32: return xcom_var(func(a.uint64_val(), b.int32_val())); \
+case xcom_vtype_uint32:return xcom_var(func(a.uint64_val(), b.uint32_val())); \
+case xcom_vtype_int64: return xcom_var(func(a.uint64_val(), b.int64_val())); \
+case xcom_vtype_uint64:return xcom_var(func(a.uint64_val(), b.uint64_val())); \
+break;\
+default:\
+break;\
+}\
+default:\
+break;\
+}\
+}while(0)
+
 
     
 }

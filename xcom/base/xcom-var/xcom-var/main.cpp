@@ -477,6 +477,27 @@ int main(int argc, const char * argv[]) {
     {
         try {
             {
+                bool a = true;
+                int ia = 1212121;
+                auto nfaa = ~a;
+                auto ab = a|ia;
+            
+                float fa = 1.099090;
+                fa++;
+                
+//                auto nfa = ~fa;
+//                auto af = ab|fa;
+                
+                
+                int aa = 0x7FFFFFFF;
+                aa++;
+                
+                uint8_t ua = 0xFF;
+                ua++;
+                
+                getchar();
+            }
+            {
                 xcom_var a = 1 + 1.5;
                 xcom_var b = 1 + 2;
                 xcom_var c = a + b;

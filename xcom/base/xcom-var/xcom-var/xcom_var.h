@@ -354,57 +354,72 @@ namespace xcom {
             xcom_var operator +() const throw(std::logic_error);
             xcom_var operator -() const throw(std::logic_error);
             // 自增自减运算符    ++(自增)，--(自减)
-            xcom_var& operator++ ()     // prefix ++
-            {
-                // Do work on this.   (increment your object here)
-                return *this;
-            }
+            xcom_var& operator++ () throw(std::logic_error);     // prefix ++
+            xcom_var  operator++ (int) throw(std::logic_error);// postfix ++
             
-            // You want to make the ++ operator work like the standard operators
-            // The simple way to do this is to implement postfix in terms of prefix.
-            //
-            xcom_var  operator++ (int)  // postfix ++
-            {
-                xcom_var result(*this);   // make a copy for result
-                ++(*this);              // Now use the prefix version to do the work
-                return result;          // return the copy (the old) value.
-            }
+            xcom_var& operator-- () throw(std::logic_error);     // prefix --
+            xcom_var  operator-- (int) throw(std::logic_error);  // postfix --
             
-            xcom_var& operator-- ()     // prefix ++
-            {
-                // Do work on this.   (increment your object here)
-                return *this;
-            }
-            
-            // You want to make the ++ operator work like the standard operators
-            // The simple way to do this is to implement postfix in terms of prefix.
-            //
-            xcom_var  operator-- (int)  // postfix ++
-            {
-                xcom_var result(*this);   // make a copy for result
-                ++(*this);              // Now use the prefix version to do the work
-                return result;          // return the copy (the old) value.
-            }
             
             // 位运算符:只对整型    | (按位或)，& (按位与)，~(按位取反)，^(按位异或),，<< (左移)，>>(右移)
-            friend bool operator | (const xcom_var& a, const xcom_var& b);
-            friend bool operator & (const xcom_var& a, const xcom_var& b);
-            friend bool operator ^ (const xcom_var& a, const xcom_var& b);
-            friend xcom_var operator ~ (const xcom_var& a);
-            friend xcom_var operator << (const xcom_var& a, int i);
+            friend xcom_var operator | (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator & (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator ^ (const xcom_var& a, const xcom_var& b) throw(std::logic_error);
+            friend xcom_var operator ~ (const xcom_var& a) throw(std::logic_error);
+            friend xcom_var operator << (const xcom_var& a, int i) throw(std::logic_error);
             friend std::ostream & operator <<(std::ostream &os, const xcom_var &a );
-            friend xcom_var operator >> (const xcom_var& a, int i);
+            friend xcom_var operator >> (const xcom_var& a, int i) throw(std::logic_error);
             // 赋值运算符 +=, -=, *=, /= , % = , &=, |=, ^=, <<=, >>=
-            xcom_var& operator +=(const xcom_var& a);
-            xcom_var& operator -=(const xcom_var& a);
-            xcom_var& operator *=(const xcom_var& a);
-            xcom_var& operator /=(const xcom_var& a);
-            xcom_var& operator %=(const xcom_var& a);
-            xcom_var& operator &=(const xcom_var& a);
-            xcom_var& operator |=(const xcom_var& a);
-            xcom_var& operator ^=(const xcom_var& a);
-            xcom_var& operator <<=(int i);
-            xcom_var& operator >>=(int i);
+            inline xcom_var& operator +=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this + a;
+                return *this;
+            }
+            inline xcom_var& operator -=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this - a;
+                return *this;
+            }
+            inline xcom_var& operator *=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this * a;
+                return *this;
+            }
+            inline xcom_var& operator /=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this / a;
+                return *this;
+            }
+            inline xcom_var& operator %=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this % a;
+                return *this;
+            }
+            inline xcom_var& operator &=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this & a;
+                return *this;
+            }
+            inline xcom_var& operator |=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this | a;
+                return *this;
+            }
+            inline xcom_var& operator ^=(const xcom_var& a) throw(std::logic_error)
+            {
+                *this = *this ^ a;
+                return *this;
+            }
+            inline xcom_var& operator <<=(int i) throw(std::logic_error)
+            {
+                *this = *this << i;
+                return *this;
+            }
+            inline xcom_var& operator >>=(int i) throw(std::logic_error)
+            {
+                *this = *this >> i;
+                return *this;
+            }
         };
         
 #ifdef __cplusplus
