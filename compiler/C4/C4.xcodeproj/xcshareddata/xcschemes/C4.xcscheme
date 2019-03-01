@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-d hello.c"
+            argument = "hello.c"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

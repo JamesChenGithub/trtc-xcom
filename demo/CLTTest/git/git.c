@@ -57,7 +57,7 @@ int main (int argc, char **argv)
                     {
                         
                         ar++;
-                        int len = strlen(ar);
+                        unsigned long len = strlen(ar);
                         if (len > 2) {
                             if (strcmp(ar, "version") == 0) {
                                 version();
