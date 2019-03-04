@@ -80,10 +80,10 @@ namespace xcom {
         }
     }
     
-//    xcom_data::xcom_data(const xcom_var_func &func):xcom_data() {
-//        _core = new xcom_var(func);
-//        isowed = true;
-//    }
+    //    xcom_data::xcom_data(const xcom_var_func &func):xcom_data() {
+    //        _core = new xcom_var(func);
+    //        isowed = true;
+    //    }
     
     xcom_data::xcom_data(xcom_data &&data):xcom_data()
     {
@@ -91,10 +91,10 @@ namespace xcom {
         {
             xcom_var var = *data._core;
             _core = new xcom_var(std::move(var));
-//            data._core = nullptr;
+            //            data._core = nullptr;
         }
     }
-   
+    
     xcom_data& xcom_data::operator = (const xcom_data &data)
     {
         if (data._core && _core) {
@@ -118,44 +118,44 @@ namespace xcom {
     }
     
 #define XCOM_DATA_IMPL(T, VT, VAL) \
-    xcom_data::xcom_data(T value):xcom_data() { _core = new xcom_var(value); isowed = true;} \
-    xcom_data::operator T() const {return _core ? _core->obj.VT##_val : VAL; } \
-    T xcom_data::VT##_val() const {return _core ? _core->obj.VT##_val : VAL; } \
-    xcom_data& xcom_data::operator = (T value) { \
-        if (_core)  {*_core = value;}\
-        else  {_core = new xcom_var(value); isowed = true;}\
-        return *this;\
-    }\
-    bool xcom_data::operator == (const T value) const { return _core && _core->type != xcom_vtype_##VT  ? _core->obj.VT##_val == value : false ;}
+xcom_data::xcom_data(T value):xcom_data() { _core = new xcom_var(value); isowed = true;} \
+xcom_data::operator T() const {return _core ? _core->obj.VT##_val : VAL; } \
+T xcom_data::VT##_val() const {return _core ? _core->obj.VT##_val : VAL; } \
+xcom_data& xcom_data::operator = (T value) { \
+if (_core)  {*_core = value;}\
+else  {_core = new xcom_var(value); isowed = true;}\
+return *this;\
+}\
+bool xcom_data::operator == (const T value) const { return _core && _core->type != xcom_vtype_##VT  ? _core->obj.VT##_val == value : false ;}
     
-
-//    xcom_data::xcom_data(bool value):_core(nullptr), isowed(true) {
-//        _core = new xcom_var(value);
-//        isowed = true;
-//    }
-//    xcom_data::operator bool() const{
-//        return _core ? _core->obj.bool_val : false;
-//    }
-//    bool xcom_data::bool_val() const {
-//        return _core ? _core->obj.bool_val : false;
-//    }
-//    xcom_data& xcom_data::operator = (bool value) {
-//        if (_core)
-//        {
-//            xcom_var_ptr ptr = _core->vptr_val();
-//            *_core = value;
-//        }
-//        else
-//        {
-//            _core = new xcom_var(value);
-//            isowed = true;
-//        }
-//        return *this;
-//    }
-//    bool xcom_data::operator == (const bool value) const {
-//        return _core && _core->type != xcom_vtype_bool  ?  _core->obj.bool_val == value : false;
-//    }
-
+    
+    //    xcom_data::xcom_data(bool value):_core(nullptr), isowed(true) {
+    //        _core = new xcom_var(value);
+    //        isowed = true;
+    //    }
+    //    xcom_data::operator bool() const{
+    //        return _core ? _core->obj.bool_val : false;
+    //    }
+    //    bool xcom_data::bool_val() const {
+    //        return _core ? _core->obj.bool_val : false;
+    //    }
+    //    xcom_data& xcom_data::operator = (bool value) {
+    //        if (_core)
+    //        {
+    //            xcom_var_ptr ptr = _core->vptr_val();
+    //            *_core = value;
+    //        }
+    //        else
+    //        {
+    //            _core = new xcom_var(value);
+    //            isowed = true;
+    //        }
+    //        return *this;
+    //    }
+    //    bool xcom_data::operator == (const bool value) const {
+    //        return _core && _core->type != xcom_vtype_bool  ?  _core->obj.bool_val == value : false;
+    //    }
+    
     
     XCOM_DATA_IMPL(bool, bool, false)
     XCOM_DATA_IMPL(int8_t, int8, 0)
@@ -432,278 +432,157 @@ namespace xcom {
     
     xcom_data operator+(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
     {
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core + *b._core;
-            return xcom_data(result, true);
-        }  catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core + *b._core;
+        return xcom_data(result, true);
     }
     xcom_data operator-(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
     {
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core - *b._core;
-            return xcom_data(result, true);
-        }  catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core - *b._core;
+        return xcom_data(result, true);
     }
     xcom_data operator*(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
     {
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core * *b._core;
-            return xcom_data(result, true);
-        }catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core * *b._core;
+        return xcom_data(result, true);
     }
     xcom_data operator/(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
     {
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core / *b._core;
-            return xcom_data(result, true);
-        }catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core / *b._core;
+        return xcom_data(result, true);
     }
     xcom_data operator%(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
     {
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core % *b._core;
-            return xcom_data(result, true);
-        }catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core % *b._core;
+        return xcom_data(result, true);
     }
     
     // 关系运算符   != (不等于)，< (小于)，> (大于>，<=(小于等于)，>=(大于等于)
-    bool operator !=(const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            return *a._core != *b._core;
-        }catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return false;
+    bool operator !=(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
+    {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        return *a._core != *b._core;
     }
-    bool operator ==(const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            return *a._core == *b._core;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return false;
+    bool operator ==(const xcom_data& a, const xcom_data& b) throw(std::logic_error)
+    {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        return *a._core == *b._core;
     }
-    bool operator < (const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            return *a._core < *b._core;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return false;
+    bool operator < (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        bool comp = *a._core < *b._core;
+        return comp;
     }
-    bool operator > (const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            return *a._core > *b._core;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return false;
+    bool operator > (const xcom_data& a, const xcom_data& b) throw(std::logic_error)
+    {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        bool comp = *a._core > *b._core;
+        return comp;
     }
     bool operator <=(const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            return *a._core <= *b._core;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return false;
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        bool comp = *a._core <= *b._core;
+        return comp;
     }
     bool operator >=(const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            return *a._core >= *b._core;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return false;
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        bool comp = *a._core >= *b._core;
+        return comp;
     }
     
     xcom_data operator||(const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core || *b._core;
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core || *b._core;
+        return xcom_data(result, true);
     }
     xcom_data operator&&(const xcom_data& a, const xcom_data& b) throw(std::logic_error){
-        try {
-            xcom_check_null_throw(a, b, __FUNCTION__);
-            xcom_var result = *a._core && *b._core;
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core && *b._core;
+        return xcom_data(result, true);
+        
     }
     xcom_data operator!(const xcom_data& a) throw(std::logic_error) {
-        try {
-            xcom_check_null_throw(a, __FUNCTION__);
-            xcom_var result = !*a._core;
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(a, __FUNCTION__);
+        xcom_var result = !*a._core;
+        return xcom_data(result, true);
     }
-        
+    
     xcom_data xcom_data::operator +() const throw(std::logic_error) {
-        try {
-            xcom_check_null_throw(*this, __FUNCTION__);
-            xcom_var result = +(*this->_core);
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(*this, __FUNCTION__);
+        xcom_var result = +(*this->_core);
+        return xcom_data(result, true);
     }
     xcom_data xcom_data::operator -() const throw(std::logic_error) {
-        try {
-            xcom_check_null_throw(*this, __FUNCTION__);
-            xcom_var result = -(*this->_core);
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(*this, __FUNCTION__);
+        xcom_var result = -(*this->_core);
+        return xcom_data(result, true);
     }
-        
+    
     // prefix ++
     xcom_data& xcom_data::operator++ () throw(std::logic_error){
-        try {
-            xcom_check_null_throw(*this, __FUNCTION__);
-            xcom_var result = ++(*this->_core);
-            return *this;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
+        xcom_check_null_throw(*this, __FUNCTION__);
+        xcom_var result = ++(*this->_core);
         return *this;
     }
-        // postfix ++
+    // postfix ++
     xcom_data  xcom_data::operator++ (int) throw(std::logic_error) {
-        try {
-            xcom_check_null_throw(*this, __FUNCTION__);
-            xcom_var result = (*this->_core)++;
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
-    }
+        xcom_check_null_throw(*this, __FUNCTION__);
+        xcom_var result = (*this->_core)++;
+        return xcom_data(result, true);
         
-        // prefix --
+    }
+    
+    // prefix --
     xcom_data& xcom_data::operator-- () throw(std::logic_error) {
-        try {
-            xcom_check_null_throw(*this, __FUNCTION__);
-            xcom_var result = --(*this->_core);
-            return *this;
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
+        xcom_check_null_throw(*this, __FUNCTION__);
+        xcom_var result = --(*this->_core);
         return *this;
     }
-        // postfix --
+    // postfix --
     xcom_data  xcom_data::operator-- (int) throw(std::logic_error) {
-        try {
-            xcom_check_null_throw(*this, __FUNCTION__);
-            xcom_var result = (*this->_core)--;
-            return xcom_data(result, true);
-        } catch (std::logic_error e) {
-            std::cout << e.what() << std::endl;
-        }
-        return xcom_data();
+        xcom_check_null_throw(*this, __FUNCTION__);
+        xcom_var result = (*this->_core)--;
+        return xcom_data(result, true);
     }
-        
-        xcom_data operator | (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
-            try {
-                xcom_check_null_throw(a, b, __FUNCTION__);
-                xcom_var result = *a._core | *b._core;
-                return xcom_data(result, true);
-            } catch (std::logic_error e) {
-                std::cout << e.what() << std::endl;
-            }
-            return xcom_data();
-        }
-        xcom_data operator & (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
-            try {
-                xcom_check_null_throw(a, b, __FUNCTION__);
-                xcom_var result = *a._core & *b._core;
-                return xcom_data(result, true);
-            } catch (std::logic_error e) {
-                std::cout << e.what() << std::endl;
-            }
-            return xcom_data();
-        }
-        xcom_data operator ^ (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
-            try {
-                xcom_check_null_throw(a, b, __FUNCTION__);
-                xcom_var result = *a._core ^ *b._core;
-                return xcom_data(result, true);
-            } catch (std::logic_error e) {
-                std::cout << e.what() << std::endl;
-            }
-            return xcom_data();
-        }
-        xcom_data operator ~ (const xcom_data& a) throw(std::logic_error) {
-            try {
-                xcom_check_null_throw(a,  __FUNCTION__);
-                xcom_var result = ~(*a._core);
-                return xcom_data(result, true);
-            } catch (std::logic_error e) {
-                std::cout << e.what() << std::endl;
-            }
-            return xcom_data();
-        }
-        xcom_data operator << (const xcom_data& a, int i) throw(std::logic_error) {
-            try {
-                xcom_check_null_throw(a,  __FUNCTION__);
-                xcom_var result = *a._core << i;
-                return xcom_data(result, true);
-            } catch (std::logic_error e) {
-                std::cout << e.what() << std::endl;
-            }
-            return xcom_data();
-        }
-        std::ostream & operator <<(std::ostream &os, const xcom_data &a ) {
-            xcom_check_null_throw(a,  __FUNCTION__);
-            os << *a._core;
-            return os;
-        }
-        xcom_data operator >> (const xcom_data& a, int i) throw(std::logic_error) {
-            try {
-                xcom_check_null_throw(a,  __FUNCTION__);
-                xcom_var result = *a._core >> i;
-                return xcom_data(result, true);
-            } catch (std::logic_error e) {
-                std::cout << e.what() << std::endl;
-            }
-            return xcom_data();
-        }
+    
+    xcom_data operator | (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core | *b._core;
+        return xcom_data(result, true);
+    }
+    xcom_data operator & (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core & *b._core;
+        return xcom_data(result, true);
+    }
+    xcom_data operator ^ (const xcom_data& a, const xcom_data& b) throw(std::logic_error) {
+        xcom_check_null_throw(a, b, __FUNCTION__);
+        xcom_var result = *a._core ^ *b._core;
+        return xcom_data(result, true);
+    }
+    xcom_data operator ~ (const xcom_data& a) throw(std::logic_error) {
+        xcom_check_null_throw(a,  __FUNCTION__);
+        xcom_var result = ~(*a._core);
+        return xcom_data(result, true);
+    }
+    xcom_data operator << (const xcom_data& a, int i) throw(std::logic_error) {
+        xcom_check_null_throw(a,  __FUNCTION__);
+        xcom_var result = *a._core << i;
+        return xcom_data(result, true);
+    }
+    std::ostream & operator <<(std::ostream &os, const xcom_data &a ) {
+        xcom_check_null_throw(a,  __FUNCTION__);
+        os << *a._core;
+        return os;
+    }
+    xcom_data operator >> (const xcom_data& a, int i) throw(std::logic_error) {
+        xcom_check_null_throw(a,  __FUNCTION__);
+        xcom_var result = *a._core >> i;
+        return xcom_data(result, true);
+    }
     
 }
