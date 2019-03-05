@@ -236,6 +236,11 @@ bool xcom_data::operator == (const T value) const { return _core && _core->type 
         return _core ? _core->size() : 0;
     }
     
+    bool xcom_data::is_valid() const
+    {
+        return _core ? _core->is_valid() : false;
+    }
+    
     void xcom_data::insert(const char *key, const xcom_data &xvalue, bool is_dic_insert)
     {
         if (!key || !*key)
@@ -298,7 +303,15 @@ bool xcom_data::operator == (const T value) const { return _core && _core->type 
         return _core->set_buffer(buf, len);
     }
     
-    void xcom_data::set_callback(const xcom_data_callback funcAddr, xcom_data &data)
+    bool xcom_data::is_callback() const
+    {
+        if (_core) {
+            return _core->is_function();
+        }
+        return false;
+    }
+    
+    void xcom_data::set_callback(const xcom_data_callback funcAddr, const xcom_data &data)
     {
         if (funcAddr == nullptr)
         {
@@ -364,7 +377,7 @@ bool xcom_data::operator == (const T value) const { return _core && _core->type 
         }
     }
     
-    xcom_data xcom_data::callback()
+    xcom_data xcom_data::callback() const
     {
         if (_core) {
             xcom_data_func *cb = _core->func_val();

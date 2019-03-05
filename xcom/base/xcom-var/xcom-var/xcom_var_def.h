@@ -23,7 +23,7 @@ namespace xcom {
         typedef std::map<std::string, xcom_var_ptr> xcom_var_map;
         typedef std::vector<xcom_var_ptr> xcom_var_array;
         typedef std::vector<std::pair<std::string, xcom_var_ptr>> xcom_var_dict;
-        typedef xcom_data (*xcom_callback)(xcom_data &);
+        typedef xcom_data (*xcom_callback)(const xcom_data &);
         
         
 #define printf //printf

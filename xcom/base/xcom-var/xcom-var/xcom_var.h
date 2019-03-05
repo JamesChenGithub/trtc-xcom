@@ -316,6 +316,7 @@ namespace xcom {
             inline bool is_array() const { return this->type == xcom_vtype_array; }
             inline bool is_dict() const { return this->type == xcom_vtype_dict;}
             inline bool is_valid() const { return this->type != xcom_vtype_null;}
+            inline bool is_function() const { return this->type == xcom_vtype_func;}
             bool is_zero() const;
             
             // just array or dict vaild, return empty;

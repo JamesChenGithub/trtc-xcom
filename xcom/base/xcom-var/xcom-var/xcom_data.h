@@ -16,7 +16,7 @@ namespace xcom {
     
     class xcom_var;
     class xcom_data;
-    typedef xcom_data (*xcom_data_callback)(xcom_data &);
+    typedef xcom_data (*xcom_data_callback)(const xcom_data &);
     
     class xcom_data
     {
@@ -80,9 +80,10 @@ namespace xcom {
         
     public:
         // func
-        void set_callback(const xcom_data_callback funcAddr, xcom_data &data);
+        bool is_callback() const;
+        void set_callback(const xcom_data_callback funcAddr, const xcom_data &data);
         void set_callback(const xcom_data_callback funcAddr, xcom_data &&data);
-        xcom_data callback();
+        xcom_data callback() const;
     public:
         // tool
         const char *to_var_json() const;
@@ -95,7 +96,7 @@ namespace xcom {
         // just array or dict vaild, return size;
         // other return 1
         uint32_t size() const;
-        
+        bool is_valid() const;
     public:
         // 友元重载 ： 双目算术运算符    + (加)，-(减)，*(乘)，/(除)，% (取模)
         // 只针对数据类型, 非数据类型返回 xcom_data()
