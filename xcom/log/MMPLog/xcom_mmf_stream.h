@@ -14,8 +14,8 @@ namespace xcom
 #else
         typedef int HANDLE;
 #endif
+    
     protected:
-        size_t  query_file_size_();
         char*   data_;
         size_t  offset_;
         size_t  mapped_size_;
@@ -25,6 +25,9 @@ namespace xcom
 #if defined(_WIN32)
         HANDLE file_mapping_handle_;
 #endif
+        
+    protected:
+        size_t  query_file_size_();
     public:
         explicit mmf_stream();
         ~mmf_stream();
@@ -49,6 +52,7 @@ namespace xcom
     
     };
 
+    // 只读
     class mmf_istream: public mmf_stream
     {
     public:
@@ -72,18 +76,21 @@ namespace xcom
         if_doesnt_exist_create,
     };
 
+    // 只写
     class mmf_ostream: public mmf_stream
     {
     public:
-        explicit mmf_ostream(char const* pathname = 0,
-            mmf_exists_mode exists_mode = if_exists_fail,
-            mmf_doesnt_exist_mode doesnt_exist_mode = if_doesnt_exist_create);
-        void open(char const* pathname,
-            mmf_exists_mode exists_mode = if_exists_fail,
-            mmf_doesnt_exist_mode doesnt_exist_mode = if_doesnt_exist_create);
+        explicit mmf_ostream(char const* pathname = 0, mmf_exists_mode exists_mode = if_exists_fail, mmf_doesnt_exist_mode doesnt_exist_mode = if_doesnt_exist_create);
+        void open(char const* pathname, mmf_exists_mode exists_mode = if_exists_fail, mmf_doesnt_exist_mode doesnt_exist_mode = if_doesnt_exist_create);
         char* data() { return data_; }
         void map(size_t offset = 0, size_t size = 0);
         bool flush();
+    };
+    
+    // 追加写
+    class mmf_astream: public mmf_ostream
+    {
+
     };
 }
 #endif // _MMP_STREAM_H_
