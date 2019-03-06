@@ -1,4 +1,4 @@
-#include "xcom_mmf_stream.h"
+#include "xcom_mmap_stream.h"
 #if defined(_WIN32)
 #include <windows.h>
 #else
@@ -22,7 +22,7 @@ namespace xcom
 #endif
     }
     
-    mmf_stream::mmf_stream():
+    mmap_stream::mmap_stream():
     data_(0),
     offset_(0),
     mapped_size_(0),
@@ -37,12 +37,12 @@ namespace xcom
     {
     }
     
-    mmf_stream::~mmf_stream()
+    mmap_stream::~mmap_stream()
     {
         close();
     }
     
-    void mmf_stream::close()
+    void mmap_stream::close()
     {
         unmap();
 #if defined(_WIN32)
@@ -55,7 +55,7 @@ namespace xcom
         file_size_ = 0;
     }
     
-    void mmf_stream::unmap()
+    void mmap_stream::unmap()
     {
         if (data_)
         {
@@ -74,7 +74,7 @@ namespace xcom
         mapped_size_ = 0;
     }
     
-    size_t mmf_stream::query_file_size_()
+    size_t mmap_stream::query_file_size_()
     {
 #if defined(_WIN32)
         DWORD high_size;
@@ -89,12 +89,12 @@ namespace xcom
 #endif
     }
     
-    mmf_istream::mmf_istream(char const* pathname, bool map_all)
+    mmap_istream::mmap_istream(char const* pathname, bool map_all)
     {
         open(pathname, map_all);
     }
     
-    void mmf_istream::open(char const* pathname, bool map_all)
+    void mmap_istream::open(char const* pathname, bool map_all)
     {
         if (!pathname) {
             return;
@@ -123,7 +123,7 @@ namespace xcom
         }
     }
     
-    void mmf_istream::map(size_t offset, size_t requested_size)
+    void mmap_istream::map(size_t offset, size_t requested_size)
     {
         unmap();
         
@@ -161,12 +161,12 @@ namespace xcom
         offset_ = offset;
     }
     
-    mmf_ostream::mmf_ostream(char const* pathname, xcom::mmf_exists_mode exists_mode, xcom::mmf_doesnt_exist_mode doesnt_exist_mode)
+    mmap_ostream::mmap_ostream(char const* pathname, xcom::mmf_exists_mode exists_mode, xcom::mmf_doesnt_exist_mode doesnt_exist_mode)
     {
         open(pathname, exists_mode, doesnt_exist_mode);
     }
     
-    void mmf_ostream::open(char const* pathname, xcom::mmf_exists_mode exists_mode, xcom::mmf_doesnt_exist_mode doesnt_exist_mode)
+    void mmap_ostream::open(char const* pathname, xcom::mmf_exists_mode exists_mode, xcom::mmf_doesnt_exist_mode doesnt_exist_mode)
     {
         if (! pathname) {
             return;
@@ -233,7 +233,7 @@ namespace xcom
         }
     }
     
-    void mmf_ostream::map(size_t offset, size_t requested_size)
+    void mmap_ostream::map(size_t offset, size_t requested_size)
     {
         unmap();
         if (offset > file_size_) {
@@ -274,7 +274,7 @@ namespace xcom
         offset_ = offset;
     }
     
-    bool mmf_ostream::flush()
+    bool mmap_ostream::flush()
     {
         if (data_)
         {
@@ -299,13 +299,13 @@ namespace xcom
     
     // 追加写
     
-    mmf_astream::mmf_astream(char const* pathname, int map_count, mmf_exists_mode exists_mode, mmf_doesnt_exist_mode doesnt_exist_mode)
+    mmap_astream::mmap_astream(char const* pathname, int map_count, mmf_exists_mode exists_mode, mmf_doesnt_exist_mode doesnt_exist_mode)
     {
-        map_granularity_count = map_count;
+        map_granularity_count = map_count <= 0 ? 1 : map_count;
         open(pathname, exists_mode, doesnt_exist_mode);
         map(file_size_, map_granularity_count * granularity_);
     }
-    void mmf_astream::append(const char *data, size_t size)
+    void mmap_astream::append(const char *data, size_t size)
     {
         if(offset_ + size > mapped_size_){
             // 写回文件
@@ -333,6 +333,28 @@ namespace xcom
             offset_+= size;
             
         }
+    }
+    
+    int mmap_astream::append_to_file(char const* pathname)
+    {
+        if(data_ && offset_ > 0)
+        {
+            mmap_ostream dest_mf(pathname, if_exists_just_open, if_doesnt_exist_fail);
+            
+            if (!dest_mf.is_open()) return -1;
+            
+            dest_mf.map(dest_mf.file_size(), offset_);
+            
+            
+            // Check that the contents of the file has been mapped into memory.
+            if (! dest_mf.data()) return -2;
+            
+            
+            memcpy(dest_mf.data(), data_, offset_);
+            dest_mf.flush();
+            return 0;
+        }
+        return 0;
     }
     
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		92947033222FB72400592C43 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92947032222FB72400592C43 /* main.cpp */; };
-		9294703B222FB73500592C43 /* xcom_mmf_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92947039222FB73500592C43 /* xcom_mmf_stream.cpp */; };
+		9294703B222FB73500592C43 /* xcom_mmap_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92947039222FB73500592C43 /* xcom_mmap_stream.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +26,8 @@
 /* Begin PBXFileReference section */
 		9294702F222FB72400592C43 /* MMPLog */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MMPLog; sourceTree = BUILT_PRODUCTS_DIR; };
 		92947032222FB72400592C43 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		92947039222FB73500592C43 /* xcom_mmf_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_mmf_stream.cpp; sourceTree = "<group>"; };
-		9294703A222FB73500592C43 /* xcom_mmf_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcom_mmf_stream.h; sourceTree = "<group>"; };
+		92947039222FB73500592C43 /* xcom_mmap_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_mmap_stream.cpp; sourceTree = "<group>"; };
+		9294703A222FB73500592C43 /* xcom_mmap_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcom_mmap_stream.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +44,8 @@
 		92947026222FB72400592C43 = {
 			isa = PBXGroup;
 			children = (
-				92947039222FB73500592C43 /* xcom_mmf_stream.cpp */,
-				9294703A222FB73500592C43 /* xcom_mmf_stream.h */,
+				92947039222FB73500592C43 /* xcom_mmap_stream.cpp */,
+				9294703A222FB73500592C43 /* xcom_mmap_stream.h */,
 				92947031222FB72400592C43 /* MMPLog */,
 				92947030222FB72400592C43 /* Products */,
 			);
@@ -124,7 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92947033222FB72400592C43 /* main.cpp in Sources */,
-				9294703B222FB73500592C43 /* xcom_mmf_stream.cpp in Sources */,
+				9294703B222FB73500592C43 /* xcom_mmap_stream.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

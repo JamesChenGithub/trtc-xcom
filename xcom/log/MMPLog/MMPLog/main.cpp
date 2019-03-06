@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "xcom_mmf_stream.h"
+#include "xcom_mmap_stream.h"
 #include <iostream> // for std::cout and std::endl
 #include <algorithm> // for std::copy
 
@@ -31,7 +31,7 @@ using namespace xcom;
 int CopyFile(char const* source, char const* dest, bool overwrite)
 {
     // Create a read-only memory-mapped-file for reading the source file.
-    xcom::mmf_istream source_mf(source);
+    xcom::mmap_istream source_mf(source);
     
     // Check that the file has been opened.
     if (! source_mf.is_open()) return 1;
@@ -44,7 +44,7 @@ int CopyFile(char const* source, char const* dest, bool overwrite)
     // if such file already exists.
     
     
-    xcom::mmf_ostream dest_mf(dest, overwrite ? xcom::if_exists_map_all : xcom::if_exists_fail, xcom::if_doesnt_exist_create);
+    xcom::mmap_ostream dest_mf(dest, overwrite ? xcom::if_exists_map_all : xcom::if_exists_fail, xcom::if_doesnt_exist_create);
     const size_t srcfilesize = source_mf.file_size();
     for (int i = 0; i < 4; i++) {
         
@@ -89,19 +89,20 @@ int main()
     // Copy the first file, overwriting the second file,
     // if it already exists.
     // It should always print 0, meaning success.
-    //cout << CopyFile("xcom_mmf_stream.h", "copy.tmp", true) << endl;
+    //cout << CopyFile("xcom_mmap_stream.h", "copy.tmp", true) << endl;
     
     // Copy the first file to the second file,
     // but only if the second file does not already exist.
     // It should always print 3, meaning failure to open the second file,
     // as here the second file already exists.
-    //cout << CopyFile("xcom_mmf_stream.h", "copy.tmp", true) << endl;
+    //cout << CopyFile("xcom_mmap_stream.h", "copy.tmp", true) << endl;
     
     
-    mmf_astream astr("my.log");
+    mmap_astream astr("my.log");
     long size = 0;
     static int index = 0;
     for (int j = 0; j < 10; j++) {
+        
         for (int i = index * 100; i < (index + 1) * 100; i++) {
             std::ostringstream ostr;
             ostr << "line : " << std::setw(8) << i << "    :  Copy the first file, overwriting the second file, if it already exists, It should always print 0, meaning success."<< std::endl;
@@ -109,11 +110,16 @@ int main()
             size += str.length();
             astr.append(str.c_str(), str.length());
             std::cout << str;
+            
+            if ((i - index * 100) == 50) {
+                astr.append_to_file("date.log");
+            }
         }
         astr.flush();
-        getchar();
-        getchar();
+        
         index++;
+        
+        
     }
     std::cout << "write size : " << size << std::endl;
 }
