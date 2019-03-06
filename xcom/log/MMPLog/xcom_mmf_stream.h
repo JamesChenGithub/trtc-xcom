@@ -90,7 +90,11 @@ namespace xcom
     // 追加写
     class mmf_astream: public mmf_ostream
     {
-
+    protected:
+        int  map_granularity_count;
+    public:
+        explicit mmf_astream(char const* pathname = 0, int map_count = 1, mmf_exists_mode exists_mode = if_exists_map_all, mmf_doesnt_exist_mode doesnt_exist_mode = if_doesnt_exist_create);
+        void append(const char *data, size_t size);
     };
 }
 #endif // _MMP_STREAM_H_

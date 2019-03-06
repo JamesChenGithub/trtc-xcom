@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <string.h>
 #endif
 
 namespace xcom
@@ -294,4 +295,44 @@ namespace xcom
         return true;
 #endif
     }
+    
+    
+    // 追加写
+    
+    mmf_astream::mmf_astream(char const* pathname, int map_count, mmf_exists_mode exists_mode, mmf_doesnt_exist_mode doesnt_exist_mode)
+    {
+        map_granularity_count = map_count;
+        open(pathname, exists_mode, doesnt_exist_mode);
+        map(file_size_, map_granularity_count * granularity_);
+    }
+    void mmf_astream::append(const char *data, size_t size)
+    {
+        if(offset_ + size > mapped_size_){
+            // 写回文件
+            flush();
+            
+            if (size > map_granularity_count * granularity_) {
+                // 一次性写完
+                map(file_size_, size);
+                offset_ = 0;
+                memcpy(data_ + offset_, data, size);
+                flush();
+                // 再重新map
+                map(file_size_, map_granularity_count * granularity_);
+                offset_ = 0;
+            } else {
+                map(file_size_, map_granularity_count * granularity_);
+                offset_ = 0;
+                memcpy(data_ + offset_, data, size);
+                offset_+= size;
+            }
+            
+        } else {
+            // 直接写
+            memcpy(data_ + offset_, data, size);
+            offset_+= size;
+            
+        }
+    }
+    
 }
