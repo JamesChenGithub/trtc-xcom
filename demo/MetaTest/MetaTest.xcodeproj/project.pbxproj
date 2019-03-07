@@ -25,6 +25,10 @@
 /* Begin PBXFileReference section */
 		923047D322310FF50071CDD0 /* MetaTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MetaTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		923047D622310FF50071CDD0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		923047DD223114F20071CDD0 /* STLStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLStack.h; sourceTree = "<group>"; };
+		923047DE2231207A0071CDD0 /* STLFunc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLFunc.h; sourceTree = "<group>"; };
+		923047E2223128740071CDD0 /* STLPointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLPointer.h; sourceTree = "<group>"; };
+		923047E3223130060071CDD0 /* STLFuncTemp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLFuncTemp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,10 @@
 			isa = PBXGroup;
 			children = (
 				923047D622310FF50071CDD0 /* main.cpp */,
+				923047DD223114F20071CDD0 /* STLStack.h */,
+				923047DE2231207A0071CDD0 /* STLFunc.h */,
+				923047E2223128740071CDD0 /* STLPointer.h */,
+				923047E3223130060071CDD0 /* STLFuncTemp.h */,
 			);
 			path = MetaTest;
 			sourceTree = "<group>";
