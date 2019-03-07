@@ -24,13 +24,13 @@ extern "C" {
         xcom_log_level_debug,       // Detailed information on the flow through the system.
         xcom_log_level_info,        // Interesting runtime events (startup/shutdown), should be conservative and keep to a minimum.
         xcom_log_level_warn,        // Other runtime situations that are undesirable or unexpected, but not necessarily "wrong".
-        xcom_log_level_err,         // Other runtime errors or unexpected conditions.
+        xcom_log_level_error,         // Other runtime errors or unexpected conditions.
         xcom_log_level_fatal,       // Severe errors that cause premature termination.
         xcom_log_level_none,        // Special level used to disable all log messages.
     } xcom_log_level;
     
     typedef struct xcom_log_item_t {
-        xcom_log_level level;       
+        xcom_log_level level;
         const char *tag;
         const char *file_name;
         const char *func_name;
