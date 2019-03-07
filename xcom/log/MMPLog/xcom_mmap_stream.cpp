@@ -22,12 +22,7 @@ namespace xcom
 #endif
     }
     
-    mmap_stream::mmap_stream():
-    data_(0),
-    offset_(0),
-    mapped_size_(0),
-    file_size_(0),
-    granularity_(mmf_granularity()),
+    mmap_stream::mmap_stream(): data_(0), offset_(0),  mapped_size_(0), file_size_(0), granularity_(mmf_granularity()),
 #if defined(_WIN32)
     file_handle_(INVALID_HANDLE_VALUE),
     file_mapping_handle_(INVALID_HANDLE_VALUE)
@@ -217,7 +212,7 @@ namespace xcom
             {
                 if (doesnt_exist_mode == if_doesnt_exist_create) {
                     posix_open_mode |= O_EXCL | O_CREAT;
-                }  else {
+                } else {
                     return;
                 }
             }
@@ -307,7 +302,7 @@ namespace xcom
     }
     void mmap_astream::append(const char *data, size_t size)
     {
-        if(offset_ + size > mapped_size_){
+        if(offset_ + size > mapped_size_) {
             // 写回文件
             flush();
             
@@ -331,7 +326,6 @@ namespace xcom
             // 直接写
             memcpy(data_ + offset_, data, size);
             offset_+= size;
-            
         }
     }
     
@@ -341,13 +335,17 @@ namespace xcom
         {
             mmap_ostream dest_mf(pathname, if_exists_just_open, if_doesnt_exist_fail);
             
-            if (!dest_mf.is_open()) return -1;
+            if (!dest_mf.is_open()) {
+                return -1;
+            }
             
             dest_mf.map(dest_mf.file_size(), offset_);
             
             
             // Check that the contents of the file has been mapped into memory.
-            if (! dest_mf.data()) return -2;
+            if (! dest_mf.data()){
+                return -2;
+            }
             
             
             memcpy(dest_mf.data(), data_, offset_);
