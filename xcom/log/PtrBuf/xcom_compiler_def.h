@@ -19,7 +19,7 @@
 #endif
 
 #if defined(__GNUC__)
-#define XCOM_EXPORT_FUNC __attribute__ ((visibility ("default")))
+#define XCOM_EXPORT_FUNC __attribute__((visibility ("default")))
 #elif defined(_MSC_VER)
 #define XCOM_EXPORT_FUNC __declspec(dllexport)
 #else
@@ -28,7 +28,7 @@
 
 #ifndef VARIABLE_IS_NOT_USED
 #ifdef __GNUC__
-#define VARIABLE_IS_NOT_USED __attribute__ ((unused))
+#define VARIABLE_IS_NOT_USED __attribute__((unused))
 #else
 #define VARIABLE_IS_NOT_USED
 #endif
