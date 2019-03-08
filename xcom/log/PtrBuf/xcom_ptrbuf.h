@@ -47,11 +47,13 @@ namespace xcom {
         void write(const void *pBuffer, size_t nLen);
         void write(const void *pBuffer, size_t nLen, off_t nPos);
         
-        template<class T> void read(T &val)
-        { read(&val, sizeof(val)); }
+        template<class T> void read(T &val) {
+            read(&val, sizeof(val));
+        }
         
-        template<class T> void read(int nPos, const T &val) const
-        { read(&val, sizeof(val), nPos); }
+        template<class T> void read(int nPos, const T &val) const {
+            read(&val, sizeof(val), nPos);
+        }
         
         size_t read(void *pBuffer, size_t nLen);
         size_t read(void *pBuffer, size_t nLen, off_t nPos) const;

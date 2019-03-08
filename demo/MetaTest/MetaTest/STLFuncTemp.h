@@ -39,4 +39,28 @@ struct OuterFunc {
     using Result = InFunc<U, V>;
 };
 
+
+//模式特化，当两个类型相等时，选择特化版本，否则选择非特化版本。
+template <typename T, typename U>
+struct IsEqual {
+    enum {Result = false};
+};
+
+template <typename T>
+struct IsEqual<T, T> {
+    enum {Result = true};
+};
+
+
+template <int N, int M>
+struct IsNumEqual {
+    enum {Result = false};
+};
+
+template <int T>
+struct IsNumEqual<T, T> {
+    enum {Result = true};
+};
+
+
 #endif /* STLFuncTemp_h */
