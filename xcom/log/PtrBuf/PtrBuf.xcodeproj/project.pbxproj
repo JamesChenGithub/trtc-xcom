@@ -39,6 +39,7 @@
 		923047B82230E4740071CDD0 /* xcom_log_delc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_log_delc.h; sourceTree = "<group>"; };
 		92D7CDAD22321D500085ABC6 /* xcom_dir_path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_dir_path.cpp; sourceTree = "<group>"; };
 		92D7CDAE22321D500085ABC6 /* xcom_dir_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcom_dir_path.h; sourceTree = "<group>"; };
+		92F14F502232B00200AE93A5 /* data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				923047A82230D8380071CDD0 /* main.cpp */,
+				92F14F502232B00200AE93A5 /* data.txt */,
 			);
 			path = PtrBuf;
 			sourceTree = "<group>";

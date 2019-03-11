@@ -110,7 +110,7 @@ namespace xcom {
         bool remove_file() const;
         
         bool resize_file(size_t target_length) const;
-        
+    
         bool create_directory() const;
         
         bool is_wide();

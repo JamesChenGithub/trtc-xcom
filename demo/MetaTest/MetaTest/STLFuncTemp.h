@@ -9,6 +9,7 @@
 #ifndef STLFuncTemp_h
 #define STLFuncTemp_h
 
+#include "STLFunc.h"
 
 template<typename T>
 struct OutFunc {
@@ -41,12 +42,12 @@ struct OuterFunc {
 
 
 //模式特化，当两个类型相等时，选择特化版本，否则选择非特化版本。
-template <typename T, typename U>
+template<typename T, typename U>
 struct IsEqual {
     enum {Result = false};
 };
 
-template <typename T>
+template<typename T>
 struct IsEqual<T, T> {
     enum {Result = true};
 };
@@ -62,5 +63,63 @@ struct IsNumEqual<T, T> {
     enum {Result = true};
 };
 
+template <typename N, typename M>
+struct IsTypeEqual {
+    enum {Result = false};
+};
 
+template <typename T>
+struct IsTypeEqual<T, T> {
+    enum {Result = true};
+};
+
+
+template <int V>
+struct IntType{
+    enum {
+        Value = V
+    };
+    using Result = IntType<V>;
+};
+
+
+////////////////////
+template<bool V> struct BoolType;
+
+template<>
+struct BoolType<true>
+{
+    enum { Value = true };
+    using Result = BoolType<true>;
+};
+
+template<>
+struct BoolType<false>
+{
+    enum { Value = false };
+    using Result = BoolType<false>;
+};
+
+using TrueType = BoolType<true>;
+using FalseType = BoolType<false>;
+
+template<typename T, typename U>
+struct IsEqual2 {
+    using Result = FalseType;
+};
+
+template<typename T>
+struct IsEqual2<T, T> {
+    using Result = TrueType;
+};
+
+template<typename T>
+struct Print2 {
+    const int Value = 1/(sizeof(T) - sizeof(T));
+};
+
+#define ____print(...) Print2<__VA_ARGS__> UNIQUE_NAME(print_value_)
+
+____print(IsEqual2<IntType<5>, IntType<6>>::Result);
+____print(IsEqual2<TrueType, BoolType<true>>::Result);
 #endif /* STLFuncTemp_h */

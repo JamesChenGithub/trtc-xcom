@@ -29,6 +29,7 @@
 		923047DE2231207A0071CDD0 /* STLFunc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLFunc.h; sourceTree = "<group>"; };
 		923047E2223128740071CDD0 /* STLPointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLPointer.h; sourceTree = "<group>"; };
 		923047E3223130060071CDD0 /* STLFuncTemp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLFuncTemp.h; sourceTree = "<group>"; };
+		92F14F4F22325A7500AE93A5 /* STLConvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLConvert.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 				923047DE2231207A0071CDD0 /* STLFunc.h */,
 				923047E2223128740071CDD0 /* STLPointer.h */,
 				923047E3223130060071CDD0 /* STLFuncTemp.h */,
+				92F14F4F22325A7500AE93A5 /* STLConvert.h */,
 			);
 			path = MetaTest;
 			sourceTree = "<group>";

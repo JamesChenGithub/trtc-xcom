@@ -12,7 +12,22 @@
 #include <queue>
 #include "STLPointer.h"
 #include "STLFuncTemp.h"
+#include "STLConvert.h"
 
+//static int classcount = 0;
+//static char className[10][20] = {'\0'};
+//
+//class A;
+//className[classcount++] = "A";
+//class A {
+//
+//};
+//
+//class B;
+//className[classcount++] = "B";
+//class B {
+//
+//};
 
 
 int main()
@@ -62,10 +77,18 @@ int main()
     {
         std::cout << Factorial<10>::value << std::endl;
         std::cout << Factorial2<10>::value << std::endl;
+        
+        const int a = 10;
+        std::cout << Factorial2<a>::value << std::endl;
+        
+        const int b = 10;
+        std::cout << Factorial2<b>::value << std::endl;
     }
     
     {
         int i = 100;
+        
+        i = ++i;
         PointerOf<int>::Result pi = &i;
         Pointer2Of<int>::Result ppi = &pi;
         Pointer2Of<int>::Result2 ppi2 = &pi;
@@ -78,6 +101,15 @@ int main()
     
     {
         OutFunc<int>::Result<int, long> a;
+    }
+    
+    {
+        std::cout << (__value(__int(5)) + __value(__int(6))) << std::endl;
+        std::cout << (__value(__true()) && __value(__false())) << std::endl;
+        
+       __is_convertible(int, short);
+        
+        std::cout << sizeof(Base) <<"    " << sizeof(Derived) <<std::endl;
     }
     return  0;
 }
