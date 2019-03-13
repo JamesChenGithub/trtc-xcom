@@ -12,6 +12,9 @@
 		923047B42230DAED0071CDD0 /* xcom_assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923047B22230DAED0071CDD0 /* xcom_assert.cpp */; };
 		923047B62230E38E0071CDD0 /* xcom_compiler_def.h in Sources */ = {isa = PBXBuildFile; fileRef = 923047B52230E38E0071CDD0 /* xcom_compiler_def.h */; };
 		923047B92230E4740071CDD0 /* xcom_log_delc.c in Sources */ = {isa = PBXBuildFile; fileRef = 923047B72230E4740071CDD0 /* xcom_log_delc.c */; };
+		9277CE9622360A990021A34D /* xcom_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9277CE9422360A990021A34D /* xcom_logger.cpp */; };
+		9277CE9A223618290021A34D /* xcom_logger_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9277CE98223618290021A34D /* xcom_logger_core.cpp */; };
+		9277CE9D22361A380021A34D /* xcom_mmap_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9277CE9B22361A380021A34D /* xcom_mmap_stream.cpp */; };
 		92D7CDAF22321D510085ABC6 /* xcom_dir_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92D7CDAD22321D500085ABC6 /* xcom_dir_path.cpp */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +40,12 @@
 		923047B52230E38E0071CDD0 /* xcom_compiler_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_compiler_def.h; sourceTree = "<group>"; };
 		923047B72230E4740071CDD0 /* xcom_log_delc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xcom_log_delc.c; sourceTree = "<group>"; };
 		923047B82230E4740071CDD0 /* xcom_log_delc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_log_delc.h; sourceTree = "<group>"; };
+		9277CE9422360A990021A34D /* xcom_logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_logger.cpp; sourceTree = "<group>"; };
+		9277CE9522360A990021A34D /* xcom_logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_logger.h; sourceTree = "<group>"; };
+		9277CE98223618290021A34D /* xcom_logger_core.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_logger_core.cpp; sourceTree = "<group>"; };
+		9277CE99223618290021A34D /* xcom_logger_core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcom_logger_core.h; sourceTree = "<group>"; };
+		9277CE9B22361A380021A34D /* xcom_mmap_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xcom_mmap_stream.cpp; path = ../MMPLog/xcom_mmap_stream.cpp; sourceTree = "<group>"; };
+		9277CE9C22361A380021A34D /* xcom_mmap_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xcom_mmap_stream.h; path = ../MMPLog/xcom_mmap_stream.h; sourceTree = "<group>"; };
 		92D7CDAD22321D500085ABC6 /* xcom_dir_path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xcom_dir_path.cpp; sourceTree = "<group>"; };
 		92D7CDAE22321D500085ABC6 /* xcom_dir_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcom_dir_path.h; sourceTree = "<group>"; };
 		92F14F502232B00200AE93A5 /* data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
@@ -56,6 +65,12 @@
 		9230479C2230D8380071CDD0 = {
 			isa = PBXGroup;
 			children = (
+				9277CE9B22361A380021A34D /* xcom_mmap_stream.cpp */,
+				9277CE9C22361A380021A34D /* xcom_mmap_stream.h */,
+				9277CE98223618290021A34D /* xcom_logger_core.cpp */,
+				9277CE99223618290021A34D /* xcom_logger_core.h */,
+				9277CE9422360A990021A34D /* xcom_logger.cpp */,
+				9277CE9522360A990021A34D /* xcom_logger.h */,
 				92D7CDAD22321D500085ABC6 /* xcom_dir_path.cpp */,
 				92D7CDAE22321D500085ABC6 /* xcom_dir_path.h */,
 				923047B72230E4740071CDD0 /* xcom_log_delc.c */,
@@ -144,10 +159,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				923047B42230DAED0071CDD0 /* xcom_assert.cpp in Sources */,
+				9277CE9622360A990021A34D /* xcom_logger.cpp in Sources */,
 				923047B62230E38E0071CDD0 /* xcom_compiler_def.h in Sources */,
+				9277CE9A223618290021A34D /* xcom_logger_core.cpp in Sources */,
 				923047A92230D8380071CDD0 /* main.cpp in Sources */,
 				923047B92230E4740071CDD0 /* xcom_log_delc.c in Sources */,
 				92D7CDAF22321D510085ABC6 /* xcom_dir_path.cpp in Sources */,
+				9277CE9D22361A380021A34D /* xcom_mmap_stream.cpp in Sources */,
 				923047B12230D8590071CDD0 /* xcom_ptrbuf.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

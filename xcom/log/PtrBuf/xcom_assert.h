@@ -15,18 +15,26 @@
 #define XCOM_ASSERT2(e, fmt, ...)
 #define XCOM_ASSERTV2(e, fmt, valist)
 
+#define    XCOM_ASSERT_RETURN(e)
+#define    XCOM_ASSERT2_RETURN(e, fmt, ...)
+#define    XCOM_ASSERTV2_RETURN(e, fmt, valist)
+
 #else
 
 #include <sys/cdefs.h>
 #include <stdarg.h>
 
-# if (!__ISO_C_VISIBLE >= 1999)
+#if (!__ISO_C_VISIBLE >= 1999)
 #error "C Version < C99"
 # endif
 
-#  define    XCOM_ASSERT(e)                ((e) ? (void)0 : xcom_assert(__FILE__, __LINE__, __func__, #e))
-#  define    XCOM_ASSERT2(e, fmt, ...)     ((e) ? (void)0 : xcom_assert2(__FILE__, __LINE__, __func__, #e, fmt, ##__VA_ARGS__))
-#  define    XCOM_ASSERTV2(e, fmt, valist) ((e) ? (void)0 : xcom_assertv2(__FILE__, __LINE__, __func__, #e, fmt, valist))
+#define    XCOM_ASSERT(e)                ((e) ? (void)0 : xcom_assert(__FILE__, __LINE__, __func__, #e))
+#define    XCOM_ASSERT2(e, fmt, ...)     ((e) ? (void)0 : xcom_assert2(__FILE__, __LINE__, __func__, #e, fmt, ##__VA_ARGS__))
+#define    XCOM_ASSERTV2(e, fmt, valist) ((e) ? (void)0 : xcom_assertv2(__FILE__, __LINE__, __func__, #e, fmt, valist))
+
+#define    XCOM_ASSERT_RETURN(e)                do{((e) ? (void)0 : xcom_assert(__FILE__, __LINE__, __func__, #e)); return;}while(0)
+#define    XCOM_ASSERT2_RETURN(e, fmt, ...)     do{((e) ? (void)0 : xcom_assert2(__FILE__, __LINE__, __func__, #e, fmt, ##__VA_ARGS__)); return;}while(0)
+#define    XCOM_ASSERTV2_RETURN(e, fmt, valist) do{((e) ? (void)0 : xcom_assertv2(__FILE__, __LINE__, __func__, #e, fmt, valist)); return;}while(0)
 
 extern "C" {
     void xcom_enable_assert();
