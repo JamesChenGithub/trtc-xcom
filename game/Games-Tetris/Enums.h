@@ -2,6 +2,8 @@
 // 定义枚举常量
 
 // 定义游戏块类型
+#ifndef _Enums_H_
+#define _Enums_H_
 enum BlockType
 {
 	SQUARE_BLOCK,		// 正方形
@@ -21,3 +23,4 @@ enum Direction
 	DOWN,
 	NONE
 };
+#endif

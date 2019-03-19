@@ -2,7 +2,8 @@
 /*
 define const values
 */
-
+#ifndef _Defines_H_
+#define _Defines_H_
 // 定义窗口常量
 #define WINDOW_CAPTION		"Tetris"		// 窗口标题
 #define WINDOW_WIDTH		892				// 窗口宽度
@@ -53,3 +54,5 @@ define const values
 #define BG2_POSITION_y		0
 #define BG3_POSITION_x		623				// 背景图片2
 #define BG3_POSITION_y		480
+
+#endif

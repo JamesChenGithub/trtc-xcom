@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _Windows_H_
+#define _Windows_H_
 
 /*
 定义Window类主要负责窗口的创建、显示与更新，加载资源
@@ -38,3 +39,4 @@ private:
 	Game* game;
 };
 
+#endif

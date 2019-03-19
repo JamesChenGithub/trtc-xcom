@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _Square_H_
+#define _Square_H_
 
 // Square类表示单个正方形，由四个square组成游戏块
 // 在游戏中每消除一行时，上面的块会向下移动，因此定义一个square类来组成我们的游戏块更加合理
@@ -38,3 +39,4 @@ private:
 	SDL_Texture* texture;			// 存储单个正方形纹理数据
 };
 
+#endif

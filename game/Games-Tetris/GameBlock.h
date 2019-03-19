@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _GameBlock_H_
+#define _GameBlock_H_
 
 // 定义了游戏中的游戏块，由四个square组成
 // 我们在Enums.h文件中定义了七种游戏块类型，我们需要根据指定的游戏块类型来
@@ -39,3 +40,4 @@ private:
 	Square* squares[4];		// 组成游戏块的4个指针数组
 };
 
+#endif

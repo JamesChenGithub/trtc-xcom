@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _Game_H
+#define _Game_H
 
 // 游戏控制类Game
 // 存储游戏中的所有游戏块、碰撞检测等逻辑
@@ -6,7 +7,7 @@
 #include <time.h>
 #include <math.h>
 #include <vector>
-#include <SDL_ttf.h>
+#include "SDL_ttf.h"
 #include "GameBlock.h"
 
 using namespace std;
@@ -70,3 +71,4 @@ private:
 	int FocusBlockSpeed;				// 玩家正在控制的块的速度
 };
 
+#endif

@@ -1,4 +1,5 @@
-#include "stdafx.h"
+#ifndef _Square_CPP_
+#define _Square_CPP_
 #include "Square.h"
 
 
@@ -50,3 +51,4 @@ Square::~Square(void)
 	//if (texture != nullptr)
 	//	SDL_DestroyTexture(texture);
 }
+#endif

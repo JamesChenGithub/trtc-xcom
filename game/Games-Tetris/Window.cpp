@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#ifndef Window_CPP
+#define Window_CPP
+#include "SDL.h"
 #include "Window.h"
 #include <Windows.h>
 #include <stdint.h>
@@ -178,3 +180,4 @@ Window::~Window(void)
 	
 	delete game;
 }
+#endif
