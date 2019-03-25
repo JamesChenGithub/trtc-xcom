@@ -12,6 +12,19 @@
 		923F7B5A2238F23F00AA100C /* GameBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B542238F23E00AA100C /* GameBlock.cpp */; };
 		923F7B5C2238F23F00AA100C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B562238F23E00AA100C /* main.cpp */; };
 		923F7B5D2238F23F00AA100C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B572238F23E00AA100C /* Game.cpp */; };
+		925F0C8F224083E200783546 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0C8E224083E100783546 /* SDL2_image.framework */; };
+		925F0CA82240867600783546 /* Square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B482238F23E00AA100C /* Square.cpp */; };
+		925F0CA92240867700783546 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B492238F23E00AA100C /* Window.cpp */; };
+		925F0CAA2240867700783546 /* GameBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B542238F23E00AA100C /* GameBlock.cpp */; };
+		925F0CAB2240867700783546 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B562238F23E00AA100C /* main.cpp */; };
+		925F0CAC2240867700783546 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 923F7B572238F23E00AA100C /* Game.cpp */; };
+		925F0CBF2240872300783546 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CBE2240872300783546 /* SDL2_image.framework */; };
+		925F0CC42240873B00783546 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CC12240873B00783546 /* SDL2_ttf.framework */; };
+		925F0CC52240873B00783546 /* SDL2_ttf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CC12240873B00783546 /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		925F0CC62240873B00783546 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CC22240873B00783546 /* SDL2.framework */; };
+		925F0CC72240873C00783546 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CC22240873B00783546 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		925F0CC82240873C00783546 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CC32240873B00783546 /* SDL2_image.framework */; };
+		925F0CC92240873C00783546 /* SDL2_image.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 925F0CC32240873B00783546 /* SDL2_image.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +36,19 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		925F0CCA2240873C00783546 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				925F0CC92240873C00783546 /* SDL2_image.framework in Embed Frameworks */,
+				925F0CC52240873B00783546 /* SDL2_ttf.framework in Embed Frameworks */,
+				925F0CC72240873C00783546 /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -51,6 +77,20 @@
 		923F7B572238F23E00AA100C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		923F7B602238F27300AA100C /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		923F7B612238F27300AA100C /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
+		925F0C8E224083E100783546 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../sdl/SDL2_image.framework; sourceTree = "<group>"; };
+		925F0C972240864E00783546 /* TetrisApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TetrisApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		925F0C992240864E00783546 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		925F0C9A2240864E00783546 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		925F0C9C2240865000783546 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		925F0C9F2240865000783546 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		925F0CA12240865000783546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		925F0CA22240865000783546 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		925F0CA42240865000783546 /* TetrisApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TetrisApp.entitlements; sourceTree = "<group>"; };
+		925F0CB5224086E200783546 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../sdl/SDL2.framework; sourceTree = "<group>"; };
+		925F0CBE2240872300783546 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../sdl/SDL2_image.framework; sourceTree = "<group>"; };
+		925F0CC12240873B00783546 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../sdl/SDL2_ttf.framework; sourceTree = "<group>"; };
+		925F0CC22240873B00783546 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../sdl/SDL2.framework; sourceTree = "<group>"; };
+		925F0CC32240873B00783546 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../sdl/SDL2_image.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +98,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925F0C8F224083E200783546 /* SDL2_image.framework in Frameworks */,
+				925F0CBF2240872300783546 /* SDL2_image.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		925F0C942240864E00783546 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				925F0CC82240873C00783546 /* SDL2_image.framework in Frameworks */,
+				925F0CC42240873B00783546 /* SDL2_ttf.framework in Frameworks */,
+				925F0CC62240873B00783546 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,9 +119,17 @@
 		923F7B292238F20900AA100C = {
 			isa = PBXGroup;
 			children = (
+				925F0C8E224083E100783546 /* SDL2_image.framework */,
+				925F0CBE2240872300783546 /* SDL2_image.framework */,
+				925F0CB5224086E200783546 /* SDL2.framework */,
+				925F0CC32240873B00783546 /* SDL2_image.framework */,
+				925F0CC12240873B00783546 /* SDL2_ttf.framework */,
+				925F0CC22240873B00783546 /* SDL2.framework */,
 				923F7B5E2238F27300AA100C /* SDL */,
 				923F7B342238F20900AA100C /* Tetris */,
+				925F0C982240864E00783546 /* TetrisApp */,
 				923F7B332238F20900AA100C /* Products */,
+				925F0CAD2240868E00783546 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				923F7B322238F20900AA100C /* Tetris */,
+				925F0C972240864E00783546 /* TetrisApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,6 +197,27 @@
 			path = ../SDL;
 			sourceTree = "<group>";
 		};
+		925F0C982240864E00783546 /* TetrisApp */ = {
+			isa = PBXGroup;
+			children = (
+				925F0C992240864E00783546 /* AppDelegate.h */,
+				925F0C9A2240864E00783546 /* AppDelegate.m */,
+				925F0C9C2240865000783546 /* Assets.xcassets */,
+				925F0C9E2240865000783546 /* MainMenu.xib */,
+				925F0CA12240865000783546 /* Info.plist */,
+				925F0CA22240865000783546 /* main.m */,
+				925F0CA42240865000783546 /* TetrisApp.entitlements */,
+			);
+			path = TetrisApp;
+			sourceTree = "<group>";
+		};
+		925F0CAD2240868E00783546 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,6 +238,24 @@
 			productReference = 923F7B322238F20900AA100C /* Tetris */;
 			productType = "com.apple.product-type.tool";
 		};
+		925F0C962240864E00783546 /* TetrisApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 925F0CA52240865000783546 /* Build configuration list for PBXNativeTarget "TetrisApp" */;
+			buildPhases = (
+				925F0C932240864E00783546 /* Sources */,
+				925F0C942240864E00783546 /* Frameworks */,
+				925F0C952240864E00783546 /* Resources */,
+				925F0CCA2240873C00783546 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TetrisApp;
+			productName = TetrisApp;
+			productReference = 925F0C972240864E00783546 /* TetrisApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,6 +268,9 @@
 					923F7B312238F20900AA100C = {
 						CreatedOnToolsVersion = 10.1;
 					};
+					925F0C962240864E00783546 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 				};
 			};
 			buildConfigurationList = 923F7B2D2238F20900AA100C /* Build configuration list for PBXProject "Tetris" */;
@@ -176,6 +279,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 923F7B292238F20900AA100C;
 			productRefGroup = 923F7B332238F20900AA100C /* Products */;
@@ -183,9 +287,20 @@
 			projectRoot = "";
 			targets = (
 				923F7B312238F20900AA100C /* Tetris */,
+				925F0C962240864E00783546 /* TetrisApp */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		925F0C952240864E00783546 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		923F7B2E2238F20900AA100C /* Sources */ = {
@@ -200,7 +315,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		925F0C932240864E00783546 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				925F0CAA2240867700783546 /* GameBlock.cpp in Sources */,
+				925F0CA82240867600783546 /* Square.cpp in Sources */,
+				925F0CAB2240867700783546 /* main.cpp in Sources */,
+				925F0CA92240867700783546 /* Window.cpp in Sources */,
+				925F0CAC2240867700783546 /* Game.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		925F0C9E2240865000783546 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				925F0C9F2240865000783546 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		923F7B372238F20900AA100C /* Debug */ = {
@@ -319,7 +457,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 43YJ58H38Q;
-				FRAMEWORK_SEARCH_PATHS = "";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../sdl";
 				HEADER_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -330,8 +469,47 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 43YJ58H38Q;
-				FRAMEWORK_SEARCH_PATHS = "";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../sdl";
 				HEADER_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		925F0CA62240865000783546 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TetrisApp/TetrisApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 43YJ58H38Q;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../sdl\"";
+				INFOPLIST_FILE = TetrisApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.trtcsdk.TetrisApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		925F0CA72240865000783546 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TetrisApp/TetrisApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 43YJ58H38Q;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../sdl\"";
+				INFOPLIST_FILE = TetrisApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.trtcsdk.TetrisApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -353,6 +531,15 @@
 			buildConfigurations = (
 				923F7B3A2238F20900AA100C /* Debug */,
 				923F7B3B2238F20900AA100C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		925F0CA52240865000783546 /* Build configuration list for PBXNativeTarget "TetrisApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				925F0CA62240865000783546 /* Debug */,
+				925F0CA72240865000783546 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

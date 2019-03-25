@@ -1,5 +1,7 @@
-
+#ifndef _Game_CPP_
+#define _Game_CPP_
 #include "Game.h"
+#include <string>
 
 
 Game::Game(SDL_Renderer* renderer, SDL_Texture* texture, TTF_Font* Font):
@@ -76,24 +78,24 @@ void Game::Draw()
 	}
 
 	// 绘制当前得分、进入下一关所需得分、级别
-	char nex_square[50];
-	sprintf_s(nex_square, "NEXT SQUARE:");
+    char nex_square[50];
+    sprintf(nex_square, "NEXT SQUARE:");
 	Draw_text(nex_square, NEXT_BLOCK_X - 95, (NEXT_BLOCK_Y - 115));
 	// 得分
 	char cur_score[50];
-	sprintf_s(cur_score, "CURRENT SCORE: %d", Score);
+	sprintf(cur_score, "CURRENT SCORE: %d", Score);
 	Draw_text(cur_score, SCORE_POSITION_X, SCORE_POSITION_Y);
 	// 级别
 	char cur_level[50];
-	sprintf_s(cur_level, "CURRENT LEVEL: %d", Level);
+	sprintf(cur_level, "CURRENT LEVEL: %d", Level);
 	Draw_text(cur_level, LEVEL_POSITION_X, LEVEL_POSITION_Y);
 	// 每关所需得分
 	char level_score[50];
-	sprintf_s(level_score, "SCORE OF LEVEL: %d", SCORE_PRE_LEVEL);
+	sprintf(level_score, "SCORE OF LEVEL: %d", SCORE_PRE_LEVEL);
 	Draw_text(level_score, SCORE_PER_LEVEL_X, SCORE_PER_LEVEL_Y);
 	// 当前游戏块下落速度
 	char cur_speed[50];
-	sprintf_s(cur_speed, "CURRENT SPEED: %d", INITIAL_SPEED);
+	sprintf(cur_speed, "CURRENT SPEED: %d", INITIAL_SPEED);
 	Draw_text(cur_speed, SPEED_X, SPEED_Y);
 }
 
@@ -404,3 +406,4 @@ Game::~Game(void)
 	}
 	GameSquares.clear();
 }
+#endif

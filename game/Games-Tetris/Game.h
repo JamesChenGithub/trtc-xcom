@@ -7,7 +7,7 @@
 #include <time.h>
 #include <math.h>
 #include <vector>
-#include "SDL_ttf.h"
+#include <SDL2_ttf/SDL_ttf.h>
 #include "GameBlock.h"
 
 using namespace std;

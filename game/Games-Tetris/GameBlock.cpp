@@ -1,4 +1,6 @@
 
+#ifndef _GameBlock_CPP_
+#define _GameBlock_CPP_
 #include "GameBlock.h"
 
 
@@ -231,3 +233,4 @@ GameBlock::~GameBlock(void)
 	//		delete squares[i];
 	//}
 }
+#endif

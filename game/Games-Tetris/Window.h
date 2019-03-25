@@ -5,7 +5,7 @@
 定义Window类主要负责窗口的创建、显示与更新，加载资源
 */
 
-#include <SDL_image.h>
+#include <SDL2_image/SDL_image.h>
 #include <iostream>
 #include "Game.h"
 

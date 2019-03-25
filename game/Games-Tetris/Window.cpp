@@ -1,10 +1,11 @@
 #ifndef Window_CPP
 #define Window_CPP
-#include "SDL.h"
+#include <SDL2/SDL.h>
 #include "Window.h"
-#include <Windows.h>
+//#include <Windows.h>
 #include <stdint.h>
-
+#include <stdlib.h>
+#include <time.h>
 
 Window::Window(void):
 	win(nullptr), renderer(nullptr), Font(nullptr), texture(nullptr),
@@ -28,7 +29,8 @@ Window::Window(void):
 	renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	// 初始化随机数种子
-	srand(unsigned int (time(0)));
+    time_t n = time(0);
+	srand((unsigned int)n);
 
 	// 加载资源文件
 	LoadResouceFile();
